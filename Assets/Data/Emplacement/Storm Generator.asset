@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1850f629360f584aa26ea112b2b5b80, type: 3}
+  m_Name: Storm Generator
+  m_EditorClassIdentifier: 
+  id: 4
+  prefab: {fileID: 6566063019931104539, guid: 0d1008adb0fe861438541b8037419181, type: 3}
+  icon: {fileID: 0}
+  price: 0
+  size: {x: 3, y: 3}
+  height: 2.2
+  upgradable: 1
+  upgradePrice: 0
+  upgradedSellPrice: 0
+  sellPrice: 0
+  shovelPrice: 0
+  star1Exp: 1000
+  star2Exp: 3000
+  star3Exp: 6000
+  abilityEnabled: 0
+  rechargeTime: 0
+  enableAntiAir: 0
+  description: 

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1850f629360f584aa26ea112b2b5b80, type: 3}
+  m_Name: Laser Tower
+  m_EditorClassIdentifier: 
+  id: 0
+  prefab: {fileID: 4900963072674325538, guid: 5353012dc82e322499ba80399bc026a1, type: 3}
+  icon: {fileID: 21300000, guid: 1b9258ad0734bf446ba7c56f10d7e634, type: 3}
+  price: 0
+  size: {x: 1, y: 1}
+  height: 1
+  upgradable: 1
+  upgradePrice: 0
+  upgradedSellPrice: 0
+  sellPrice: 0
+  shovelPrice: 0
+  star1Exp: 1000
+  star2Exp: 3000
+  star3Exp: 6000
+  abilityEnabled: 0
+  rechargeTime: 0
+  enableAntiAir: 0
+  description: 
