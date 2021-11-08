@@ -27,6 +27,21 @@ namespace TowerDefence.Towers {
 				}
 			}
 		}
+
+		public float ExpPercentage {
+			get {
+				if(Exp > info.star3Exp) {
+					return 1;
+				} else if(Exp > info.star2Exp) {
+					return (exp - info.star2Exp) / info.star3Exp;
+				} else if(exp > info.star1Exp) {
+					return (exp - info.star1Exp) / info.star2Exp;
+				} else {
+					return exp / info.star1Exp;
+				}
+			}
+		}
+
 		public int Star { get; protected set; }
 		public int Kills { get; protected set; }
 
@@ -50,6 +65,7 @@ namespace TowerDefence.Towers {
 		protected virtual void Update() {
 			targetUpdater.SelfUpdate();
 			Target = targetUpdater.Target;
+			Debug.Log(Star);
 		}
 
 		protected abstract void InitializeAttributes();

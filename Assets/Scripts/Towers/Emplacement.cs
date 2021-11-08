@@ -9,6 +9,10 @@ namespace TowerDefence.Towers {
 	public abstract class Emplacement: Placement {
 		public bool IsUpgraded { get; protected set; }
 
+		public void Upgrade() {
+
+		}
+
 		public void Sell() {
 			Game.Instance.level.Cash += IsUpgraded ? info.upgradedSellPrice : info.sellPrice;
 			Game.Instance.level.ClearNode(coord.x, coord.y);
@@ -16,7 +20,7 @@ namespace TowerDefence.Towers {
 		}
 
 		public virtual void Abibity() {
-			
+
 		}
 	}
 }

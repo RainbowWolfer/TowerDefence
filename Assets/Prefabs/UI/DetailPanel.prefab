@@ -420,9 +420,6 @@ MonoBehaviour:
   canvas: {fileID: 6461332579279405804}
   topHandler: {fileID: 413770270}
   botHandler: {fileID: 128979110}
-  top: {fileID: 8723139343993504798}
-  test: 0
-  tmp: {x: 0, y: 0, z: 0}
   showDescription: 0
   showSpecialAbility: 0
   titleMask: {fileID: 8723139344152091599}
@@ -433,6 +430,7 @@ MonoBehaviour:
   star3: {fileID: 8723139345193500061}
   expFiller: {fileID: 8723139344967667035}
   upgradeIcon: {fileID: 8723139344105895228}
+  upgradeIconImage: {fileID: 8723139344105895225}
   upgradeIcon_outline: {fileID: 8723139344105895231}
   upgradePriceText: {fileID: 8723139344563375852}
   sellIcon: {fileID: 8723139344497193991}

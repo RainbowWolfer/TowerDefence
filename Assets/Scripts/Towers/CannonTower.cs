@@ -40,8 +40,14 @@ namespace TowerDefence.Towers {
 			bool ready = Target != null && CheckAimingReady();
 			anim.SetBool("Firing", ready);
 			if(ready && fireTimer.EverySeconds(GetFireRate())) {
-				Target.TakeDamage(GetDamage());
+				Fire();
 			}
+		}
+
+		private void Fire() {
+			float damage = GetDamage();
+			Target.TakeDamage(damage);
+			Exp += damage;
 		}
 
 		protected override void InitializeAttributes() {
