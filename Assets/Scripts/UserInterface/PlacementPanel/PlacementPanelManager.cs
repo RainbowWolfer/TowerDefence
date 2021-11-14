@@ -13,32 +13,31 @@ namespace TowerDefence.UserInterface {
 		private GameObject detailPanelPrefab;
 		[SerializeField]
 		private GameObject descriptionPanelPrefab;
+		[SerializeField]
+		private GameObject abilityPanelPrefab;
 
 		private readonly Dictionary<Placement, PlacementPanel> pool = new Dictionary<Placement, PlacementPanel>();
 
+		public AbilityPanel CurrentAbilityPanel { get; private set; }
+
 		public Placement Current { get; private set; }
 		public PlacementPanel CurrentPanel => pool[Current];
-
-		public bool IsMouseContact { get; private set; }
 
 		private void Awake() {
 			Clear();
 		}
 
 		private void Update() {
-			//Debug.Log(HasMouseOnPanels());
-			//DebugPool();
-		}
 
-		private void DebugPool() {
-			string result = "";
-			foreach(KeyValuePair<Placement, PlacementPanel> item in pool) {
-				result += $"({item.Key}) - ({item.Value})";
-			}
-			Debug.Log(result);
 		}
 
 		public bool HasMouseOnPanels() => pool.Values.Any(p => p.IsMouseOnPanel);
+
+		public void RequestAbility(Emplacement emplacement) {
+			ClearRequest();
+			CurrentAbilityPanel = Instantiate(abilityPanelPrefab, transform).GetComponent<AbilityPanel>();
+			CurrentAbilityPanel.Initialize(emplacement, this);
+		}
 
 		public void Request(Placement p) {
 			if(p == null || Current == p) {
@@ -54,12 +53,10 @@ namespace TowerDefence.UserInterface {
 				pool[p].Show = true;
 			} else {
 				GameObject prefab;
-				if(p is Tower) {
+				if(p is FieldPlacement) {
 					prefab = detailPanelPrefab;
 				} else if(p is EnvironmentCube) {
 					prefab = descriptionPanelPrefab;
-				} else if(p is Emplacement) {
-					prefab = detailPanelPrefab;
 				} else {
 					throw new Exception("new type of placement not implemented");
 				}
@@ -86,6 +83,11 @@ namespace TowerDefence.UserInterface {
 		public void Remove(Placement t) {
 			Destroy(pool[t].gameObject);
 			pool.Remove(t);
+		}
+
+		public void Remove(AbilityPanel ap) {
+			Destroy(ap.gameObject);
+			this.CurrentAbilityPanel = null;
 		}
 
 	}

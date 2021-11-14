@@ -192,7 +192,7 @@ namespace TowerDefence {
 
 		public void ClearNode(int x, int y) {
 			Vector2Int size = Game.Towers.RequestByID(map.nodes[x, y].towerID).size;
-			Debug.Log(size);
+			//Debug.Log(size);
 			for(int i = x; i < size.x + x; i++) {
 				for(int j = y; j < size.y + y; j++) {
 					if(!CheckForUnplacable(i, j)) {

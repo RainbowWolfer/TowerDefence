@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TMPro.Examples;
 using TowerDefence.Data;
+using TowerDefence.Functions;
 using TowerDefence.UserInterface;
 using UnityEngine;
 using Random = UnityEngine.Random;

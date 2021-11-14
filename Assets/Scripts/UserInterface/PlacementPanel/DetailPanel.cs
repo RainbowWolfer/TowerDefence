@@ -10,29 +10,17 @@ using TowerDefence.Towers;
 
 namespace TowerDefence.UserInterface {
 	public class DetailPanel: PlacementPanel {
-		private Tower tower;
-		private Emplacement emplacement;
+		public override Placement CurrentPlacement { get => CurrentFieldPlacement; }
+		public FieldPlacement CurrentFieldPlacement { get; private set; }
 
-		public override Placement Placement => tower ?? (Placement)emplacement;
-		//public IFieldPlacement FieldPlacement { get; private set; }
+		public bool IsUpgraded => CurrentFieldPlacement.IsUpgraded;
 
-		public bool IsUpgraded {
-			get {
-				if(tower != null) {
-					return tower.IsUpgraded;
-				} else if(emplacement != null) {
-					return emplacement.IsUpgraded;
-				} else {
-					return false;
-				}
-			}
-		}
+		public bool UpgradeAvailiable => Game.Instance.level.Cash >= CurrentFieldPlacement.info.upgradePrice;
 
-		public bool UpgradeAvailiable => Game.Instance.level.Cash >= Placement.info.upgradePrice;
-
-
-		[SerializeField] private bool showDescription;
-		[SerializeField] private bool showSpecialAbility;
+		[SerializeField]
+		private bool showDescription;
+		[SerializeField]
+		private bool showSpecialAbility;
 
 		public bool ShowDescription {
 			get => showDescription;
@@ -129,8 +117,8 @@ namespace TowerDefence.UserInterface {
 
 			description.sizeDelta = new Vector2(ShowDescription ? DESCRIPTIONFIXEDWIDTH : 0, description.sizeDelta.y);
 
-			upgradePriceText.text = $"${Placement.info.upgradePrice}";
-			sellPriceText.text = $"${(IsUpgraded ? Placement.info.upgradedSellPrice : Placement.info.sellPrice)}";
+			upgradePriceText.text = $"${CurrentFieldPlacement.info.upgradePrice}";
+			sellPriceText.text = $"${(IsUpgraded ? CurrentFieldPlacement.info.upgradedSellPrice : CurrentFieldPlacement.info.sellPrice)}";
 
 			UpdateKillCount();
 			UpdateExp();
@@ -140,27 +128,29 @@ namespace TowerDefence.UserInterface {
 		public override void Initialize(Placement placement, PlacementPanelManager manager) {
 			base.Initialize(placement, manager);
 			if(placement is Tower t) {
-				this.tower = t;
-				upgradeIcon.MouseUp += s => this.Upgrade();
-				sellIcon.MouseUp += s => t.Sell();
-				abilityIcon.MouseUp += s => t.Ability();
+				this.CurrentFieldPlacement = t;
+				ShowSpecialAbility = false;
+				showDescription = false;
 			} else if(placement is Emplacement e) {
-				this.emplacement = e;
+				this.CurrentFieldPlacement = e;
 				ShowSpecialAbility = true;
-				upgradeIcon.MouseUp += s => this.Upgrade();
-				sellIcon.MouseUp += s => e.Sell();
-				abilityIcon.MouseUp += s => e.Abibity();
+				showDescription = false;
+				abilityIcon.MouseUp += s => this.Ability(e);
 			} else {
 				throw new Exception($"{nameof(placement)} type cast error");
 			}
-			//FieldPlacement = placement as IFieldPlacement;
+
+			upgradeIcon.MouseUp += s => this.Upgrade();
+			sellIcon.MouseUp += s => CurrentFieldPlacement.Sell();
 		}
 
-		public void UpdateKillCount() => killCountText.text = $"{tower.Kills}K";
+		public void UpdateKillCount() {
+			killCountText.text = $"{CurrentFieldPlacement.Kills}K";
+		}
 
 		public void UpdateExp() {
-			expFiller.fillAmount = tower.ExpPercentage;
-			bool[] stars = tower.Star switch {
+			expFiller.fillAmount = CurrentFieldPlacement.ExpPercentage;
+			bool[] stars = CurrentFieldPlacement.Star switch {
 				0 => new bool[] { false, false, false },
 				1 => new bool[] { true, false, false },
 				2 => new bool[] { true, true, false },
@@ -180,16 +170,14 @@ namespace TowerDefence.UserInterface {
 			if(!UpgradeAvailiable) {
 				return;
 			}
-			if(tower != null) {
-				tower.Upgrade();
-			} else if(emplacement != null) {
-				emplacement.Upgrade();
-			} else {
-				throw new Exception("error");
-			}
-			sellPriceText.text = $"${(IsUpgraded ? Placement.info.upgradedSellPrice : Placement.info.sellPrice)}";
+			CurrentFieldPlacement.Upgrade();
+			sellPriceText.text = $"${(IsUpgraded ? CurrentFieldPlacement.info.upgradedSellPrice : CurrentFieldPlacement.info.sellPrice)}";
 			upgradePriceText.text = "----";
 			upgradeIconImage.color = new Color(0, 0.6667f, 1);
+		}
+
+		private void Ability(Emplacement e) {
+			manager.RequestAbility(e);
 		}
 
 		private float cv1;

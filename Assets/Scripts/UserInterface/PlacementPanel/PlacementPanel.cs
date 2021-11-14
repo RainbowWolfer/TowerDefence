@@ -20,7 +20,8 @@ namespace TowerDefence.UserInterface {
 				OnShowChanged?.Invoke(value);
 			}
 		}
-		public abstract Placement Placement { get; }
+		public abstract Placement CurrentPlacement { get; }
+
 		public abstract float Width { get; }
 
 		[SerializeField]
@@ -58,9 +59,14 @@ namespace TowerDefence.UserInterface {
 				Mathf.SmoothDampAngle(rectTransform.localEulerAngles.y, Show ? 0 : -90, ref p_cv3, 0.1f)
 			, 0);
 			canvas.alpha = Mathf.Lerp(0, 1, rectTransform.localEulerAngles.y / 90 + 1);
-
 			if(!Show && rectTransform.anchoredPosition.x <= -Width) {
-				manager.Remove(Placement);
+				if(CurrentPlacement != null) {
+					manager.Remove(CurrentPlacement);
+				} else if(this is AbilityPanel ap && manager.CurrentAbilityPanel == ap) {
+					manager.Remove(ap);
+				} else {
+					throw new Exception($"Unhandled Panel Type: {this}");
+				}
 			}
 		}
 	}

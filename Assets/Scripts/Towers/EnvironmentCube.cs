@@ -14,7 +14,8 @@ namespace TowerDefence.Towers {
 
 		public bool enableRandomRotationOnStart = true;
 
-		private void Start() {
+		protected override void Start() {
+			base.Start();
 			if(enableRandomRotationOnStart) {
 				rotationParent.Rotate(axis, Random.Range(0, 360));
 			}

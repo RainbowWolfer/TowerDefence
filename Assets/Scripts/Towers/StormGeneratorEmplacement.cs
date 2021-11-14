@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace TowerDefence.Towers {
 	public class StormGeneratorEmplacement: Emplacement {
-		public override void Abibity() {
+		public override void Ability() {
 			
 		}
 	}
