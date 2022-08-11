@@ -13,8 +13,8 @@ using Random = UnityEngine.Random;
 
 namespace TowerDefence {
 	public class Game: MonoBehaviour {
-		public static Game Instance;
-		public static TowerPrefabs Towers;
+		public static Game Instance { get; private set; }
+		public static TowerPrefabs Towers { get; private set; }
 
 		public Level level;
 		public LevelControl control;
@@ -89,13 +89,27 @@ namespace TowerDefence {
 			return v;
 		}
 
+		public void EnemiesTakeAreaDamage(Vector2 position, float radius, float damage) {
+			List<Enemy> enemiesInRange = new List<Enemy>();
+			foreach(Enemy item in enemies) {
+				var pos = new Vector2(item.transform.position.x, item.transform.position.z);
+				if(Vector2.Distance(pos, position) < radius) {
+					enemiesInRange.Add(item);
+				}
+			}
+
+			foreach(Enemy e in enemiesInRange) {
+				e.TakeDamage(damage);
+			}
+		}
+
 		private void CreateEnemy() {
 			Vector2Int start = level.StartCoord;
 			Enemy enemy = Instantiate(testEnemy, enemiesParent).GetComponent<Enemy>();
 			enemy.transform.position = new Vector3(start.x, 0.1f, start.y);
 			enemy.path = level.targetPath;
 			enemy.speed = 0.5f;
-			enemy.maxHealth = 3000 + wave * 1000;
+			enemy.maxHealth = 300 + wave * 500;
 			enemy.health = enemy.maxHealth;
 			enemy.game = this;
 			enemies.Add(enemy);

@@ -417,6 +417,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7126dda198ea543a8dc6f61d5db3ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MouseDetector>k__BackingField:
+    <Backgrounds>k__BackingField:
+    - {fileID: 8723139343993504793}
+    - {fileID: 8723139344984994061}
   canvas: {fileID: 6461332579279405804}
   topHandler: {fileID: 413770270}
   botHandler: {fileID: 128979110}
@@ -439,7 +443,8 @@ MonoBehaviour:
   abilityObject: {fileID: 8723139344622357770}
   abilityIcon: {fileID: 8723139344169228671}
   abilityIcon_outline: {fileID: 8723139344169228670}
-  abilityFiller: {fileID: 8723139344169228664}
+  abilityFiller: {fileID: 8723139343743651925}
+  abilityFiller_outline: {fileID: 8723139344803838980}
   description: {fileID: 8723139345146160120}
   descriptionText: {fileID: 8723139343685135400}
   showMoreObject: {fileID: 8723139345114412014}
@@ -628,10 +633,10 @@ RectTransform:
   m_Father: {fileID: 8723139344803838983}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 25}
+  m_SizeDelta: {x: -4, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8723139343743651930
 CanvasRenderer:
@@ -666,7 +671,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.543
+  m_FillAmount: 0.688
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

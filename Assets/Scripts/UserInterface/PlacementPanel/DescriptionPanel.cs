@@ -11,7 +11,7 @@ using UnityEngine.UI;
 namespace TowerDefence.UserInterface {
 	public class DescriptionPanel: PlacementPanel {
 		private EnvironmentCube environmentCube;
-		public override Placement CurrentPlacement => environmentCube;
+		//public override Placement CurrentPlacement => environmentCube;
 
 		[SerializeField]
 		private TextMeshProUGUI titleText;

@@ -32,20 +32,20 @@ namespace TowerDefence.GameControl {
 					return;
 				}
 				mode = value;
-				(bool, bool) top_bot = value switch {
+				(bool top, bool bot) = value switch {
 					ShowMode.Full => (true, true),
 					ShowMode.Half => (false, true),
 					ShowMode.None => (false, false),
 					_ => throw new Exception("it cannot be wrong"),
 				};
-				topB.SetActive(top_bot.Item1);
-				topF.SetActive(top_bot.Item1);
-				topL.SetActive(top_bot.Item1);
-				topR.SetActive(top_bot.Item1);
-				botB.SetActive(top_bot.Item2);
-				botF.SetActive(top_bot.Item2);
-				botL.SetActive(top_bot.Item2);
-				botR.SetActive(top_bot.Item2);
+				topB.SetActive(top);
+				topF.SetActive(top);
+				topL.SetActive(top);
+				topR.SetActive(top);
+				botB.SetActive(bot);
+				botF.SetActive(bot);
+				botL.SetActive(bot);
+				botR.SetActive(bot);
 			}
 		}
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Storm Generator
   m_EditorClassIdentifier: 
   id: 4
-  prefab: {fileID: 6566063019931104539, guid: 0d1008adb0fe861438541b8037419181, type: 3}
+  prefab: {fileID: 7240353841431022235, guid: 2e3f873440b1b3d4aa3dc258179bf79f, type: 3}
   icon: {fileID: 0}
   price: 0
   size: {x: 3, y: 3}

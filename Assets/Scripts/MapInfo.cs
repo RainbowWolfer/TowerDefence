@@ -9,21 +9,21 @@ using Random = UnityEngine.Random;
 namespace TowerDefence {
 	[Serializable]
 	public class MapInfo {
-		public string name { get; private set; }
-		public Node[,] nodes { get; private set; }
-		public List<Path> paths { get; private set; }
+		public string Name { get; private set; }
+		public Node[,] Nodes { get; private set; }
+		public List<Path> Paths { get; private set; }
 
 		public MapInfo(string name, int width, int height) {
-			this.name = name;
-			nodes = new Node[width, height];
-			paths = new List<Path>();
+			Name = name;
+			Nodes = new Node[width, height];
+			Paths = new List<Path>();
 		}
 
 		public static MapInfo GetDefaultMapInfo() {
 			var map = new MapInfo("Default", 20, 10);
-			for(int x = 0; x < map.nodes.GetLength(0); x++) {
-				for(int y = 0; y < map.nodes.GetLength(1); y++) {
-					map.nodes[x, y] = new Node(x, y) {
+			for(int x = 0; x < map.Nodes.GetLength(0); x++) {
+				for(int y = 0; y < map.Nodes.GetLength(1); y++) {
+					map.Nodes[x, y] = new Node(x, y) {
 						type = (NodeType)Random.Range(0, 2),
 						towerID = (short)Random.Range(0, 3),
 					};
@@ -162,7 +162,7 @@ namespace TowerDefence {
 						type = NodeType.Unplacable;
 					}
 
-					map.nodes[x, y] = new Node(x, y) {
+					map.Nodes[x, y] = new Node(x, y) {
 						towerID = id,
 						type = type,
 					};
@@ -170,9 +170,9 @@ namespace TowerDefence {
 			}
 			Path p = new Path();
 			foreach(FNode item in path) {
-				p.path.Add(map.nodes[item.coord.x, item.coord.y]);
+				p.path.Add(map.Nodes[item.coord.x, item.coord.y]);
 			}
-			map.paths.Add(p);
+			map.Paths.Add(p);
 			return map;
 		}
 
@@ -242,30 +242,30 @@ namespace TowerDefence {
 
 	[Serializable]
 	public class Node {
-		public Vector2Int coord { get; private set; }
-		public Vector2Int origin { get; set; }
+		public Vector2Int Coord { get; private set; }
+		public Vector2Int Origin { get; set; }
 
 		public NodeType type;
 
 		public short towerID;
 
 		public Node(Vector2Int coord) {
-			this.coord = coord;
-			this.origin = coord;
+			Coord = coord;
+			Origin = coord;
 		}
 
 		public Node(int x, int y) {
-			this.coord = new Vector2Int(x, y);
-			this.origin = new Vector2Int(x, y);
+			Coord = new Vector2Int(x, y);
+			Origin = new Vector2Int(x, y);
 		}
 
 		public Node(Vector2Int coord, Vector2Int origin) {
-			this.coord = coord;
-			this.origin = origin;
+			Coord = coord;
+			Origin = origin;
 		}
 		public Node(int x, int y, int x_origin, int y_origin) {
-			this.coord = new Vector2Int(x, y);
-			this.origin = new Vector2Int(x_origin, y_origin);
+			Coord = new Vector2Int(x, y);
+			Origin = new Vector2Int(x_origin, y_origin);
 		}
 	}
 

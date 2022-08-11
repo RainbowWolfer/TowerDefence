@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TowerDefence.Towers;
 using UnityEngine;
 
 namespace TowerDefence.Towers {
-	public class SniperTower: Tower {
-		
+	public class SnipeTower: Tower {
 		public override float GetAttackRadius() {
-			return 1;
+			throw new NotImplementedException();
 		}
 
 		public override float GetDamage() {
-			return 1;
+			throw new NotImplementedException();
 		}
 
 		protected override void InitializeAttributes() {
-
+			throw new NotImplementedException();
 		}
 	}
 }

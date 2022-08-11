@@ -59,10 +59,10 @@ namespace TowerDefence {
 				throw new Exception("Map is Null");
 			}
 			ClearMap();
-			for(int x = 0; x < map.nodes.GetLength(0); x++) {
-				for(int y = 0; y < map.nodes.GetLength(1); y++) {
+			for(int x = 0; x < map.Nodes.GetLength(0); x++) {
+				for(int y = 0; y < map.Nodes.GetLength(1); y++) {
 					var coord = new Vector2Int(x, y);
-					Node node = map.nodes[x, y];
+					Node node = map.Nodes[x, y];
 					if(node.type == NodeType.Path) {
 						continue;
 					}
@@ -75,8 +75,8 @@ namespace TowerDefence {
 				Destroy(item);
 			}
 			borders.Clear();
-			int x_max = map.nodes.GetLength(0) + 1;
-			int y_max = map.nodes.GetLength(1) + 1;
+			int x_max = map.Nodes.GetLength(0) + 1;
+			int y_max = map.Nodes.GetLength(1) + 1;
 			for(int x = -1; x < x_max; x++) {
 				for(int y = -1; y < y_max; y++) {
 					if(x == -1 || x == x_max - 1 || y == -1 || y == y_max - 1) {
@@ -89,13 +89,13 @@ namespace TowerDefence {
 			if(startPoint != null) {
 				Destroy(startPoint);
 			}
-			if(map.paths.Count > 0 && map.paths[0].path.Count > 0) {
-				Path p = map.paths[0];
+			if(map.Paths.Count > 0 && map.Paths[0].path.Count > 0) {
+				Path p = map.Paths[0];
 				targetPath = p;
 				Node start = p.path[0];
-				StartCoord = start.coord;
+				StartCoord = start.Coord;
 				startPoint = Instantiate(startPointCube, transform);
-				startPoint.transform.localPosition = new Vector3(start.coord.x, 0, start.coord.y);
+				startPoint.transform.localPosition = new Vector3(start.Coord.x, 0, start.Coord.y);
 			}
 		}
 
@@ -108,14 +108,14 @@ namespace TowerDefence {
 
 		public bool Check(int startX, int startY, Vector2Int size) {
 			//Debug.Log(size + " = " + new Vector2Int(startX, startY) + " = " + new Vector2Int(map.nodes.GetLength(0), map.nodes.GetLength(1)));
-			if(startX + size.x - 1 >= map.nodes.GetLength(0) || startY + size.y - 1 >= map.nodes.GetLength(1)) {//out of bounds
+			if(startX + size.x - 1 >= map.Nodes.GetLength(0) || startY + size.y - 1 >= map.Nodes.GetLength(1)) {//out of bounds
 																												//Debug.LogWarning("OUT OF BOUNDS");
 				return false;
 			}
 			bool result = true;
 			for(int x = startX; x < startX + size.x; x++) {
 				for(int y = startY; y < startY + size.y; y++) {
-					Node node = map.nodes[x, y];
+					Node node = map.Nodes[x, y];
 					result &= node.type == NodeType.Placable;
 				}
 			}
@@ -125,24 +125,24 @@ namespace TowerDefence {
 		public bool CheckWithin(int x, int y) =>
 			x >= 0 &&
 			y >= 0 &&
-			x < map.nodes.GetLength(0) &&
-			y < map.nodes.GetLength(1);
+			x < map.Nodes.GetLength(0) &&
+			y < map.Nodes.GetLength(1);
 		public bool CheckWithin(Vector2Int coord) => CheckWithin(coord.x, coord.y);
 
-		public bool CheckForPlacable(int x, int y) => CheckWithin(x, y) && map.nodes[x, y].type == NodeType.Placable;
+		public bool CheckForPlacable(int x, int y) => CheckWithin(x, y) && map.Nodes[x, y].type == NodeType.Placable;
 		public bool CheckForPlacable(Vector2Int coord) => CheckWithin(coord.x, coord.y) && CheckForPlacable(coord.x, coord.y);
 
-		public bool CheckForPath(int x, int y) => CheckWithin(x, y) && map.nodes[x, y].type == NodeType.Path;
+		public bool CheckForPath(int x, int y) => CheckWithin(x, y) && map.Nodes[x, y].type == NodeType.Path;
 		public bool CheckForPath(Vector2Int coord) => CheckWithin(coord.x, coord.y) && CheckForPath(coord.x, coord.y);
 
-		public bool CheckForUnplacable(int x, int y) => CheckWithin(x, y) && map.nodes[x, y].type == NodeType.Unplacable;
+		public bool CheckForUnplacable(int x, int y) => CheckWithin(x, y) && map.Nodes[x, y].type == NodeType.Unplacable;
 		public bool CheckForUnplacable(Vector2Int coord) => CheckWithin(coord.x, coord.y) && CheckForUnplacable(coord.x, coord.y);
 
-		public NodeType CheckType(int x, int y) => map.nodes[x, y].type;
+		public NodeType CheckType(int x, int y) => map.Nodes[x, y].type;
 		public NodeType CheckType(Vector2Int coord) => CheckType(coord.x, coord.y);
 
 		public void GetHeightAndSize(int x, int y, out float height, out Vector2Int size) {
-			TowerInfo info = Game.Towers.RequestByID(map.nodes[x, y].towerID);
+			TowerInfo info = Game.Towers.RequestByID(map.Nodes[x, y].towerID);
 			height = info.height;
 			size = info.size;
 		}
@@ -150,7 +150,7 @@ namespace TowerDefence {
 			GetHeightAndSize(coord.x, coord.y, out height, out size);
 		}
 
-		public Vector2Int GetOriginCoord(int x, int y) => map.nodes[x, y].origin;
+		public Vector2Int GetOriginCoord(int x, int y) => map.Nodes[x, y].Origin;
 		public Vector2Int GetOriginCoord(Vector2Int coord) => GetOriginCoord(coord.x, coord.y);
 
 		public Placement GetPlacement(int x, int y) => pool[new Vector2Int(x, y)].GetComponent<Placement>();
@@ -168,9 +168,9 @@ namespace TowerDefence {
 			}
 			for(int i = x; i < size.x + x; i++) {
 				for(int j = y; j < size.y + y; j++) {
-					Node n = map.nodes[i, j];
+					Node n = map.Nodes[i, j];
 					n.towerID = newID;
-					n.origin = new Vector2Int(x, y);
+					n.Origin = new Vector2Int(x, y);
 					if(newID == 0) {
 						n.type = NodeType.Placable;
 					} else {
@@ -191,7 +191,7 @@ namespace TowerDefence {
 		}
 
 		public void ClearNode(int x, int y) {
-			Vector2Int size = Game.Towers.RequestByID(map.nodes[x, y].towerID).size;
+			Vector2Int size = Game.Towers.RequestByID(map.Nodes[x, y].towerID).size;
 			//Debug.Log(size);
 			for(int i = x; i < size.x + x; i++) {
 				for(int j = y; j < size.y + y; j++) {
@@ -202,9 +202,9 @@ namespace TowerDefence {
 			}
 			for(int i = x; i < size.x + x; i++) {
 				for(int j = y; j < size.y + y; j++) {
-					map.nodes[i, j].towerID = 0;
-					map.nodes[i, j].type = NodeType.Placable;
-					map.nodes[i, j].origin = new Vector2Int(i, j);
+					map.Nodes[i, j].towerID = 0;
+					map.Nodes[i, j].type = NodeType.Placable;
+					map.Nodes[i, j].Origin = new Vector2Int(i, j);
 					Destroy(pool[new Vector2Int(i, j)]);
 					pool[new Vector2Int(i, j)] = CreateGameObject(i, j, 0, mapParent);
 				}
@@ -228,18 +228,18 @@ namespace TowerDefence {
 		}
 
 		public void VisualizePath() {
-			if(map.paths.Count == 0) {
+			if(map.Paths.Count == 0) {
 				return;
 			}
-			Path path = map.paths[0];
+			Path path = map.Paths[0];
 			var list = new List<GameObject>();
 			for(int i = 1; i < path.path.Count - 1; i++) {
 				Node item = path.path[i];
 				Node next = path.path[i + 1];
-				Vector2Int direction = next.coord - item.coord;
+				Vector2Int direction = next.Coord - item.Coord;
 
 				GameObject arrow = Instantiate(pathVisual_arrow, visualPathParent);
-				arrow.transform.position = new Vector3(item.coord.x, -0.1f, item.coord.y);
+				arrow.transform.position = new Vector3(item.Coord.x, -0.1f, item.Coord.y);
 				list.Add(arrow);
 
 				if(direction == Vector2Int.down) {
@@ -253,7 +253,7 @@ namespace TowerDefence {
 				}
 			}
 			GameObject des = Instantiate(pathVisual_destination, visualPathParent);
-			Vector2Int end = path.path[path.path.Count - 1].coord;
+			Vector2Int end = path.path[path.path.Count - 1].Coord;
 			des.transform.position = new Vector3(end.x, -0.1f, end.y);
 			list.Add(des);
 			StartCoroutine(VisualizePathCoroutine(list));

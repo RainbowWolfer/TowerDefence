@@ -51,7 +51,8 @@ namespace TowerDefence.Towers {
 			laser_r.enabled = false;
 		}
 
-		private void Start() {
+		protected override void Start() {
+			base.Start();
 			_laserColor = new Color(0, 0.2f, 0.3f, 0.05f);
 			laserColor = _laserColor;
 			laser_l.colorGradient = GetFixedColor(_laserColor);

@@ -191,6 +191,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b0abc1e3c3a9846948db694df738b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MouseDetector>k__BackingField:
+    <Backgrounds>k__BackingField:
+    - {fileID: 6899068556975729968}
+    - {fileID: 6899068558114625572}
   canvas: {fileID: 1435256846254244219}
   topHandler: {fileID: 1632354391}
   botHandler: {fileID: 1940586279}

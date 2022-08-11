@@ -10,7 +10,7 @@ using TowerDefence.Towers;
 
 namespace TowerDefence.UserInterface {
 	public class DetailPanel: PlacementPanel {
-		public override Placement CurrentPlacement { get => CurrentFieldPlacement; }
+		//public override Placement CurrentPlacement { get => CurrentFieldPlacement; }
 		public FieldPlacement CurrentFieldPlacement { get; private set; }
 
 		public bool IsUpgraded => CurrentFieldPlacement.IsUpgraded;
@@ -38,7 +38,7 @@ namespace TowerDefence.UserInterface {
 			}
 		}
 
-		private const float DESCRIPTIONFIXEDWIDTH = 180f;
+		private const float DESCRIPTION_FIXED_WIDTH = 180f;
 
 		public override float Width {
 			get {
@@ -52,6 +52,7 @@ namespace TowerDefence.UserInterface {
 			}
 		}
 
+		[Space]
 		[SerializeField]
 		private RectTransform titleMask;
 		[SerializeField]
@@ -63,6 +64,7 @@ namespace TowerDefence.UserInterface {
 		[SerializeField]
 		private Image expFiller;
 
+		[Space]
 		[SerializeField]
 		private PointEventHandler upgradeIcon;
 		[SerializeField]
@@ -72,6 +74,7 @@ namespace TowerDefence.UserInterface {
 		[SerializeField]
 		private TextMeshProUGUI upgradePriceText;
 
+		[Space]
 		[SerializeField]
 		private PointEventHandler sellIcon;
 		[SerializeField]
@@ -79,6 +82,7 @@ namespace TowerDefence.UserInterface {
 		[SerializeField]
 		private TextMeshProUGUI sellPriceText;
 
+		[Space]
 		[SerializeField]
 		private GameObject abilityObject;
 		[SerializeField]
@@ -87,12 +91,16 @@ namespace TowerDefence.UserInterface {
 		private Outline abilityIcon_outline;
 		[SerializeField]
 		private Image abilityFiller;
+		[SerializeField]
+		private Image abilityFiller_outline;
 
+		[Space]
 		[SerializeField]
 		private RectTransform description;
 		[SerializeField]
 		private TextMeshProUGUI descriptionText;
 
+		[Space]
 		[SerializeField]
 		private GameObject showMoreObject;
 		[SerializeField]
@@ -115,7 +123,7 @@ namespace TowerDefence.UserInterface {
 			showMoreButton.MouseExit += s => showMoreButton_outline.enabled = false;
 			showMoreButton.MouseUp += s => ShowDescription = !ShowDescription;
 
-			description.sizeDelta = new Vector2(ShowDescription ? DESCRIPTIONFIXEDWIDTH : 0, description.sizeDelta.y);
+			description.sizeDelta = new Vector2(ShowDescription ? DESCRIPTION_FIXED_WIDTH : 0, description.sizeDelta.y);
 
 			upgradePriceText.text = $"${CurrentFieldPlacement.info.upgradePrice}";
 			sellPriceText.text = $"${(IsUpgraded ? CurrentFieldPlacement.info.upgradedSellPrice : CurrentFieldPlacement.info.sellPrice)}";
@@ -123,19 +131,24 @@ namespace TowerDefence.UserInterface {
 			UpdateKillCount();
 			UpdateExp();
 			abilityFiller.fillAmount = 0;
+
 		}
 
 		public override void Initialize(Placement placement, PlacementPanelManager manager) {
 			base.Initialize(placement, manager);
 			if(placement is Tower t) {
-				this.CurrentFieldPlacement = t;
+				CurrentFieldPlacement = t;
 				ShowSpecialAbility = false;
-				showDescription = false;
+				ShowDescription = false;
 			} else if(placement is Emplacement e) {
-				this.CurrentFieldPlacement = e;
+				CurrentFieldPlacement = e;
 				ShowSpecialAbility = true;
-				showDescription = false;
-				abilityIcon.MouseUp += s => this.Ability(e);
+				ShowDescription = false;
+				abilityIcon.MouseUp += s => {
+					if(e.Ability?.StatusType == AbilityStatusType.Ready && e.Ability?.IsFiring == false) {
+						Ability(e);
+					}
+				};
 			} else {
 				throw new Exception($"{nameof(placement)} type cast error");
 			}
@@ -166,6 +179,12 @@ namespace TowerDefence.UserInterface {
 			titleMask.sizeDelta = new Vector2(ShowSpecialAbility ? 505f : 380f, titleMask.sizeDelta.y);
 		}
 
+		private void UpdateAbilityCooldown() {
+			if(CurrentFieldPlacement is Emplacement em && em.Ability != null) {
+				abilityFiller.fillAmount = em.Ability?.CooldownPercentage ?? 0;
+			}
+		}
+
 		private void Upgrade() {
 			if(!UpgradeAvailiable) {
 				return;
@@ -186,7 +205,12 @@ namespace TowerDefence.UserInterface {
 			base.Update();
 			UpdateLayout();
 			description.sizeDelta = new Vector2(
-				Mathf.SmoothDamp(description.sizeDelta.x, showDescription ? DESCRIPTIONFIXEDWIDTH : 0, ref cv1, 0.1f)
+				Mathf.SmoothDamp(
+					description.sizeDelta.x,
+					showDescription ? DESCRIPTION_FIXED_WIDTH : 0,
+					ref cv1,
+					0.1f
+				)
 			, description.sizeDelta.y);
 
 			abilityObject.SetActive(showSpecialAbility);
@@ -195,7 +219,12 @@ namespace TowerDefence.UserInterface {
 			upgradePriceText.color = UpgradeAvailiable ? Color.white : Color.red;
 			UpdateKillCount();
 			UpdateExp();
-		}
+			UpdateAbilityCooldown();
 
+			if(CurrentFieldPlacement is Emplacement e) {
+				abilityIcon_outline.effectColor = e.Ability?.StatusType != AbilityStatusType.Ready ? Color.red : new Color(0.6f, 0.6f, 0.6f, 0.5f);
+				abilityFiller_outline.color = e.Ability?.StatusType != AbilityStatusType.Ready ? Color.red : Color.white;
+			}
+		}
 	}
 }

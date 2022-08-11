@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TowerDefence.Functions;
 using TowerDefence.Towers;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace TowerDefence.UserInterface {
 	public class PlacementPanelManager: MonoBehaviour {
 		[SerializeField]
@@ -16,59 +16,66 @@ namespace TowerDefence.UserInterface {
 		[SerializeField]
 		private GameObject abilityPanelPrefab;
 
-		private readonly Dictionary<Placement, PlacementPanel> pool = new Dictionary<Placement, PlacementPanel>();
+		//private readonly Dictionary<Placement, PlacementPanel> pool = new Dictionary<Placement, PlacementPanel>();
+		private readonly List<PlacementPanel> panels = new List<PlacementPanel>();
 
 		public AbilityPanel CurrentAbilityPanel { get; private set; }
 
 		public Placement Current { get; private set; }
-		public PlacementPanel CurrentPanel => pool[Current];
+		//public PlacementPanel CurrentPanel => pool[Current];
 
 		private void Awake() {
 			Clear();
 		}
 
 		private void Update() {
-
+			//Debug.Log(pool.Count);
 		}
 
-		public bool HasMouseOnPanels() => pool.Values.Any(p => p.IsMouseOnPanel);
+		public bool HasMouseOnPanels() => panels.Any(p => p.MouseDetector.GetHasMouseOn());
 
 		public void RequestAbility(Emplacement emplacement) {
 			ClearRequest();
 			CurrentAbilityPanel = Instantiate(abilityPanelPrefab, transform).GetComponent<AbilityPanel>();
 			CurrentAbilityPanel.Initialize(emplacement, this);
+			panels.Add(CurrentAbilityPanel);
+			Game.Instance.control.StartAbility(emplacement);
 		}
 
-		public void Request(Placement p) {
-			if(p == null || Current == p) {
+		public void Request(Placement placement) {
+			if(placement == null || Current == placement) {
 				return;
 			}
 
-			foreach(PlacementPanel item in pool.Values) {
+			foreach(PlacementPanel item in panels) {
 				item.Show = false;
 			}
 
-			Current = p;
-			if(pool.ContainsKey(p)) {
-				pool[p].Show = true;
+			Current = placement;
+			PlacementPanel found = panels.Find(i => i.TargetPlacement == placement);
+#pragma warning disable CS0184 // 'is' expression's given expression is never of the provided type
+			if(found != null && !found is AbilityPanel) {
+#pragma warning restore CS0184 // 'is' expression's given expression is never of the provided type
+				found.Show = true;
 			} else {
 				GameObject prefab;
-				if(p is FieldPlacement) {
+				if(placement is FieldPlacement) {
 					prefab = detailPanelPrefab;
-				} else if(p is EnvironmentCube) {
+				} else if(placement is EnvironmentCube) {
 					prefab = descriptionPanelPrefab;
 				} else {
-					throw new Exception("new type of placement not implemented");
+					throw new Exception($"new type of placement not implemented ({placement.GetType()})");
 				}
 				var panel = Instantiate(prefab, transform).GetComponent<PlacementPanel>();
-				pool.Add(p, panel);
-				panel.Initialize(p, this);
+				panel.Initialize(placement, this);
+				panels.Add(panel);
 			}
 		}
 
 		public void ClearRequest() {//maybe i should call it deselected?
+			CurrentAbilityPanel = null;
 			Current = null;
-			foreach(PlacementPanel item in pool.Values) {
+			foreach(PlacementPanel item in panels) {
 				item.Show = false;
 			}
 		}
@@ -77,18 +84,29 @@ namespace TowerDefence.UserInterface {
 			for(int i = 0; i < transform.childCount; i++) {
 				Destroy(transform.GetChild(i).gameObject);
 			}
-			pool.Clear();
+			panels.Clear();
 		}
 
-		public void Remove(Placement t) {
-			Destroy(pool[t].gameObject);
-			pool.Remove(t);
+		public void Remove(PlacementPanel panel) {
+			panels.Remove(panel);
+			Destroy(panel.gameObject);
+			//Destroy(pool[t].gameObject);
+			//pool.Remove(t);
 		}
 
-		public void Remove(AbilityPanel ap) {
-			Destroy(ap.gameObject);
-			this.CurrentAbilityPanel = null;
-		}
+		//public void Remove(Placement t) {
 
+		//	//Destroy(pool[t].gameObject);
+		//	//pool.Remove(t);
+		//}
+
+		//public void Remove(AbilityPanel ap) {
+		//	Destroy(ap.gameObject);
+		//	this.CurrentAbilityPanel = null;
+		//}
+
+		//public void RemoveEmpty() {
+
+		//}
 	}
 }

@@ -15,5 +15,19 @@ namespace TowerDefence.Functions {
 			return list.SequenceEqual(list.OrderBy(i => i).ToArray());
 		}
 
+
+		public static void PrintDictionary<T, W>(this Dictionary<T, W> dic) {
+			string content = "";
+			foreach(KeyValuePair<T, W> item in dic) {
+				content += $"{item.Key} - {item.Value}\n";
+			}
+			Debug.LogWarning(content);
+		}
+
+		public static void ColorLerp(this Material material, string name, Color targetColor, float speed) {
+			material.SetColor(name, Color.Lerp(
+				material.GetColor(name), targetColor, speed
+			));
+		}
 	}
 }

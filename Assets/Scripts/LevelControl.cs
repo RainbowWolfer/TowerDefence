@@ -17,10 +17,14 @@ namespace TowerDefence {
 		private ModelSelector selector;
 		[SerializeField]
 		private ModelSelector selector_confirm;
+		[SerializeField]
+		private CircleRangeSelector circleRangeSelector;
 
 		private GameObject placingObject;
 		private MeshRenderer[] renderers;
 		private Vector2Int placingSize;
+
+		private Emplacement abilityEmplacement;
 
 		[SerializeField]
 		private Material red;
@@ -52,76 +56,123 @@ namespace TowerDefence {
 			if(UI.Instance.pausePanel.Show) {
 				return;
 			}
-			if(RightClick && placingObject != null) {
-				UI.Instance.iconManager.DeselectAll();
-				placingObject = null;
-			} else if(RightClick && towerSelection != null) {
-				DeselectTower();
-			}
-			Vector2Int coord = GetMouseCoord();
+			if(abilityEmplacement != null && abilityEmplacement.Ability != null) {//emplacement ability selecting mode
+				circleRangeSelector.gameObject.SetActive(true);
+				circleRangeSelector.radius = abilityEmplacement.Ability.AbilityRadius;
+				if(RightClick) {
+					StopAbility();
+					return;
+				}
+				Vector2Int coord = GetMouseCoord();
+				if(level.CheckWithin(coord)) {
+					circleRangeSelector.position = coord;
+					if(LeftClick) {
+						//fire!
+						abilityEmplacement.Fire(coord);
 
-			if(level.CheckWithin(coord)) {
-				coord = level.GetOriginCoord(coord);
-				level.GetHeightAndSize(coord, out float height, out Vector2Int size);
-				switch(level.CheckType(coord)) {
-					case NodeType.Path:
-						selector.SetState(ModelSelector.ShowMode.None);
-						if(iconSelection != null) {
-							placingObject.SetActive(false);
-						}
-						if(RightClick || LeftClick) {
-							DeselectTower();
-						}
-						break;
-					case NodeType.Placable:
-						if(iconSelection == null) {
-							selector.SetState(ModelSelector.ShowMode.Half, coord, height, size);
+						//select tower
+						var height = abilityEmplacement.info.height;
+						var size = abilityEmplacement.info.size;
+						selector.SetState(ModelSelector.ShowMode.Full, abilityEmplacement.coord, height, size);
+						UI.Instance.placementPanelManager.Request(abilityEmplacement);
+						towerSelection = abilityEmplacement;
+						selector_confirm.SetState(ModelSelector.ShowMode.Full, abilityEmplacement.coord, height, size);
+
+						abilityEmplacement = null;
+					}
+				} else {//mouse out of level
+					if(LeftClick || RightClick) {
+						StopAbility();
+						return;
+					}
+				}
+
+			} else {//normal mode
+				circleRangeSelector.gameObject.SetActive(false);
+				if(RightClick && placingObject != null) {//in ui selecting
+					UI.Instance.iconManager.DeselectAll();
+					placingObject = null;
+					return;
+				} else if(RightClick && towerSelection != null) {//in selected a field placement
+					DeselectTower();
+					return;
+				}
+				Vector2Int coord = GetMouseCoord();
+
+				if(level.CheckWithin(coord)) {
+					coord = level.GetOriginCoord(coord);
+					level.GetHeightAndSize(coord, out float height, out Vector2Int size);
+					switch(level.CheckType(coord)) {
+						case NodeType.Path:
+							selector.SetState(ModelSelector.ShowMode.None);
+							if(iconSelection != null) {
+								placingObject.SetActive(false);
+							}
 							if(RightClick || LeftClick) {
 								DeselectTower();
 							}
-						} else {
-							UpdatePlacing(coord);
-							if(LeftClick) {
-								level.EditNode(coord, iconSelection.id);
+							break;
+						case NodeType.Placable:
+							if(iconSelection == null) {
+								selector.SetState(ModelSelector.ShowMode.Half, coord, height, size);
+								if(RightClick || LeftClick) {
+									DeselectTower();
+								}
+							} else {
+								UpdatePlacing(coord);
+								if(LeftClick) {
+									level.EditNode(coord, iconSelection.id);
+								}
 							}
-						}
-						break;
-					case NodeType.Unplacable:
-						if(iconSelection == null) {
-							selector.SetState(ModelSelector.ShowMode.Full, coord, height, size);
-							if(LeftClick) {
-								Placement t = level.GetPlacement(coord);
-								UI.Instance.placementPanelManager.Request(t);
-								towerSelection = t;
-								selector_confirm.SetState(ModelSelector.ShowMode.Full, coord, height, size);
-							} else if(RightClick && towerSelection != null) {
-								DeselectTower();
+							break;
+						case NodeType.Unplacable:
+							if(iconSelection == null) {
+								selector.SetState(ModelSelector.ShowMode.Full, coord, height, size);
+								if(LeftClick) {
+									Placement t = level.GetPlacement(coord);
+									UI.Instance.placementPanelManager.Request(t);
+									towerSelection = t;
+									selector_confirm.SetState(ModelSelector.ShowMode.Full, coord, height, size);
+								} else if(RightClick && towerSelection != null) {
+									DeselectTower();
+								}
+							} else {
+								UpdatePlacing(coord);
 							}
-						} else {
-							UpdatePlacing(coord);
-						}
-						break;
-					default:
-						throw new Exception("?");
-				}
-			} else {//mouse outside of the level
-				selector.SetState(ModelSelector.ShowMode.None);
-				if(iconSelection != null) {
-					placingObject.SetActive(false);
-				}
-				if((RightClick || LeftClick) && towerSelection != null) {
-					DeselectTower();
+							break;
+						default:
+							throw new Exception("?");
+					}
+				} else {//mouse outside of the level
+					selector.SetState(ModelSelector.ShowMode.None);
+					if(iconSelection != null) {
+						placingObject.SetActive(false);
+					}
+					if((RightClick || LeftClick) && towerSelection != null) {
+						DeselectTower();
+					}
 				}
 			}
 		}
 
 		public void DeselectTower(bool ignoreUIDection = false) {//in case of control through ui
-			if(UI.Instance.placementPanelManager.HasMouseOnPanels() && !ignoreUIDection) {
+			if(!ignoreUIDection && UI.Instance.placementPanelManager.HasMouseOnPanels()) {
 				return;
 			}
 			UI.Instance.placementPanelManager.ClearRequest();
 			towerSelection = null;
 			selector_confirm.SetState(ModelSelector.ShowMode.None);
+		}
+
+		public void StartAbility(Emplacement emplacement) {
+			abilityEmplacement = emplacement;
+			//emplacement.LightUp();
+			DeselectTower();
+		}
+
+		public void StopAbility() {
+			abilityEmplacement = null;
+			DeselectTower();
 		}
 
 		private void GeneratePlacingObject(TowerInfo info) {

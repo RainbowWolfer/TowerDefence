@@ -57,7 +57,7 @@ namespace TowerDefence.UserInterface {
 		private void Update() {
 			rectTransform.anchoredPosition = new Vector2(0, Mathf.SmoothDamp(rectTransform.anchoredPosition.y, y, ref cv1, 0.1f));
 
-			float parentWidth = pausePanel.rectTransform.sizeDelta.x;
+			float parentWidth = pausePanel.Rt.sizeDelta.x;
 			float v = (parentWidth - buttonWidth) / 2 - gap;
 
 			lc.anchoredPosition = new Vector2(Mathf.SmoothDamp(lc.anchoredPosition.x, v, ref cv2, 0.1f), 0);
@@ -99,7 +99,7 @@ namespace TowerDefence.UserInterface {
 			}
 		}
 		private void OnValidate() {
-			float parentWidth = pausePanel.rectTransform.sizeDelta.x;
+			float parentWidth = pausePanel.Rt.sizeDelta.x;
 			float v = (parentWidth - buttonWidth) / 2 - gap;
 			lc.anchoredPosition = new Vector2(v, 0);
 			rc.anchoredPosition = new Vector2(-v, 0);

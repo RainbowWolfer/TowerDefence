@@ -20,7 +20,7 @@ namespace TowerDefence {
 			if(!Directory.Exists(MapInfoPath)) {
 				Directory.CreateDirectory(MapInfoPath);
 			}
-			using var stream = new FileStream(MapInfoPath + $"{mapInfo.name}.map", FileMode.OpenOrCreate);
+			using var stream = new FileStream(MapInfoPath + $"{mapInfo.Name}.map", FileMode.OpenOrCreate);
 			new BinaryFormatter().Serialize(stream, mapInfo);
 		}
 

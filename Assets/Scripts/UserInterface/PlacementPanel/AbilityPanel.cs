@@ -7,7 +7,7 @@ using TowerDefence.Towers;
 
 namespace TowerDefence.UserInterface {
 	public class AbilityPanel: PlacementPanel {
-		public override Placement CurrentPlacement => current;
+		//public override Placement CurrentPlacement => current;
 		public Emplacement current;
 
 		public override float Width => 500;
@@ -19,6 +19,11 @@ namespace TowerDefence.UserInterface {
 			} else {
 				throw new Exception($"{nameof(placement)} type cast error");
 			}
+		}
+
+		protected override void Update() {
+			base.Update();
+
 		}
 	}
 }

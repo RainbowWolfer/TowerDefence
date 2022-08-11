@@ -63,8 +63,8 @@ namespace TowerDefence.Towers {
 
 		protected override void Start() {
 			base.Start();
-			if(!Methods.CheckLinerIncrease(true, info.star1Exp, info.star2Exp, info.star3Exp)) {
-				throw new Exception($"The Exp of {info.name} is not correct");
+			if(info != null && !Methods.CheckLinerIncrease(true, info.star1Exp, info.star2Exp, info.star3Exp)) {
+				Debug.LogError($"The Exp of {info.name} is not correct");
 			}
 		}
 

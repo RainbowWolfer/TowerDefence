@@ -13,7 +13,7 @@ namespace TowerDefence {
 			}
 			if(Input.GetKeyDown(KeyCode.L)) {
 				MapInfo map = Local.LoadMapInfo("Default");
-				Debug.Log(map?.name);
+				Debug.Log(map?.Name);
 			}
 			if(Input.GetKeyDown(KeyCode.O)) {
 				List<MapInfo> all = Local.LoadAllMapInfos();

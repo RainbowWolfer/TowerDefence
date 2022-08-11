@@ -9,28 +9,28 @@ using TMPro;
 
 namespace TowerDefence.UserInterface {
 	public class PausePanel: MonoBehaviour {
-		public RectTransform rectTransform => transform as RectTransform;
-		public bool Show { get; set; }
+
+		[field: SerializeField]
+		public MouseDetector MouseDetector { get; private set; }
+
 		[SerializeField]
 		private ButtonSelector selector;
 
-		public bool IsSettingsOpened { get; set; }
-
 		[SerializeField]
-		public RectTransform settingsPanel;
+		private RectTransform settingsPanel;
 		[SerializeField]
 		private RectTransform buttonsParent;
 
-		[SerializeField]
-		private Image bg;
+		public RectTransform Rt => transform as RectTransform;
+		public bool Show { get; set; }
+		public bool IsSettingsOpened { get; set; }
 
-		public bool HasMouseOn => UI.IsContact(bg.transform as RectTransform);
 		public readonly float setttingsOffset = 375;
 
 		private float cv1;
 		private float cv2;
 		private void Update() {
-			rectTransform.anchoredPosition = new Vector2(0, Mathf.SmoothDamp(rectTransform.anchoredPosition.y, Show ? 0 : rectTransform.sizeDelta.y, ref cv1, 0.1f));
+			Rt.anchoredPosition = new Vector2(0, Mathf.SmoothDamp(Rt.anchoredPosition.y, Show ? 0 : Rt.sizeDelta.y, ref cv1, 0.1f));
 
 			buttonsParent.anchoredPosition = new Vector2(Mathf.SmoothDamp(buttonsParent.anchoredPosition.x, IsSettingsOpened ? -setttingsOffset : 0, ref cv2, 0.1f), buttonsParent.anchoredPosition.y);
 		}

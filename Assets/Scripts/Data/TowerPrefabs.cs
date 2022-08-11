@@ -25,7 +25,7 @@ namespace TowerDefence.Data {
 
 
 		public TowerInfo RequestByID(short id) {
-			var target = id switch {
+			TowerInfo target = id switch {
 				-5 => tankTrap,
 				-4 => poplarTree,
 				-3 => palmTree,

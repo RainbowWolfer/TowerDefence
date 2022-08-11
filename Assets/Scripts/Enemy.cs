@@ -62,7 +62,7 @@ namespace TowerDefence {
 		}
 
 		private Vector3 GetNextPosition() {
-			var v = path.path[index].coord;
+			var v = path.path[index].Coord;
 			return new Vector3(v.x, transform.position.y, v.y) + offset;
 		}
 	}

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace TowerDefence.UserInterface {
 	public class UI: MonoBehaviour {
@@ -13,11 +15,13 @@ namespace TowerDefence.UserInterface {
 
 		[SerializeField]
 		private Canvas canvas;
+		[field: SerializeField]
+		public UIRayCaster RayCaster { get; private set; }
 
 		public GameObject prefab_healthBar;
 
 		[Space]
-		public TextMeshProUGUI fps;
+		public FpsCounter fpsCounter;
 		public FlowIconManager flowIconManager;
 		public IconManager iconManager;
 		public PlacementPanelManager placementPanelManager;
@@ -30,25 +34,21 @@ namespace TowerDefence.UserInterface {
 		}
 
 		private void Start() {
-			StartCoroutine(FPSUpdate());
+
 		}
 
 		private void Update() {
 			if(Input.GetKeyDown(KeyCode.Escape)) {
 				pausePanel.Show = !pausePanel.Show;
 			}
+
 		}
 
 		//public static bool HasMouseOnUI(){
 		//	return IsContact;
 		//}
 
-		private IEnumerator FPSUpdate() {
-			while(true) {
-				fps.text = ((int)(1f / Time.deltaTime)).ToString();
-				yield return new WaitForSeconds(0.4f);
-			}
-		}
+
 
 		public static Vector3 GetScreenPosition(Vector3 worldPosition) {
 			Vector3 desirePos = CameraController.Instance.mainCamera.WorldToScreenPoint(worldPosition) - new Vector3(Screen.width / 2, Screen.height / 2, 0);
