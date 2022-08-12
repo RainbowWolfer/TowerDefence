@@ -61,8 +61,8 @@ namespace TowerDefence.UserInterface {
 			Draw(new List<TowerInfo>() {
 				Game.Towers.RequestByID(1),
 				Game.Towers.RequestByID(2),
-				Game.Towers.RequestByID(1),
 				Game.Towers.RequestByID(3),
+				Game.Towers.RequestByID(4),
 				Game.Towers.RequestByID(3),
 				Game.Towers.RequestByID(2),
 			});
@@ -70,9 +70,9 @@ namespace TowerDefence.UserInterface {
 
 		private void DrawEnplacements() {
 			Draw(new List<TowerInfo>() {
-				Game.Towers.RequestByID(4),
-				Game.Towers.RequestByID(4),
-				Game.Towers.RequestByID(4),
+				Game.Towers.RequestByID(7),
+				Game.Towers.RequestByID(7),
+				Game.Towers.RequestByID(7),
 				Game.Towers.RequestByID(1),
 				Game.Towers.RequestByID(2),
 				Game.Towers.RequestByID(3),

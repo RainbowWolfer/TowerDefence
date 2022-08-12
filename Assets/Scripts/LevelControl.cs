@@ -8,7 +8,6 @@ using TowerDefence.GameControl;
 using TowerDefence.Towers;
 using TowerDefence.UserInterface;
 using UnityEngine;
-
 namespace TowerDefence {
 	public class LevelControl: MonoBehaviour {
 		private Level level;
@@ -19,6 +18,8 @@ namespace TowerDefence {
 		private ModelSelector selector_confirm;
 		[SerializeField]
 		private CircleRangeSelector circleRangeSelector;
+		[SerializeField]
+		private GapCircleRange attackRange;
 
 		private GameObject placingObject;
 		private MeshRenderer[] renderers;
@@ -34,8 +35,10 @@ namespace TowerDefence {
 		private bool LeftClick => Input.GetMouseButtonDown(0);
 		private bool RightClick => Input.GetMouseButtonDown(1);
 
+
 		private TowerInfo iconSelection;
-		private Placement towerSelection;
+
+		public Placement TowerSelection { get; set; }
 
 		private void Start() {
 			level = Game.Instance.level;
@@ -49,13 +52,24 @@ namespace TowerDefence {
 				}
 			};
 			selector_confirm.SetState(ModelSelector.ShowMode.None);
+			TowerSelection = null;
 		}
 
+		private void UpdateIndicatorTarget() {
+			if(TowerSelection is Tower tower) {
+				attackRange.Show(tower);
+				attackRange.AttackTargetIndicator.enemy = tower.Target;
+			} else {
+				attackRange.Show(null);
+				attackRange.AttackTargetIndicator.enemy = null;
+			}
+		}
 
 		private void Update() {
 			if(UI.Instance.pausePanel.Show) {
 				return;
 			}
+			UpdateIndicatorTarget();
 			if(abilityEmplacement != null && abilityEmplacement.Ability != null) {//emplacement ability selecting mode
 				circleRangeSelector.gameObject.SetActive(true);
 				circleRangeSelector.radius = abilityEmplacement.Ability.AbilityRadius;
@@ -75,7 +89,7 @@ namespace TowerDefence {
 						var size = abilityEmplacement.info.size;
 						selector.SetState(ModelSelector.ShowMode.Full, abilityEmplacement.coord, height, size);
 						UI.Instance.placementPanelManager.Request(abilityEmplacement);
-						towerSelection = abilityEmplacement;
+						TowerSelection = abilityEmplacement;
 						selector_confirm.SetState(ModelSelector.ShowMode.Full, abilityEmplacement.coord, height, size);
 
 						abilityEmplacement = null;
@@ -93,7 +107,7 @@ namespace TowerDefence {
 					UI.Instance.iconManager.DeselectAll();
 					placingObject = null;
 					return;
-				} else if(RightClick && towerSelection != null) {//in selected a field placement
+				} else if(RightClick && TowerSelection != null) {//in selected a field placement
 					DeselectTower();
 					return;
 				}
@@ -129,11 +143,11 @@ namespace TowerDefence {
 							if(iconSelection == null) {
 								selector.SetState(ModelSelector.ShowMode.Full, coord, height, size);
 								if(LeftClick) {
-									Placement t = level.GetPlacement(coord);
-									UI.Instance.placementPanelManager.Request(t);
-									towerSelection = t;
+									Placement pla = level.GetPlacement(coord);
+									UI.Instance.placementPanelManager.Request(pla);
+									TowerSelection = pla;
 									selector_confirm.SetState(ModelSelector.ShowMode.Full, coord, height, size);
-								} else if(RightClick && towerSelection != null) {
+								} else if(RightClick && TowerSelection != null) {
 									DeselectTower();
 								}
 							} else {
@@ -148,7 +162,7 @@ namespace TowerDefence {
 					if(iconSelection != null) {
 						placingObject.SetActive(false);
 					}
-					if((RightClick || LeftClick) && towerSelection != null) {
+					if((RightClick || LeftClick) && TowerSelection != null) {
 						DeselectTower();
 					}
 				}
@@ -160,7 +174,7 @@ namespace TowerDefence {
 				return;
 			}
 			UI.Instance.placementPanelManager.ClearRequest();
-			towerSelection = null;
+			TowerSelection = null;
 			selector_confirm.SetState(ModelSelector.ShowMode.None);
 		}
 

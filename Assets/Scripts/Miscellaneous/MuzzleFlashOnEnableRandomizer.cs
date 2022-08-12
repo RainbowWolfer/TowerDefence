@@ -11,7 +11,11 @@ namespace TowerDefence.Miscellaneous {
 		public bool enable;
 		private void OnEnable() {
 			if(enable) {
-				transform.localEulerAngles = new Vector3(Random.Range(0, 360), 0, 0);
+				transform.localEulerAngles = new Vector3(
+					Random.Range(0, 360),
+					transform.localEulerAngles.y,
+					transform.localEulerAngles.z
+				);
 			}
 		}
 	}

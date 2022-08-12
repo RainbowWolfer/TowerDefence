@@ -26,7 +26,7 @@ namespace TowerDefence.Towers {
 		private float verAngle;
 
 		private float cv1;
-		private Timer fireTimer = new Timer();
+		private readonly Timer fireTimer = new Timer();
 
 		protected override void Awake() {
 			base.Awake();
