@@ -105,9 +105,5 @@ namespace TowerDefence.Towers {
 		public override float GetAttackRadius() {
 			return 3;
 		}
-
-		protected override void InitializeAttributes() {
-
-		}
 	}
 }

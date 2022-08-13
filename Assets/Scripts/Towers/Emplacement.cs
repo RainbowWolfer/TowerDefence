@@ -40,6 +40,7 @@ namespace TowerDefence.Towers {
 		public float AbilityRadius { get; set; }
 		public float Cooldown { get; set; }
 		public float UpgradedCooldown { get; set; }
+
 		public float CooldownTimer { get; set; } = 0;
 		public bool IsFiring { get; set; }
 

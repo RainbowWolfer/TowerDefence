@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 namespace TowerDefence.Towers {
+	/// <summary>
+	/// damage -> start damage / end damage
+	/// GetDamage() -> strat damage
+	/// GetDamageLength() -> start + length = end damage
+	/// </summary>
 	public class LaserTower: Tower {
 		[SerializeField]
 		private Transform turrert;
@@ -70,6 +75,9 @@ namespace TowerDefence.Towers {
 					laser_l.enabled = false;
 					laser_r.enabled = false;
 				}
+			} else {
+				laser_l.enabled = false;
+				laser_r.enabled = false;
 			}
 			_laserColor = Color.Lerp(_laserColor, laserColor, Time.deltaTime * 5);
 			laser_l.colorGradient = GetFixedColor(_laserColor);
@@ -86,8 +94,14 @@ namespace TowerDefence.Towers {
 		private Gradient GetFixedColor(Color color) {
 			return new Gradient() {
 				mode = GradientMode.Fixed,
-				alphaKeys = new GradientAlphaKey[] { new GradientAlphaKey(color.a, 0), new GradientAlphaKey(color.a, 1) },
-				colorKeys = new GradientColorKey[] { new GradientColorKey(color, 0), new GradientColorKey(color, 1) }
+				alphaKeys = new GradientAlphaKey[] {
+					new GradientAlphaKey(color.a, 0),
+					new GradientAlphaKey(color.a, 1),
+				},
+				colorKeys = new GradientColorKey[] {
+					new GradientColorKey(color, 0),
+					new GradientColorKey(color, 1),
+				},
 			};
 		}
 
@@ -99,15 +113,25 @@ namespace TowerDefence.Towers {
 
 		private void DoDamage(Enemy enemy) {
 			float damage = Mathf.Lerp(startDamage, endDamage, Percentage);
-			laserColor = Color.Lerp(new Color(0, 0.2f, 0.3f, 0.05f), new Color(0, 0.65f, 1f, 1f), Percentage);
+			laserColor = Color.Lerp(
+				new Color(0, 0.2f, 0.3f, 0.05f),
+				new Color(0, 0.65f, 1f, 1f),
+				Percentage
+			);
 			enemy.TakeDamage(damage);
 		}
 
 		private void UpdateLaser(Transform target) {
 			laser_l.enabled = true;
 			laser_r.enabled = true;
-			laser_l.SetPositions(new Vector3[] { target.position, laser_l_start.position });
-			laser_r.SetPositions(new Vector3[] { target.position, laser_r_start.position });
+			laser_l.SetPositions(new Vector3[] {
+				target.position,
+				laser_l_start.position
+			});
+			laser_r.SetPositions(new Vector3[] {
+				target.position,
+				laser_r_start.position
+			});
 		}
 
 		private void AimAt(Transform target) {
@@ -140,16 +164,14 @@ namespace TowerDefence.Towers {
 			base.Upgrade();
 		}
 
-		public override float GetAttackRadius() {
-			return 2;
-		}
-
-		public override float GetDamage() {
-			return 100;
-		}
-
-		protected override void InitializeAttributes() {
-
-		}
+		//public float GetDamageLength(){
+		//	return (Star switch {
+		//		Star.None => info.damage.none,
+		//		Star.Star1 => info.damage.one,
+		//		Star.Star2 => info.damage.two,
+		//		Star.Star3 => info.damage.three,
+		//		_ => throw new Exception(),
+		//	}) * (IsUpgraded ? info.damageUpgradeMultuplier : 1);
+		//}
 	}
 }

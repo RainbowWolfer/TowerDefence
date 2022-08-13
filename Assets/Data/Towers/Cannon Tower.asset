@@ -15,10 +15,10 @@ MonoBehaviour:
   id: 0
   prefab: {fileID: 6379503998794011885, guid: 5aa4b295a21116a499fdbe9ca1cdf077, type: 3}
   icon: {fileID: 21300000, guid: b3685903be623d746abff0a4c73699f8, type: 3}
-  price: 0
   size: {x: 1, y: 1}
   height: 1
   upgradable: 1
+  price: 0
   upgradePrice: 0
   upgradedSellPrice: 0
   sellPrice: 0
@@ -26,7 +26,31 @@ MonoBehaviour:
   star1Exp: 1000
   star2Exp: 3000
   star3Exp: 6000
-  abilityEnabled: 0
-  rechargeTime: 0
-  enableAntiAir: 0
+  damageUpgradeMultuplier: 2
+  fireRateUpgradeMultuplier: 0.5
+  radiusUpgradeMultuplier: 1.5
+  damage:
+    none: 10
+    one: 20
+    two: 30
+    three: 40
+  fireRate:
+    none: 0.06
+    one: 0.05
+    two: 0.04
+    three: 0.03
+  attackRadius:
+    none: 2
+    one: 2.5
+    two: 3
+    three: 3.5
+  turnnigTime:
+    none: 0.05
+    one: 0.04
+    two: 0.03
+    three: 0.02
+  ability:
+    abilityRadius: 0
+    cooldown: 0
+    upgradedCooldown: 0
   description: 

@@ -15,13 +15,6 @@ namespace TowerDefence.Towers {
 		[SerializeField]
 		private Transform turret;
 
-		#region Attributes
-		private float base_attackRadius;
-		private float base_turningTime;
-		private float base_fireRate;
-		private float base_damage;
-		#endregion
-
 		private float horAngle;
 		private float verAngle;
 
@@ -50,59 +43,8 @@ namespace TowerDefence.Towers {
 			Exp += damage;
 		}
 
-		protected override void InitializeAttributes() {
-			base_attackRadius = 2;
-			base_turningTime = 0.05f;
-			base_fireRate = 0.05f;
-			base_damage = 10;
-		}
-
 		public override void Upgrade() {
 			base.Upgrade();
-			base_attackRadius = 3;
-			base_turningTime = 0.04f;
-			base_fireRate = 0.035f;
-			base_damage = 20;
-		}
-
-		public override float GetDamage() {
-			return base_damage * Star switch {
-				0 => 1f,
-				1 => 1.3f,
-				2 => 1.6f,
-				3 => 2f,
-				_ => throw new Exception("Error"),
-			};
-		}
-
-		public override float GetAttackRadius() {
-			return base_attackRadius * Star switch {
-				0 => 1f,
-				1 => 1.1f,
-				2 => 1.3f,
-				3 => 1.5f,
-				_ => throw new Exception("Error"),
-			};
-		}
-
-		public float GetTurningTime() {
-			return base_turningTime * Star switch {
-				0 => 1f,
-				1 => 1f,
-				2 => 0.95f,
-				3 => 0.9f,
-				_ => throw new Exception("Error"),
-			};
-		}
-
-		public float GetFireRate() {
-			return base_fireRate * Star switch {
-				0 => 1f,
-				1 => 1.1f,
-				2 => 1.2f,
-				3 => 1.3f,
-				_ => throw new Exception("Error"),
-			};
 		}
 
 		private void AimAt(Transform target) {

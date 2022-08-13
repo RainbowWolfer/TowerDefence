@@ -17,10 +17,6 @@ namespace TowerDefence.Towers {
 			return 1;
 		}
 
-		protected override void InitializeAttributes() {
-			
-		}
-
 
 	}
 }

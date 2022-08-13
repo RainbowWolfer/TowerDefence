@@ -130,10 +130,6 @@ namespace TowerDefence.Towers {
 			return 200f;
 		}
 
-		protected override void InitializeAttributes() {
-
-		}
-
 		//used in animation 
 		public void EjectBullet() {
 			var rigidbody = Instantiate(bulletCasingPrefab).GetComponent<Rigidbody>();

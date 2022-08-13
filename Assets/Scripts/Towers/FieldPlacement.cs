@@ -14,20 +14,20 @@ namespace TowerDefence.Towers {
 			protected set {
 				exp = value;
 				if(value >= info.star3Exp) {
-					if(Star == 3) {
+					if(Star == Star.Star3) {
 						return;
 					}
-					Star = 3;
+					Star = Star.Star3;
 				} else if(value >= info.star2Exp) {
-					if(Star == 2) {
+					if(Star == Star.Star2) {
 						return;
 					}
-					Star = 2;
+					Star = Star.Star2;
 				} else if(value >= info.star1Exp) {
-					if(Star == 1) {
+					if(Star == Star.Star1) {
 						return;
 					}
-					Star = 1;
+					Star = Star.Star1;
 				}
 			}
 		}
@@ -46,8 +46,9 @@ namespace TowerDefence.Towers {
 			}
 		}
 
-		public int Star { get; protected set; }
+		public Star Star { get; protected set; }
 		public int Kills { get; protected set; }
+
 
 		public bool IsUpgraded { get; protected set; }
 
@@ -72,4 +73,9 @@ namespace TowerDefence.Towers {
 			base.Update();
 		}
 	}
+
+	public enum Star {
+		None, Star1, Star2, Star3
+	}
+
 }
