@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TowerDefence.Functions;
 using UnityEngine;
 
-namespace TowerDefence.Towers {
+namespace TowerDefence.Placements {
 	public abstract class FieldPlacement: Placement {
 		private float exp;
 		public float Exp {

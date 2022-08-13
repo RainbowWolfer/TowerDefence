@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace TowerDefence.Towers {
+namespace TowerDefence.Placements.Towers {
 	/// <summary>
 	/// damage -> start damage / end damage
 	/// GetDamage() -> strat damage
@@ -34,11 +34,8 @@ namespace TowerDefence.Towers {
 		[SerializeField]
 		private MeshRenderer headLight;
 
-		private int startDamage = 1;
-		private int endDamage = 40;
-		private float chargeTime = 5;
 		private float fireTime;
-		private float Percentage => fireTime / chargeTime;
+		private float Percentage => fireTime / GetChargingSpeed();
 
 		private bool aimReady;
 
@@ -112,7 +109,11 @@ namespace TowerDefence.Towers {
 		}
 
 		private void DoDamage(Enemy enemy) {
-			float damage = Mathf.Lerp(startDamage, endDamage, Percentage);
+			float damage = Mathf.Lerp(
+				GetDamage(),
+				GetDamage() + GetDamageLength(),
+				Percentage
+			);
 			laserColor = Color.Lerp(
 				new Color(0, 0.2f, 0.3f, 0.05f),
 				new Color(0, 0.65f, 1f, 1f),
@@ -164,14 +165,24 @@ namespace TowerDefence.Towers {
 			base.Upgrade();
 		}
 
-		//public float GetDamageLength(){
-		//	return (Star switch {
-		//		Star.None => info.damage.none,
-		//		Star.Star1 => info.damage.one,
-		//		Star.Star2 => info.damage.two,
-		//		Star.Star3 => info.damage.three,
-		//		_ => throw new Exception(),
-		//	}) * (IsUpgraded ? info.damageUpgradeMultuplier : 1);
-		//}
+		public float GetDamageLength() {
+			return (Star switch {
+				Star.None => 2,
+				Star.Star1 => 4,
+				Star.Star2 => 6,
+				Star.Star3 => 8,
+				_ => throw new Exception(),
+			}) * (IsUpgraded ? 1.2f : 1);
+		}
+
+		public float GetChargingSpeed() {
+			return (Star switch {
+				Star.None => 4,
+				Star.Star1 => 5,
+				Star.Star2 => 6,
+				Star.Star3 => 7,
+				_ => throw new Exception(),
+			}) * (IsUpgraded ? 1.4f : 1);
+		}
 	}
 }

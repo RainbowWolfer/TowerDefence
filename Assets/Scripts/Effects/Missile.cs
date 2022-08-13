@@ -5,8 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace TowerDefence.Towers {
-	public class AimingSystem: MonoBehaviour {
-		
+namespace TowerDefence.Effects {
+	public class Missile: MonoBehaviour {
+		private void Start() {
+
+		}
+
+		private void Update() {
+
+		}
 	}
 }

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using TowerDefence.GameControl;
 using UnityEngine;
 
-namespace TowerDefence.Towers {
+namespace TowerDefence.Placements {
 	public abstract class Tower: FieldPlacement {
-		protected Game game;
 		protected TargetUpdater targetUpdater;
 
 		public Enemy Target { get; protected set; }
@@ -55,8 +54,7 @@ namespace TowerDefence.Towers {
 		}
 
 		protected virtual void Awake() {
-			game = Game.Instance;
-			targetUpdater = new TargetUpdater(game, this);
+			targetUpdater = new TargetUpdater(this);
 		}
 
 		protected override void Start() {

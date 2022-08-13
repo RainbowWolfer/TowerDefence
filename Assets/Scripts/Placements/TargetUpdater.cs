@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace TowerDefence.Towers {
+namespace TowerDefence.Placements {
 	public class TargetUpdater {
-		private readonly Game game;
 		private readonly Transform self;
 		private readonly Tower tower;
 
@@ -26,8 +25,7 @@ namespace TowerDefence.Towers {
 
 		public bool pause = false;
 
-		public TargetUpdater(Game game, Tower t) {
-			this.game = game;
+		public TargetUpdater( Tower t) {
 			this.self = t.transform;
 			this.tower = t;
 		}
@@ -37,7 +35,7 @@ namespace TowerDefence.Towers {
 				return;
 			}
 			List<Enemy> found = new List<Enemy>();
-			foreach(Enemy e in game.enemies) {
+			foreach(Enemy e in Game.Instance.enemies) {
 				if(Vector3.Distance(e.transform.position, self.position) >= tower.GetAttackRadius()) {
 					continue;
 				}

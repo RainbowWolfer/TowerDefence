@@ -14,6 +14,7 @@ namespace TowerDefence.Data {
 		public TowerInfo lightningTower;
 		public TowerInfo laserTower;
 		public TowerInfo snipeTower;
+		public TowerInfo missileTower;
 
 		public TowerInfo stormGeneratorEmplacement;
 
@@ -37,6 +38,7 @@ namespace TowerDefence.Data {
 				2 => lightningTower,
 				3 => laserTower,
 				4 => snipeTower,
+				5 => missileTower,
 				7 => stormGeneratorEmplacement,
 				_ => throw new Exception($"ID({id}) is not found"),
 			};

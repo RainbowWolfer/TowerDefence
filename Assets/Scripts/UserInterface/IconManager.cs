@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TowerDefence.Data;
-using TowerDefence.Towers;
+using TowerDefence.Placements;
 using UnityEngine;
 
 namespace TowerDefence.UserInterface {
@@ -63,7 +63,7 @@ namespace TowerDefence.UserInterface {
 				Game.Towers.RequestByID(2),
 				Game.Towers.RequestByID(3),
 				Game.Towers.RequestByID(4),
-				Game.Towers.RequestByID(3),
+				Game.Towers.RequestByID(5),
 				Game.Towers.RequestByID(2),
 			});
 		}

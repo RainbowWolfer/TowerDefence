@@ -7,7 +7,7 @@ using TowerDefence.GameControl;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace TowerDefence.Towers {
+namespace TowerDefence.Placements.Environments {
 	public class EnvironmentCube: Placement {
 		public Transform rotationParent;
 		public Vector3 axis;

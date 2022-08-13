@@ -810,10 +810,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4900963072674325538}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d6267610ea5f8b4a9d274ae7759be9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 80863bce1d2567b41a24a224168fb5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  info: {fileID: 0}
+  info: {fileID: 11400000, guid: b79f8a407e57b7e41a19ea15c95a711d, type: 2}
   coord: {x: 0, y: 0}
   turrert: {fileID: 9056276565470760132}
   gun: {fileID: 5879248244423634348}

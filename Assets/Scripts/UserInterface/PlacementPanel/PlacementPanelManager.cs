@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TowerDefence.Functions;
-using TowerDefence.Towers;
+using TowerDefence.Placements;
+using TowerDefence.Placements.Environments;
 using UnityEngine;
 using UnityEngine.UI;
 namespace TowerDefence.UserInterface {

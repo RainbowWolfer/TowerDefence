@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.VFX;
 
-namespace TowerDefence.Towers {
+namespace TowerDefence.Placements.Towers {
 	public class LightningTower: Tower {
 		[Space]
 		[SerializeField]
 		private Color lightningColor;
 
-		[SerializeField]
-		private float attackRadius = 2;
-		[SerializeField]
-		private float fireRate = 3;
-		[SerializeField]
-		private float damage = 500;
+		//[SerializeField]
+		//private float attackRadius = 2;
+		//[SerializeField]
+		//private float fireRate = 3;
+		//[SerializeField]
+		//private float damage = 500;
 
 		[SerializeField]
 		private Transform parentX;
@@ -28,7 +28,7 @@ namespace TowerDefence.Towers {
 		[SerializeField]
 		private VisualEffect effect;
 
-		private Timer fireTimer = new Timer();
+		private readonly Timer fireTimer = new Timer();
 		protected override void Awake() {
 			base.Awake();
 		}
@@ -38,7 +38,7 @@ namespace TowerDefence.Towers {
 			if(Target != null) {
 				SetRotation(Target.transform);
 			}
-			if(Target != null && fireTimer.EverySeconds(fireRate)) {
+			if(Target != null && fireTimer.EverySeconds(GetFireRate())) {
 				Fire(Target.transform);
 			}
 		}
@@ -59,7 +59,7 @@ namespace TowerDefence.Towers {
 
 		private void DoDamage() {
 			if(Target != null) {
-				Target.TakeDamage(damage);
+				Target.TakeDamage(GetDamage());
 			}
 		}
 
@@ -98,12 +98,5 @@ namespace TowerDefence.Towers {
 			//Debug.Log("(" + horAngle + "  ,  " + verAngle + " )distance:" + distance);
 		}
 
-		public override float GetDamage() {
-			return 100;
-		}
-
-		public override float GetAttackRadius() {
-			return 3;
-		}
 	}
 }

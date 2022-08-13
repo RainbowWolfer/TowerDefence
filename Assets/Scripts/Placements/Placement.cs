@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TowerDefence.Data;
 using UnityEngine;
 
-namespace TowerDefence.Towers {
+namespace TowerDefence.Placements {
 	public abstract class Placement: MonoBehaviour {
 		public TowerInfo info;
 		public float Height => info.height;

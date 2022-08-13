@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace TowerDefence.Towers {
+namespace TowerDefence.Placements.Towers {
 	public class CannonTower: Tower {
 		[Space]
 		[SerializeField]

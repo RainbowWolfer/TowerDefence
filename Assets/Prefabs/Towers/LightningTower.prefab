@@ -108,6 +108,7 @@ VisualEffect:
       m_Array: []
 --- !u!73398921 &457181490
 VFXRenderer:
+  serializedVersion: 1
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -124,9 +125,6 @@ VFXRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -190,34 +188,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4295335368445765012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93080320e45d0464baccd90ca51236e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 17c50c4c79d689149bd1ce1954af7a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  info:
-    id: 0
-    name: 
-    gameObject: {fileID: 0}
-    icon: {fileID: 0}
-    price: 0
-    size: {x: 1, y: 1}
-    height: 1
-    upgradable: 1
-    upgradePrice: 0
-    upgradedSellPrice: 0
-    sellPrice: 0
-    shovelPrice: 0
-    star1Exp: 1000
-    star2Exp: 3000
-    star3Exp: 6000
-    abilityEnabled: 0
-    rechargeTime: 0
-    description: 
+  info: {fileID: 11400000, guid: d0661ad23058bde41a6306c11215e8cf, type: 2}
   coord: {x: 0, y: 0}
   lightningColor: {r: 0, g: 0, b: 0, a: 0}
-  attackRadius: 2
-  fireRate: 3
-  damage: 500
-  target: {fileID: 0}
   parentX: {fileID: 39163243}
   parentZ: {fileID: 457181489}
   effect: {fileID: 457181491}

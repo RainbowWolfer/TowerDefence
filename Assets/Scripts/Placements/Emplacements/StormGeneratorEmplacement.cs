@@ -9,7 +9,7 @@ using TowerDefence.Functions;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace TowerDefence.Towers {
+namespace TowerDefence.Placements.Emplacements {
 	public class StormGeneratorEmplacement: Emplacement {
 		public override EmplacementAbility Ability { get; set; }
 

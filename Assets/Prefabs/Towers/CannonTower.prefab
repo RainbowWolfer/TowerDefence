@@ -456,28 +456,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6379503998794011885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8acf0ffed2ea0da47b99634d765850c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b46458a57f89e4419d3defad5e69dff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  info:
-    id: 0
-    name: 
-    gameObject: {fileID: 0}
-    icon: {fileID: 0}
-    price: 0
-    size: {x: 1, y: 1}
-    height: 1
-    upgradable: 1
-    upgradePrice: 0
-    upgradedSellPrice: 0
-    sellPrice: 0
-    shovelPrice: 0
-    star1Exp: 1000
-    star2Exp: 3000
-    star3Exp: 6000
-    abilityEnabled: 0
-    rechargeTime: 0
-    description: 
+  info: {fileID: 11400000, guid: 05787c1da74d7044ebca98af99e54f85, type: 2}
   coord: {x: 0, y: 0}
   anim: {fileID: 6073637119580973499}
   chassis: {fileID: 7845946126381903889}

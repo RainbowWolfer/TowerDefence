@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using TowerDefence.Towers;
+using TowerDefence.Placements;
 
 namespace TowerDefence.UserInterface {
 	public class DetailPanel: PlacementPanel {
@@ -164,10 +164,10 @@ namespace TowerDefence.UserInterface {
 		public void UpdateExp() {
 			expFiller.fillAmount = CurrentFieldPlacement.ExpPercentage;
 			bool[] stars = CurrentFieldPlacement.Star switch {
-				0 => new bool[] { false, false, false },
-				1 => new bool[] { true, false, false },
-				2 => new bool[] { true, true, false },
-				3 => new bool[] { true, true, true },
+				Star.None => new bool[] { false, false, false },
+				Star.Star1 => new bool[] { true, false, false },
+				Star.Star2 => new bool[] { true, true, false },
+				Star.Star3 => new bool[] { true, true, true },
 				_ => new bool[] { true, true, true },
 			};
 			star1.gameObject.SetActive(stars[0]);

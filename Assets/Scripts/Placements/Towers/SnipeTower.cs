@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TowerDefence.Towers;
+using TowerDefence.Placements;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 using Random = UnityEngine.Random;
 
-namespace TowerDefence.Towers {
+namespace TowerDefence.Placements.Towers {
 	public class SnipeTower: Tower {
 		[Space]
 		[SerializeField]
 		private Animator anim;
 
+		[Space]
 		[SerializeField]
 		private Transform chassis;
 		[SerializeField]
@@ -101,33 +102,6 @@ namespace TowerDefence.Towers {
 			turret.transform.localEulerAngles = new Vector3(0,
 				Mathf.SmoothDampAngle(turret.transform.localEulerAngles.y, verAngle, ref cv1, GetTurningTime()),
 			0);
-		}
-
-		public float GetTurningTime() {
-			return 0.04f * (Star switch {
-				0 => 1f,
-				1 => 1f,
-				2 => 0.95f,
-				3 => 0.9f,
-				_ => throw new Exception("Error"),
-			});
-		}
-		public float GetFireRate() {
-			return 1f * Star switch {
-				0 => 1f,
-				1 => 1.1f,
-				2 => 1.2f,
-				3 => 1.3f,
-				_ => throw new Exception("Error"),
-			};
-		}
-
-		public override float GetAttackRadius() {
-			return 6f;
-		}
-
-		public override float GetDamage() {
-			return 200f;
 		}
 
 		//used in animation 
