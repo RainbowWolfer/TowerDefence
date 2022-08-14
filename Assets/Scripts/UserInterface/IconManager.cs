@@ -64,7 +64,7 @@ namespace TowerDefence.UserInterface {
 				Game.Towers.RequestByID(3),
 				Game.Towers.RequestByID(4),
 				Game.Towers.RequestByID(5),
-				Game.Towers.RequestByID(2),
+				Game.Towers.RequestByID(6),
 			});
 		}
 

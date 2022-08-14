@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TowerDefence.Effects;
 using UnityEngine;
 
 namespace TowerDefence.Placements.Towers {
@@ -18,6 +19,14 @@ namespace TowerDefence.Placements.Towers {
 		private Transform turret;
 		[SerializeField]
 		private Transform radar;
+		[SerializeField]
+		private Transform missile1;
+		[SerializeField]
+		private Transform missile2;
+		[SerializeField]
+		private Transform missile3;
+		[SerializeField]
+		private Transform missile4;
 
 		[Space]
 		[SerializeField]
@@ -35,6 +44,9 @@ namespace TowerDefence.Placements.Towers {
 		private float cv1;
 		private readonly Timer fireTimer = new Timer();
 
+		public bool ready = true;
+		private Vector3? targetPosition;
+
 		protected override void Awake() {
 			base.Awake();
 		}
@@ -48,26 +60,35 @@ namespace TowerDefence.Placements.Towers {
 			RadarSpin();
 			if(Target != null) {
 				AimAt(Target.transform);
+				targetPosition = Target.transform.position;
 			}
-			bool ready = Target != null && CheckAimingReady();
-			//anim.SetBool("Firing", ready);
-			if(ready && fireTimer.EverySeconds(GetFireRate())) {
-				Fire();
+			if(fireTimer.EverySeconds(GetFireRate())) {
+				ready = true;
 			}
-		}
-
-		private void Fire() {
-			float damage = GetDamage();
-			Target.TakeDamage(damage);
-			Exp += damage;
+			if(Target != null && CheckAimingReady() && ready) {
+				ready = false;
+				anim.SetTrigger("Fire");
+			}
+			anim.SetBool("IsReady", ready);
 		}
 
 		public void FireMissile(int index) {
-			if(index < 0 || index > 3) {
+			if(targetPosition == null || index < 0 || index > 3) {
 				return;
 			}
+			Transform t = index switch {
+				0 => missile1,
+				1 => missile2,
+				2 => missile3,
+				3 => missile4,
+				_ => throw new Exception(),
+			};
 
-
+			var missile = Instantiate(missilePrefab).GetComponent<Missile>();
+			missile.transform.position = t.position;
+			missile.target = targetPosition;
+			missile.radius = GetBlastRadius();
+			missile.damage = GetDamage();
 		}
 
 		private void RadarSpin() {
@@ -79,12 +100,12 @@ namespace TowerDefence.Placements.Towers {
 			if(hor > 180) {
 				hor -= 360;
 			}
-			float ver = Mathf.Abs(turret.transform.localEulerAngles.y - verAngle);
+			float ver = Mathf.Abs(turret.transform.localEulerAngles.x - verAngle);
 			if(ver > 180) {
 				ver -= 360;
 			}
 			const float deviation = 5;
-			//Debug.Log($"hor:{hor} ;\tver:{ver}");
+			Debug.Log($"hor:{hor} ;\tver:{ver}");
 			return Mathf.Abs(hor) < deviation && Mathf.Abs(ver) < deviation;
 		}
 
@@ -103,6 +124,16 @@ namespace TowerDefence.Placements.Towers {
 			turret.transform.localEulerAngles = new Vector3(
 				Mathf.SmoothDampAngle(turret.transform.localEulerAngles.x, verAngle, ref cv1, GetTurningTime()),
 			0, 0);
+		}
+
+		public float GetBlastRadius() {
+			return (Star switch {
+				Star.None => 1,
+				Star.Star1 => 1.2f,
+				Star.Star2 => 1.4f,
+				Star.Star3 => 1.6f,
+				_ => throw new Exception(),
+			}) * (IsUpgraded ? 1.5f : 1);
 		}
 	}
 }

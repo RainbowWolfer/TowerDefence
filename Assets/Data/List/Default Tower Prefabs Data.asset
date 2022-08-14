@@ -18,6 +18,7 @@ MonoBehaviour:
   laserTower: {fileID: 11400000, guid: b79f8a407e57b7e41a19ea15c95a711d, type: 2}
   snipeTower: {fileID: 11400000, guid: 72712807c30feee49a3b1f38f8c3e8ab, type: 2}
   missileTower: {fileID: 11400000, guid: 5497b74fb70bf214fa8df4d8e0efd31a, type: 2}
+  artilleryTower: {fileID: 11400000, guid: 23fe62e71df3d0948b18e6bcb27793e2, type: 2}
   stormGeneratorEmplacement: {fileID: 11400000, guid: 37f54c30094aceb4a98a402b5623e38a, type: 2}
   oakTree: {fileID: 11400000, guid: 90bc237892282a54dba4e27017c4bfcb, type: 2}
   firTree: {fileID: 11400000, guid: 2878665732baa654a8c106804a913116, type: 2}

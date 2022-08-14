@@ -89,11 +89,24 @@ namespace TowerDefence {
 			return v;
 		}
 
-		public void EnemiesTakeAreaDamage(Vector2 position, float radius, float damage) {
+		public void EnemiesTakeAreaDamageV2(Vector2 position, float radius, float damage) {
 			List<Enemy> enemiesInRange = new List<Enemy>();
 			foreach(Enemy item in enemies) {
 				var pos = new Vector2(item.transform.position.x, item.transform.position.z);
 				if(Vector2.Distance(pos, position) < radius) {
+					enemiesInRange.Add(item);
+				}
+			}
+
+			foreach(Enemy e in enemiesInRange) {
+				e.TakeDamage(damage);
+			}
+		}
+
+		public void EnemiesTakeAreaDamageV3(Vector3 position, float radius, float damage) {
+			List<Enemy> enemiesInRange = new List<Enemy>();
+			foreach(Enemy item in enemies) {
+				if(Vector3.Distance(item.transform.position, position) < radius) {
 					enemiesInRange.Add(item);
 				}
 			}

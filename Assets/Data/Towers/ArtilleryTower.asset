@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1850f629360f584aa26ea112b2b5b80, type: 3}
-  m_Name: Missile Tower
+  m_Name: ArtilleryTower
   m_EditorClassIdentifier: 
-  id: 5
-  prefab: {fileID: 4334995631200142108, guid: 36d77058dac59ff46b3804b2789f0afa, type: 3}
-  icon: {fileID: 21300000, guid: 0af57460ce5a41a449cc3afba3ad6693, type: 3}
+  id: 6
+  prefab: {fileID: 6308414570593603404, guid: b811fe72f39b0cc499dff3b50aed38d8, type: 3}
+  icon: {fileID: 2518886464002683464, guid: a0f00ec2dc2631049bc0f88127bba768, type: 3}
   size: {x: 1, y: 1}
   height: 1
   upgradable: 1

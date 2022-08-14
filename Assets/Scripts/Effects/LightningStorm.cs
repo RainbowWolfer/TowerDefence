@@ -48,7 +48,7 @@ namespace TowerDefence.Effects {
 
 		private IEnumerator DoDamage(Vector2 coord) {
 			yield return new WaitForSeconds(0.15f);
-			Game.Instance.EnemiesTakeAreaDamage(coord, LightningEffectRange, LightningDamage);
+			Game.Instance.EnemiesTakeAreaDamageV2(coord, LightningEffectRange, LightningDamage);
 			//GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
 			//obj.transform.localScale = Vector3.one * 0.3f;
 			//obj.transform.position = new Vector3(coord.x, 0.4f, coord.y);
