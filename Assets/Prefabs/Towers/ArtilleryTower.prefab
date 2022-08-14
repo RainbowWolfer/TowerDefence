@@ -137,7 +137,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3025905273132603086}
-  m_LocalRotation: {x: 0, y: 0.6324768, z: -0, w: 0.7745793}
+  m_LocalRotation: {x: 0, y: 0.25595206, z: 0, w: 0.96668947}
   m_LocalPosition: {x: 0.019184344, y: 1.1641532e-10, z: 0.14085126}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -145,7 +145,7 @@ Transform:
   - {fileID: 312500287}
   m_Father: {fileID: 4773703057273721482}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 54.51, z: 0}
 --- !u!33 &5458191725855259570
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -328,6 +328,41 @@ MonoBehaviour:
   chassis: {fileID: 4773703057273721482}
   turret: {fileID: 7155879337966115797}
   firePoint: {fileID: 312500287}
+  artilleryCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.000002682209
+      inSlope: 4.631218
+      outSlope: 4.631218
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.09166667
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -4.8113165
+      outSlope: -4.8113165
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06666672
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  projectilePrefab: {fileID: 8256390667705109516, guid: e1aac9995561b2d4d8bc797858f01cfc, type: 3}
+  verAngle: 0
 --- !u!95 &6578233418984485407
 Animator:
   serializedVersion: 3
@@ -338,7 +373,7 @@ Animator:
   m_GameObject: {fileID: 6308414570593603404}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e2ecaae47a2969f42989713011243a1e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -372,7 +407,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8698682186713588317}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0077653364, w: 0.9999699}
   m_LocalPosition: {x: -0.000000007450581, y: -0.0018590093, z: 0.5835244}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

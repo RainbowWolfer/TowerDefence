@@ -25,7 +25,7 @@ namespace TowerDefence.Placements {
 
 		public bool pause = false;
 
-		public TargetUpdater( Tower t) {
+		public TargetUpdater(Tower t) {
 			this.self = t.transform;
 			this.tower = t;
 		}
