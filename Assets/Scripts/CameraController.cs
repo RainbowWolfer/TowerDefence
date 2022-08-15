@@ -7,7 +7,8 @@ using UnityEngine;
 
 namespace TowerDefence {
 	public class CameraController: MonoBehaviour {
-		public static CameraController Instance;
+		public static CameraController Instance { get; private set; }
+
 		public Camera mainCamera;
 		public Camera uiCamera;
 
