@@ -26,6 +26,10 @@ namespace TowerDefence.Effects {
 		[Space]
 		public float damage;
 		public float radius;
+		[Space]
+		public float slowEnemyDuration = 0;
+		[Range(0, 1f)]
+		public float slowEnemyPercetange = 0;
 
 		private void Start() {
 			timePass = true;
@@ -62,6 +66,15 @@ namespace TowerDefence.Effects {
 			(Vector3 pos, float height) = GetPositionAndHeight(percentage);
 			transform.position = new Vector3(pos.x, height, pos.z);
 			//Debug.Break();
+
+			if(percentage >= 1) {
+				//do explosion
+				Game.Instance.EnemiesTakeAreaDamageV3(transform.position, radius, damage);
+
+
+
+				Destroy(gameObject);
+			}
 		}
 
 		private (Vector3 pos, float height) GetPositionAndHeight(float per) {

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1154800926709006763}
   - component: {fileID: 1154800926709006756}
   m_Layer: 6
-  m_Name: Enemy
+  m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002758b786891fc4987340d3da346bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 0}
+  info: {fileID: 11400000, guid: 76445ef71a56c494eabc095e1d010cf1, type: 2}
   maxHealth: 0
   health: 0
   speed: 5

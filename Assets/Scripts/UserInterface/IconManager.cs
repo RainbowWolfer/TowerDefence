@@ -59,34 +59,34 @@ namespace TowerDefence.UserInterface {
 
 		private void DrawTowers() {
 			Draw(new List<TowerInfo>() {
-				Game.Towers.RequestByID(1),
-				Game.Towers.RequestByID(2),
-				Game.Towers.RequestByID(3),
-				Game.Towers.RequestByID(4),
-				Game.Towers.RequestByID(5),
-				Game.Towers.RequestByID(6),
+				Game.Instance.Towers.RequestByID(1),
+				Game.Instance.Towers.RequestByID(2),
+				Game.Instance.Towers.RequestByID(3),
+				Game.Instance.Towers.RequestByID(4),
+				Game.Instance.Towers.RequestByID(5),
+				Game.Instance.Towers.RequestByID(6),
 			});
 		}
 
 		private void DrawEnplacements() {
 			Draw(new List<TowerInfo>() {
-				Game.Towers.RequestByID(7),
-				Game.Towers.RequestByID(7),
-				Game.Towers.RequestByID(7),
-				Game.Towers.RequestByID(1),
-				Game.Towers.RequestByID(2),
-				Game.Towers.RequestByID(3),
+				Game.Instance.Towers.RequestByID(7),
+				Game.Instance.Towers.RequestByID(7),
+				Game.Instance.Towers.RequestByID(7),
+				Game.Instance.Towers.RequestByID(1),
+				Game.Instance.Towers.RequestByID(2),
+				Game.Instance.Towers.RequestByID(3),
 			});
 		}
 
 		private void DrawTools() {
 			Draw(new List<TowerInfo>() {
-				Game.Towers.RequestByID(2),
-				Game.Towers.RequestByID(2),
-				Game.Towers.RequestByID(1),
-				Game.Towers.RequestByID(2),
-				Game.Towers.RequestByID(1),
-				Game.Towers.RequestByID(1),
+				Game.Instance.Towers.RequestByID(2),
+				Game.Instance.Towers.RequestByID(2),
+				Game.Instance.Towers.RequestByID(1),
+				Game.Instance.Towers.RequestByID(2),
+				Game.Instance.Towers.RequestByID(1),
+				Game.Instance.Towers.RequestByID(1),
 			});
 		}
 

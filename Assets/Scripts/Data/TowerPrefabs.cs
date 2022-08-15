@@ -10,6 +10,7 @@ namespace TowerDefence.Data {
 	public class TowerPrefabs: ScriptableObject {
 		public TowerInfo defaultCube;
 
+		[Space]
 		public TowerInfo cannonTower;
 		public TowerInfo lightningTower;
 		public TowerInfo laserTower;
@@ -17,13 +18,16 @@ namespace TowerDefence.Data {
 		public TowerInfo missileTower;
 		public TowerInfo artilleryTower;
 
+		[Space]
 		public TowerInfo stormGeneratorEmplacement;
 
+		[Space]
 		public TowerInfo oakTree;
 		public TowerInfo firTree;
 		public TowerInfo palmTree;
 		public TowerInfo poplarTree;
 
+		[Space]
 		public TowerInfo tankTrap;
 
 
@@ -42,7 +46,7 @@ namespace TowerDefence.Data {
 				5 => missileTower,
 				6 => artilleryTower,
 				7 => stormGeneratorEmplacement,
-				_ => throw new Exception($"ID({id}) is not found"),
+				_ => throw new Exception($"Tower ID({id}) is not found"),
 			};
 			target.id = id;
 			return target;

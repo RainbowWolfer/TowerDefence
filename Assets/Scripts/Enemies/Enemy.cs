@@ -4,27 +4,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TowerDefence.Data;
+using TowerDefence.Enemies.Buffs;
 using TowerDefence.UserInterface;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace TowerDefence {
+namespace TowerDefence.Enemies {
 	public class Enemy: MonoBehaviour {
-		public Game game;
+		public EnemyInfo info;
+
 		public float maxHealth;
 		public float health;
-
 		public float speed = 5;
+
+		
 		public Path path;
 		public int index = 0;
 		public Vector3 offset;
+
+		public BaseBuff buff;
 
 		private void Start() {
 			StartCoroutine(MoveCoroutine());
 		}
 
 		private void Update() {
-
+			buff?.Update(this);
 		}
 
 		public void TakeDamage(float damage) {
@@ -35,7 +41,7 @@ namespace TowerDefence {
 		}
 
 		private void Die() {
-			game.enemies.Remove(this);
+			Game.Instance.enemies.Remove(this);
 			UI.Instance.flowIconManager.RemoveHealthBar(this);
 			Destroy(gameObject);
 		}
@@ -49,7 +55,7 @@ namespace TowerDefence {
 				}
 				yield return null;
 			}
-			game.enemies.Remove(this);
+			Game.Instance.enemies.Remove(this);
 			UI.Instance.flowIconManager.RemoveHealthBar(this);
 			Destroy(this.gameObject);
 		}

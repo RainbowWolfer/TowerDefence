@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TowerDefence.Enemies;
 using TowerDefence.Placements;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -23,10 +24,14 @@ namespace TowerDefence.Placements.Towers {
 		private Transform bulletCasingTransform;
 		[SerializeField]
 		private Transform raycastCenter;
+		[SerializeField]
+		private Transform firePoint;
 
 		[Space]
 		[SerializeField]
 		private GameObject bulletCasingPrefab;
+		[SerializeField]
+		private GameObject snipeLineEffectPrefab;
 
 
 		private float horAngle;
@@ -52,8 +57,17 @@ namespace TowerDefence.Placements.Towers {
 			bool ready = Target != null && CheckAimingReady();
 			if(ready && fireTimer.EverySeconds(GetFireRate())) {
 				anim.SetTrigger("Fire");
+				GenerateEffect();
 				Fire();
 			}
+		}
+
+		private void GenerateEffect() {
+			var line = Instantiate(snipeLineEffectPrefab).GetComponent<LineRenderer>();
+			line.SetPositions(new Vector3[2]{
+				firePoint.position,
+				Target.transform.position,
+			});
 		}
 
 		private void Fire() {

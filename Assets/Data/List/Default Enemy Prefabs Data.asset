@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4773bb898ee7f41aa5bfa45eff7e9c, type: 3}
+  m_Name: Default Enemy Prefabs Data
+  m_EditorClassIdentifier: 
+  cube: {fileID: 11400000, guid: 76445ef71a56c494eabc095e1d010cf1, type: 2}
+  robot: {fileID: 0}
+  hummer: {fileID: 0}
+  apc: {fileID: 0}
+  tank: {fileID: 0}

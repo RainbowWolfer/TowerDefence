@@ -25,13 +25,8 @@ namespace TowerDefence.UserInterface {
 		[SerializeField]
 		private MySliderContent content;
 
-		private bool isMouseOn;
-		public bool IsMouseOn {
-			get => isMouseOn;
-			private set {
-				isMouseOn = value;
-			}
-		}
+		[field: SerializeField]
+		public bool IsMouseOn { get; private set; }
 
 		[SerializeField]
 		private bool drag;
@@ -102,7 +97,7 @@ namespace TowerDefence.UserInterface {
 
 				fillerImg.fillAmount = percentage;
 			}
-			handleOutline.enabled = isMouseOn || drag;
+			handleOutline.enabled = IsMouseOn || drag;
 		}
 
 		private void UpdateLayout() {

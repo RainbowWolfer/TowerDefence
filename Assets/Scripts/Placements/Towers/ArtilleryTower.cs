@@ -49,10 +49,14 @@ namespace TowerDefence.Placements.Towers {
 				AimAt(Target.transform);
 			}
 
+			float distance = Target == null ? 0 : Vector2.Distance(
+				new Vector2(transform.position.x, transform.position.z),
+				new Vector2(Target.transform.position.x, Target.transform.position.y)
+			);
 			if(Target != null
 				&& CheckAimingReady()
 				&& fireTimer.EverySeconds(GetFireRate())
-				&& true //check is within minimum range
+				&& distance >= GetMinimunAttackRadius() //check is within minimum range
 			) {
 				anim.SetTrigger("Fire");
 				Fire();
@@ -68,15 +72,23 @@ namespace TowerDefence.Placements.Towers {
 			projectile.start = firePoint.position;
 			projectile.end = Target.transform.position;
 			projectile.curve = artilleryCurve;
+			projectile.damage = GetDamage();
+			projectile.radius = GetBlastRadius();
 			//projectile.curve.keys[0].value = projectile.start.y / projectile.maxHeight;
 			//Debug.Break();
 		}
 
-		public float GetBlastRadius(){
-			return 1f;
+		public float GetBlastRadius() {
+			return (Star switch {
+				Star.None => 1,
+				Star.Star1 => 1.3f,
+				Star.Star2 => 1.6f,
+				Star.Star3 => 1.9f,
+				_ => throw new Exception(),
+			}) * (IsUpgraded ? 1.3f : 1);
 		}
 
-		public float GetMinimunAttackRadius(){
+		public float GetMinimunAttackRadius() {
 			return 1f;
 		}
 

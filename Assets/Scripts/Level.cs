@@ -142,7 +142,7 @@ namespace TowerDefence {
 		public NodeType CheckType(Vector2Int coord) => CheckType(coord.x, coord.y);
 
 		public void GetHeightAndSize(int x, int y, out float height, out Vector2Int size) {
-			TowerInfo info = Game.Towers.RequestByID(map.Nodes[x, y].towerID);
+			TowerInfo info = Game.Instance.Towers.RequestByID(map.Nodes[x, y].towerID);
 			height = info.height;
 			size = info.size;
 		}
@@ -158,7 +158,7 @@ namespace TowerDefence {
 
 
 		public void EditNode(int x, int y, short newID) {
-			Vector2Int size = Game.Towers.RequestByID(newID).size;
+			Vector2Int size = Game.Instance.Towers.RequestByID(newID).size;
 			for(int i = x; i < size.x + x; i++) {
 				for(int j = y; j < size.y + y; j++) {
 					if(!CheckForPlacable(i, j)) {
@@ -191,7 +191,7 @@ namespace TowerDefence {
 		}
 
 		public void ClearNode(int x, int y) {
-			Vector2Int size = Game.Towers.RequestByID(map.Nodes[x, y].towerID).size;
+			Vector2Int size = Game.Instance.Towers.RequestByID(map.Nodes[x, y].towerID).size;
 			//Debug.Log(size);
 			for(int i = x; i < size.x + x; i++) {
 				for(int j = y; j < size.y + y; j++) {
@@ -216,7 +216,7 @@ namespace TowerDefence {
 		}
 
 		private GameObject CreateGameObject(int x, int y, short id, Transform parent) {
-			TowerInfo info = Game.Towers.RequestByID(id);
+			TowerInfo info = Game.Instance.Towers.RequestByID(id);
 			GameObject prefab = info.prefab;
 			GameObject obj = Instantiate(prefab, parent);
 			var p = obj.GetComponent<Placement>();

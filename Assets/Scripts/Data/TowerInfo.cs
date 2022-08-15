@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 namespace TowerDefence.Data {
-	[CreateAssetMenu(fileName = "Tower Prefabs Data", menuName = "Data/Tower Prefab Data")]
+	[CreateAssetMenu(fileName = "Tower Prefab Data", menuName = "Data/Tower Prefab Data")]
 	[Serializable]
 	public class TowerInfo: ScriptableObject {
 		[HideInInspector]

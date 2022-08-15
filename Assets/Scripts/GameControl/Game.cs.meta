@@ -3,7 +3,14 @@ guid: ede1ceff42ef21d478d1f88c22f36b85
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - level: {instanceID: 0}
+  - control: {instanceID: 0}
+  - waves: {instanceID: 0}
+  - <Towers>k__BackingField: {fileID: 11400000, guid: 7334199bba1281b46b6374fedbae630e, type: 2}
+  - <Enemies>k__BackingField: {fileID: 11400000, guid: 6555d5d52af7e8f419c41bfd302ac531, type: 2}
+  - enemiesParent: {instanceID: 0}
+  - testEnemy: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

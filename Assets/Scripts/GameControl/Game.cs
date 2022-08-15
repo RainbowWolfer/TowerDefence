@@ -6,7 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TMPro.Examples;
 using TowerDefence.Data;
+using TowerDefence.Enemies;
 using TowerDefence.Functions;
+using TowerDefence.GameControl.Waves;
 using TowerDefence.UserInterface;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -14,26 +16,28 @@ using Random = UnityEngine.Random;
 namespace TowerDefence {
 	public class Game: MonoBehaviour {
 		public static Game Instance { get; private set; }
-		public static TowerPrefabs Towers { get; private set; }
 
 		public Level level;
 		public LevelControl control;
 
-		[SerializeField]
-		private TowerPrefabs towers;
+		public WavesManager waves;
+
+		[field: SerializeField]
+		public TowerPrefabs Towers { get; private set; }
+
+		[field: SerializeField]
+		public EnemyPrefabs Enemies { get; private set; }
+
 		[SerializeField]
 		private Transform enemiesParent;
 
-		[SerializeField]
-		private GameObject testEnemy;
+		//[SerializeField]
+		//private GameObject testEnemy;
 
 		public readonly List<Enemy> enemies = new List<Enemy>();
 
-		private Coroutine creatingEnemiesCoroutine;
-
 		private void Awake() {
 			Instance = this;
-			Towers = towers;
 		}
 
 		private void Start() {
@@ -61,25 +65,10 @@ namespace TowerDefence {
 			level.Initialize(MapInfo.GenerateRandomMap(15, 20));
 			ClearEnemies();
 
-			if(creatingEnemiesCoroutine != null) {
-				StopCoroutine(creatingEnemiesCoroutine);
-			}
-			creatingEnemiesCoroutine = StartCoroutine(CreateEnemiesWaves());
-		}
-
-		private int wave = 0;
-		private IEnumerator CreateEnemiesWaves() {
-			//CreateEnemy();
-			//yield break;
-			while(!Input.GetKeyDown(KeyCode.Y)) {
-				wave++;
-				for(int i = 0; i < Random.Range(7, 15); i++) {
-					CreateEnemy();
-					yield return new WaitForSeconds(Random.Range(0.4f, 1f));
-				}
-				yield return new WaitForSeconds(Random.Range(4, 7f));
-			}
-			creatingEnemiesCoroutine = null;
+			//if(creatingEnemiesCoroutine != null) {
+			//	StopCoroutine(creatingEnemiesCoroutine);
+			//}
+			//creatingEnemiesCoroutine = StartCoroutine(CreateEnemiesWaves());
 		}
 
 		public static Vector2 MultiplyVectors(Vector3 v, Vector3 w) {
@@ -116,15 +105,16 @@ namespace TowerDefence {
 			}
 		}
 
-		private void CreateEnemy() {
+		public void SpawnEnemy(EnemyType type) {
 			Vector2Int start = level.StartCoord;
-			Enemy enemy = Instantiate(testEnemy, enemiesParent).GetComponent<Enemy>();
+			EnemyInfo info = Enemies.RequestByType(type);
+			Enemy enemy = Instantiate(info.prefab, enemiesParent).GetComponent<Enemy>();
+			enemy.info = info;
 			enemy.transform.position = new Vector3(start.x, 0.1f, start.y);
 			enemy.path = level.targetPath;
 			enemy.speed = 0.5f;
-			enemy.maxHealth = 300 + wave * 500;
+			enemy.maxHealth = 300 + 1 * 500;//wave
 			enemy.health = enemy.maxHealth;
-			enemy.game = this;
 			enemies.Add(enemy);
 
 			UI.Instance.flowIconManager.AddHealthBar(enemy);
