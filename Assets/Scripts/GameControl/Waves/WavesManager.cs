@@ -21,8 +21,10 @@ namespace TowerDefence.GameControl.Waves {
 			if(levels == null || levels.Count == 0) {
 				return;
 			}
+			currentLevel = 1;
 
 
+			//StartCoroutine();
 		}
 
 

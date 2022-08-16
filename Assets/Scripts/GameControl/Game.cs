@@ -50,7 +50,8 @@ namespace TowerDefence {
 			} else if(Input.GetKey(KeyCode.J)) {
 				level.VisualizePath();
 			}
-
+			waves.levels = StageLevel.GetDefaultLevels();
+			waves.StartGame();
 			//if(Input.GetMouseButtonDown(0)) {
 			//	Vector3 pos = GetMousePosition();
 			//	int x = Mathf.RoundToInt(pos.x);
