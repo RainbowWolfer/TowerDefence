@@ -66,7 +66,11 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 			IsMouseOnButton = UIRayCaster.HasElements(buttonBackgrounds);
 
 			Rt.anchoredPosition = new Vector2(Rt.anchoredPosition.x,
-				Mathf.Lerp(Rt.anchoredPosition.y, IsOn ? 0 : Rt.sizeDelta.y, Time.deltaTime * 10)
+				Mathf.Lerp(
+					Rt.anchoredPosition.y,
+					IsOn ? 0 : Game.Instance.waves.IsOnGoing ? 150 : 120,
+					Time.deltaTime * 10
+				)
 			);
 
 			buttonArrow.localRotation = Quaternion.Lerp(buttonArrow.localRotation,

@@ -69,6 +69,9 @@ namespace TowerDefence {
 			if(UI.Instance.pausePanel.Show) {
 				return;
 			}
+			if(UI.Instance.incomingPanel.IsMouseOn || UI.Instance.incomingPanel.IsMouseOnButton) {
+				return;
+			}
 			UpdateIndicatorTarget();
 			if(abilityEmplacement != null && abilityEmplacement.Ability != null) {//emplacement ability selecting mode
 				circleRangeSelector.gameObject.SetActive(true);

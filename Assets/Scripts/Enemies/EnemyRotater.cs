@@ -22,8 +22,10 @@ namespace TowerDefence.Enemies {
 		private void Update() {
 			Vector3 direction = target - model.position;
 			direction.y = 0;
-			Quaternion toRotation = Quaternion.LookRotation(direction);
-			model.rotation = Quaternion.Slerp(model.rotation, toRotation, turnSpeed * Time.deltaTime);
+			if(direction.magnitude > Vector3.kEpsilon) {//Look rotation viewing vector is zero
+				Quaternion toRotation = Quaternion.LookRotation(direction);
+				model.rotation = Quaternion.Slerp(model.rotation, toRotation, turnSpeed * Time.deltaTime);
+			}
 		}
 	}
 }

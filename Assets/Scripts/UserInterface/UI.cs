@@ -9,6 +9,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TowerDefence.UserInterface.LevelIncomingPanel;
+using TowerDefence.UserInterface.LevelPanels;
 
 namespace TowerDefence.UserInterface {
 	public class UI: MonoBehaviour {
@@ -30,6 +31,7 @@ namespace TowerDefence.UserInterface {
 		public FinancePanel financePanel;
 		public PausePanel pausePanel;
 		public IncomingPanel incomingPanel;
+		public LevelPanel levelPanel;
 
 		private void Awake() {
 			Instance = this;

@@ -17,19 +17,27 @@ namespace TowerDefence.GameControl.Waves {
 		public static List<StageLevel> GetDefaultLevels() {
 			var levels = new List<StageLevel> {
 				new StageLevel() {
-					wavesInterval = 30,
+					wavesInterval = 2,
 					readyTime = 5,
 					waves = new List<Wave>() {
 						new Wave() {
 							cubes = new EnemyCount(30, 50),
 							robots = new EnemyCount(10, 20),
 							hummers = new EnemyCount(5, 10),
+							spawnInterval = 0.5f,
+						},
+						new Wave() {
+							hummers = new EnemyCount(5, 10),
+							spawnInterval = 1f,
+						},
+						new Wave() {
+							tanks = new EnemyCount(5, 10),
 							spawnInterval = 2f,
 						},
 					},
 				},
 				new StageLevel() {
-					wavesInterval = 20,
+					wavesInterval = 2,
 					readyTime = 5,
 					waves = new List<Wave>() {
 						new Wave() {

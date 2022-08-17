@@ -14,6 +14,8 @@ namespace TowerDefence.GameControl.Waves {
 
 		private Coroutine levelCoroutine;
 
+		public bool IsOnGoing { get; set; } = false;
+
 		private void Start() {
 
 		}
@@ -41,24 +43,33 @@ namespace TowerDefence.GameControl.Waves {
 				currentLevel = i + 1;
 				//popup ui stuff
 				UI.Instance.incomingPanel.PopupLevel(currentLevel, level, level.readyTime);
+				UI.Instance.levelPanel.Levels.Set(currentLevel);
+				IsOnGoing = false;
 				yield return new WaitForSeconds(level.readyTime);
-				StartCoroutine(CreateLevelWaves(level));
+				IsOnGoing = true;
+				yield return CreateLevelWaves(level);
 
 				//wait until all enemies killed or time runs out
-				yield return new WaitUntil(() => false);
+				//yield return new WaitUntil(() => false);
 			}
+			levelCoroutine = null;
 		}
 
 
 		private IEnumerator CreateLevelWaves(StageLevel level) {
-			foreach(Wave wave in level.waves) {
-				foreach(EnemyType item in wave.GetAll(Wave.GetClassicalWeights())) {
+			for(int i = 0; i < level.waves.Count; i++) {
+				Wave wave = level.waves[i];
+				UI.Instance.levelPanel.ResetProgress();
+				UI.Instance.levelPanel.Waves.Set(i + 1, level.waves.Count);
+				List<EnemyType> list = wave.GetAll(Wave.GetClassicalWeights());
+				for(int j = 0; j < list.Count; j++) {
+					EnemyType item = list[j];
 					Game.Instance.SpawnEnemy(item);
+					UI.Instance.levelPanel.UpdateProgress((j + 1) / (float)list.Count);
 					yield return new WaitForSeconds(wave.spawnInterval);
 				}
 				yield return new WaitForSeconds(level.wavesInterval);
 			}
-			levelCoroutine = null;
 		}
 	}
 }
