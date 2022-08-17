@@ -26,7 +26,7 @@ namespace TowerDefence.UserInterface {
 		}
 
 		private void UpdateState() {
-			fill.fillAmount = target.health / target.maxHealth;
+			fill.fillAmount = target.HealthPercentage;
 		}
 	}
 }

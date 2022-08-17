@@ -7,6 +7,13 @@ using UnityEngine;
 
 namespace TowerDefence.Functions {
 	public static class Methods {
+		public static string ToDuo(this int num) {
+			if(0 <= num && num < 10) {
+				return $"0{num}";
+			} else {
+				return $"{num}";
+			}
+		}
 
 		public static bool CheckLinerIncrease(bool checkUnsigned, params float[] list) {
 			if(checkUnsigned && list.Any(i => i < 0)) {
@@ -28,6 +35,18 @@ namespace TowerDefence.Functions {
 			material.SetColor(name, Color.Lerp(
 				material.GetColor(name), targetColor, speed
 			));
+		}
+
+		public static string FormatMinAndSec(this int seconds) {
+			int minute = 0;
+			while(seconds - 60 >= 0) {
+				minute++;
+				seconds -= 60;
+				if(minute > 99) {
+					return "99:99";
+				}
+			}
+			return $"{minute.ToDuo()}:{seconds.ToDuo()}";
 		}
 	}
 }

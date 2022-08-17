@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d680aba515e977a4abebc66c0bbdf4c2, type: 3}
-  m_Name: Cube
+  m_Name: Hummer
   m_EditorClassIdentifier: 
-  id: 0
-  prefab: {fileID: 2360163869848352330, guid: 72df0d0868611d94d8975c3cc528d6bf, type: 3}
-  speed: 0.5
-  health: 200
+  id: 2
+  prefab: {fileID: 280539873996527756, guid: 78977301c67431f41b1c4658fd75cf81, type: 3}
+  speed: 0.7
+  health: 300

@@ -8,13 +8,15 @@ using TMPro;
 using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TowerDefence.UserInterface.LevelIncomingPanel;
 
 namespace TowerDefence.UserInterface {
 	public class UI: MonoBehaviour {
-		public static UI Instance;
+		public static UI Instance { get; private set; }
 
 		[SerializeField]
 		private Canvas canvas;
+
 		[field: SerializeField]
 		public UIRayCaster RayCaster { get; private set; }
 
@@ -27,6 +29,7 @@ namespace TowerDefence.UserInterface {
 		public PlacementPanelManager placementPanelManager;
 		public FinancePanel financePanel;
 		public PausePanel pausePanel;
+		public IncomingPanel incomingPanel;
 
 		private void Awake() {
 			Instance = this;

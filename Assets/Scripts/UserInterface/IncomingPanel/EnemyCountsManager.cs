@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace TowerDefence.UserInterface.IncomingPanel {
+namespace TowerDefence.UserInterface.LevelIncomingPanel {
 	public class EnemyCountsManager: MonoBehaviour {
 		[SerializeField]
 		private GameObject itemPrefab;
@@ -13,7 +13,7 @@ namespace TowerDefence.UserInterface.IncomingPanel {
 		private List<EnemyCountItem> items = new List<EnemyCountItem>();
 
 		private void Start() {
-			Clear();
+			//Clear();
 		}
 
 

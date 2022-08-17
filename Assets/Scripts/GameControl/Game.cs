@@ -50,8 +50,6 @@ namespace TowerDefence {
 			} else if(Input.GetKey(KeyCode.J)) {
 				level.VisualizePath();
 			}
-			waves.levels = StageLevel.GetDefaultLevels();
-			waves.StartGame();
 			//if(Input.GetMouseButtonDown(0)) {
 			//	Vector3 pos = GetMousePosition();
 			//	int x = Mathf.RoundToInt(pos.x);
@@ -66,6 +64,8 @@ namespace TowerDefence {
 			level.Initialize(MapInfo.GenerateRandomMap(15, 20));
 			ClearEnemies();
 
+			waves.levels = StageLevel.GetDefaultLevels();
+			waves.StartGame();
 			//if(creatingEnemiesCoroutine != null) {
 			//	StopCoroutine(creatingEnemiesCoroutine);
 			//}
@@ -111,11 +111,11 @@ namespace TowerDefence {
 			EnemyInfo info = Enemies.RequestByType(type);
 			Enemy enemy = Instantiate(info.prefab, enemiesParent).GetComponent<Enemy>();
 			enemy.info = info;
-			enemy.transform.position = new Vector3(start.x, 0.1f, start.y);
+			enemy.transform.position = new Vector3(start.x, 0f, start.y);
 			enemy.path = level.targetPath;
-			enemy.speed = 0.5f;
-			enemy.maxHealth = 300 + 1 * 500;//wave
-			enemy.health = enemy.maxHealth;
+			//enemy.speed = 0.5f;
+			//enemy.maxHealth = 300 + 1 * 500;//wave
+			//enemy.Health = enemy.maxHealth;
 			enemies.Add(enemy);
 
 			UI.Instance.flowIconManager.AddHealthBar(enemy);

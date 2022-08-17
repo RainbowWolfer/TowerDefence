@@ -105,7 +105,7 @@ namespace TowerDefence.Placements.Towers {
 				ver -= 360;
 			}
 			const float deviation = 5;
-			Debug.Log($"hor:{hor} ;\tver:{ver}");
+			//Debug.Log($"hor:{hor} ;\tver:{ver}");
 			return Mathf.Abs(hor) < deviation && Mathf.Abs(ver) < deviation;
 		}
 

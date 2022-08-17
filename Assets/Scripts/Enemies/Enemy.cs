@@ -14,16 +14,29 @@ namespace TowerDefence.Enemies {
 	public class Enemy: MonoBehaviour {
 		public EnemyInfo info;
 
-		public float maxHealth;
-		public float health;
-		public float speed = 5;
+		[field: SerializeField]
+		public EnemyRotater Rotater { get; private set; }
 
-		
+		//public float speed = 5;
+
 		public Path path;
 		public int index = 0;
 		public Vector3 offset;
 
 		public BaseBuff buff;
+
+		[field: SerializeField]
+		public float Health { get; private set; }
+
+		[field: SerializeField]
+		public float MaxHealth { get; private set; }
+
+		public float HealthPercentage => Health / MaxHealth;
+
+		private void Awake() {
+			MaxHealth = info.health * 1;
+			Health = MaxHealth;
+		}
 
 		private void Start() {
 			StartCoroutine(MoveCoroutine());
@@ -34,8 +47,8 @@ namespace TowerDefence.Enemies {
 		}
 
 		public void TakeDamage(float damage) {
-			health -= damage;
-			if(health <= 0) {
+			Health -= damage;
+			if(Health <= 0) {
 				Die();
 			}
 		}
@@ -47,9 +60,14 @@ namespace TowerDefence.Enemies {
 		}
 
 		private IEnumerator MoveCoroutine() {
+			index = 0;
 			while(index != path.Length) {
-				transform.position = Vector3.MoveTowards(transform.position, GetNextPosition(), speed * Time.deltaTime);
-				if(Vector3.Distance(transform.position, GetNextPosition()) < 0.1f) {
+				Vector3 next = GetNextPosition();
+				Rotater?.UpdateTarget(next);
+				transform.position = Vector3.MoveTowards(transform.position,
+					next, Time.deltaTime * info.speed
+				);
+				if(Vector3.Distance(transform.position, next) < 0.1f) {
 					index++;
 					GenerateRandomOffset();
 				}
@@ -57,18 +75,21 @@ namespace TowerDefence.Enemies {
 			}
 			Game.Instance.enemies.Remove(this);
 			UI.Instance.flowIconManager.RemoveHealthBar(this);
-			Destroy(this.gameObject);
+			Destroy(gameObject);
 		}
 
 		private void GenerateRandomOffset() {
-			if(Random.Range(0, 100) > 50) {
-				return;
+			if(Random.Range(0, 100) <= 50) {
+				offset = new Vector3(
+					Random.Range(-0.4f, 0.4f),
+					0,
+					Random.Range(-0.4f, 0.4f)
+				);
 			}
-			offset = new Vector3(Random.Range(-0.4f, 0.4f), 0, Random.Range(-0.4f, 0.4f));
 		}
 
 		private Vector3 GetNextPosition() {
-			var v = path.path[index].Coord;
+			Vector2Int v = path.path[index].Coord;
 			return new Vector3(v.x, transform.position.y, v.y) + offset;
 		}
 	}

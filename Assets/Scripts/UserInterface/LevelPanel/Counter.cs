@@ -31,10 +31,12 @@ namespace TowerDefence.UserInterface.LevelPanel {
 		[field: Space]
 		[field: SerializeField]
 		public bool IsMouseOn { get; private set; }
+		[field: SerializeField]
+		public bool EnableMouseOn { get; private set; }
 
 
 		private void Update() {
-			IsMouseOn = UIRayCaster.HasElement(background);
+			IsMouseOn = EnableMouseOn && UIRayCaster.HasElement(background);
 			anim.SetBool("IsActive", IsMouseOn);
 		}
 	}

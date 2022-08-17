@@ -8,6 +8,7 @@ namespace TowerDefence.GameControl.Waves {
 	public class StageLevel {
 		public int levelCount;
 		public float wavesInterval;
+		public float readyTime;
 
 		public List<Wave> waves;
 
@@ -17,15 +18,19 @@ namespace TowerDefence.GameControl.Waves {
 			var levels = new List<StageLevel> {
 				new StageLevel() {
 					wavesInterval = 30,
+					readyTime = 5,
 					waves = new List<Wave>() {
 						new Wave() {
 							cubes = new EnemyCount(30, 50),
-							robots = new EnemyCount(10,20),
+							robots = new EnemyCount(10, 20),
+							hummers = new EnemyCount(5, 10),
+							spawnInterval = 2f,
 						},
 					},
 				},
 				new StageLevel() {
 					wavesInterval = 20,
+					readyTime = 5,
 					waves = new List<Wave>() {
 						new Wave() {
 							cubes = new EnemyCount(60, 90),

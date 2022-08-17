@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TowerDefence.UserInterface.IncomingPanel {
+namespace TowerDefence.UserInterface.LevelIncomingPanel {
 	public class EnemyCountItem: MonoBehaviour {
 		[SerializeField]
 		private Image border;
