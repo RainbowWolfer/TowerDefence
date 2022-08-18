@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 using TMPro.Examples;
 using TowerDefence.Data;
 using TowerDefence.Enemies;
+using TowerDefence.Enemies.Interfaces;
 using TowerDefence.Functions;
 using TowerDefence.GameControl.Waves;
 using TowerDefence.UserInterface;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 using Random = UnityEngine.Random;
 
 namespace TowerDefence {
@@ -107,6 +109,11 @@ namespace TowerDefence {
 			}
 		}
 
+		private void AddEnemy(Enemy enemy) {
+			enemies.Add(enemy);
+			UI.Instance.flowIconManager.AddHealthBar(enemy);
+		}
+
 		public Enemy SpawnEnemy(EnemyType type) {
 			Vector2Int start = level.StartCoord;
 			EnemyInfo info = Enemies.RequestByType(type);
@@ -117,10 +124,41 @@ namespace TowerDefence {
 			//enemy.speed = 0.5f;
 			//enemy.maxHealth = 300 + 1 * 500;//wave
 			//enemy.Health = enemy.maxHealth;
-			enemies.Add(enemy);
-
-			UI.Instance.flowIconManager.AddHealthBar(enemy);
+			AddEnemy(enemy);
 			return enemy;
+		}
+
+		public List<Enemy> SpawnEnemies(APC apc) {
+			List<Enemy> result = new List<Enemy>();
+
+			Vector2 start = new Vector2(
+				apc.transform.position.x,
+				apc.transform.position.z
+			);
+
+			for(int i = 0; i < Random.Range(4, 8); i++) {
+				EnemyInfo info = Enemies.RequestByType(EnemyType.Cube);
+				Enemy enemy = Instantiate(info.prefab, enemiesParent).GetComponent<Enemy>();
+				enemy.info = info;
+				enemy.transform.SetPositionAndRotation(
+					new Vector3(start.x, 0f, start.y),
+					Quaternion.Euler(0, Random.Range(0, 360), 0)
+				);
+				enemy.startPosition = new Vector3(start.x, 0f, start.y) + new Vector3(
+					Random.Range(-0.3f, 0.3f),
+					0,
+					Random.Range(-0.3f, 0.3f)
+				);
+				enemy.GenerateRandomOffset();
+				enemy.index = apc.index;
+				enemy.path = apc.path;
+
+				AddEnemy(enemy);
+
+				result.Add(enemy);
+			}
+
+			return result;
 		}
 
 		private void ClearEnemies() {

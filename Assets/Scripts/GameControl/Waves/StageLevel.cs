@@ -28,6 +28,17 @@ namespace TowerDefence.GameControl.Waves {
 					finishWaitTime = 4,
 					waves = new List<Wave>() {
 						new Wave() {
+							apcs = new EnemyCount(20),
+							spawnInterval = 5f,
+						},
+					},
+				},
+				new StageLevel() {
+					wavesInterval = 2,
+					readyTime = 5,
+					finishWaitTime = 4,
+					waves = new List<Wave>() {
+						new Wave() {
 							cubes = new EnemyCount(30, 50),
 							robots = new EnemyCount(10, 20),
 							hummers = new EnemyCount(5, 10),

@@ -10,12 +10,12 @@ using UnityEngine;
 namespace TowerDefence.GameControl.Waves {
 	public class WavesManager: MonoBehaviour {
 		public static WavesManager Instance { get; private set; }
+		public static StageLevel CurrentLevel => Instance?.levels[Instance.currentLevelInt];
 
 		public List<StageLevel> levels;
 		private int maxEscapes;
 		private int currentEscapes;
 		public int currentLevelInt = 0;//start from 1
-		public StageLevel CurrentLevel => levels[currentLevelInt];
 
 		private Coroutine levelCoroutine;
 
@@ -50,8 +50,8 @@ namespace TowerDefence.GameControl.Waves {
 			}
 			currentLevelInt = 1;
 
-			await Task.Delay(500);
-			await UI.Instance.incomingPanel.PopupStart();
+			//await Task.Delay(500);
+			//await UI.Instance.incomingPanel.PopupStart();
 
 			levelCoroutine = StartCoroutine(StartLevels(levels));
 		}
@@ -83,7 +83,9 @@ namespace TowerDefence.GameControl.Waves {
 			}
 			//pop up finish ui
 			//wait until enemies is empty
+
 			UI.Instance.incomingPanel.PopupFinish();
+
 
 			levelCoroutine = null;
 			LevelGoing = false;

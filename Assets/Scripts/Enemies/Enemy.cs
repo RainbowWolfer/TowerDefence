@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TowerDefence.Data;
 using TowerDefence.Enemies.Buffs;
+using TowerDefence.Enemies.Interfaces;
 using TowerDefence.GameControl.Waves;
 using TowerDefence.UserInterface;
 using UnityEngine;
@@ -35,13 +36,19 @@ namespace TowerDefence.Enemies {
 
 		public float HealthPercentage => Health / MaxHealth;
 
+		public Vector3? startPosition;
+
 		private void Awake() {
 			MaxHealth = info.health * 1;
 			Health = MaxHealth;
 		}
 
 		private void Start() {
-			StartCoroutine(MoveCoroutine());
+			if(startPosition == null) {
+				StartCoroutine(MoveCoroutine());
+			} else {
+				StartCoroutine(StartMoveCoroutine());
+			}
 		}
 
 		private void Update() {
@@ -56,13 +63,34 @@ namespace TowerDefence.Enemies {
 		}
 
 		private void Die() {
+			if(this is ISpawnOnDeath death) {
+				death.SpawnEnemies();
+			}
 			Game.Instance.enemies.Remove(this);
 			UI.Instance.flowIconManager.RemoveHealthBar(this);
 			Destroy(gameObject);
 		}
 
+		private IEnumerator StartMoveCoroutine() {
+			//move to start position
+			float time = Time.time;
+			while(Vector2.Distance(new Vector2(
+				transform.position.x,
+				transform.position.z
+			), new Vector2(
+				startPosition.Value.x,
+				startPosition.Value.z
+			)) >= 0.01f && Time.time - time <= 0.5f) {
+				transform.position = Vector3.Lerp(transform.position, startPosition.Value, Time.deltaTime * 5);
+				yield return null;
+			}
+			if(Time.time - time <= 0.5f) {
+				yield return new WaitForSeconds(0.5f);
+			}
+			yield return MoveCoroutine();
+		}
+
 		private IEnumerator MoveCoroutine() {
-			index = 0;
 			while(index != path.Length) {
 				Vector3 next = GetNextPosition();
 				Rotater?.UpdateTarget(next);
@@ -83,7 +111,7 @@ namespace TowerDefence.Enemies {
 			Destroy(gameObject);
 		}
 
-		private void GenerateRandomOffset() {
+		public void GenerateRandomOffset() {
 			if(Random.Range(0, 100) <= 50) {
 				offset = new Vector3(
 					Random.Range(-randomOffsetLimit.x, randomOffsetLimit.x),

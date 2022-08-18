@@ -15,5 +15,5 @@ MonoBehaviour:
   cube: {fileID: 11400000, guid: 76445ef71a56c494eabc095e1d010cf1, type: 2}
   robot: {fileID: 11400000, guid: 6f108d376137021418dee4f847ccbc16, type: 2}
   hummer: {fileID: 11400000, guid: dd0beae2e8a10ad43a7509dbbb61da62, type: 2}
-  apc: {fileID: 0}
+  apc: {fileID: 11400000, guid: 0c1a36832726ca9488866f73fb91efa9, type: 2}
   tank: {fileID: 11400000, guid: c940fe1af964c844584fb22da20242a2, type: 2}
