@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TowerDefence.Enemies;
+using TowerDefence.Enemies.Buffs;
 using UnityEngine;
 
 namespace TowerDefence.Effects {
@@ -72,6 +74,10 @@ namespace TowerDefence.Effects {
 				Game.Instance.EnemiesTakeAreaDamageV3(transform.position, radius, damage);
 
 				//do slow down
+				List<Enemy> enemies = Game.Instance.GetEnemiesInRangeV3(transform.position, radius);
+				foreach(Enemy e in enemies) {
+					e.buffs.Add(new SlowdownBuff(0.7f, 0.4f));
+				}
 
 				Destroy(gameObject);
 			}

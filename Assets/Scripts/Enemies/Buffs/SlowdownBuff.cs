@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TowerDefence.Enemies;
 using TowerDefence.Enemies.Buffs;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace TowerDefence.Enemies.Buffs {
 	public class SlowdownBuff: BaseBuff {
@@ -15,7 +16,11 @@ namespace TowerDefence.Enemies.Buffs {
 
 		public override void Update(Enemy enemy) {
 			base.Update(enemy);
-			
+			enemy.speedMultiplier = SlowdownPercentage;
+		}
+
+		public override void OnLost(Enemy enemy) {
+			enemy.speedMultiplier = 1f;
 		}
 	}
 }

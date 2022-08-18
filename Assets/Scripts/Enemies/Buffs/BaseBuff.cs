@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 namespace TowerDefence.Enemies.Buffs {
-	public class BaseBuff {
+	public abstract class BaseBuff {
 		public float Time { get; private set; }
 		public float Duration { get; private set; }
 
@@ -20,5 +20,7 @@ namespace TowerDefence.Enemies.Buffs {
 		public virtual void Update(Enemy enemy) {
 			Time += UnityEngine.Time.deltaTime;
 		}
+
+		public abstract void OnLost(Enemy enemy);
 	}
 }

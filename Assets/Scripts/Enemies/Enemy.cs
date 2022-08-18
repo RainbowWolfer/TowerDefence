@@ -29,10 +29,14 @@ namespace TowerDefence.Enemies {
 		public Vector2 randomOffsetLimit = new Vector2(0.4f, 0.4f);
 
 		[Space]
+		[Header("Multipliers")]
+		public float speedMultiplier = 1;
+
+		[Space]
 		public float healthBarHeight = 0.2f;
 		public Vector2 healthBarSize = new Vector2(35, 5);
 
-		public BaseBuff buff;
+		public List<BaseBuff> buffs = new List<BaseBuff>();
 
 		[field: Space]
 		[field: SerializeField]
@@ -60,7 +64,21 @@ namespace TowerDefence.Enemies {
 		}
 
 		protected virtual void Update() {
-			buff?.Update(this);
+			BuffsUpdate();
+		}
+
+		private void BuffsUpdate() {
+			var timedOutBuffs = new List<BaseBuff>();
+			buffs.ForEach(b => {
+				b.Update(this);
+				if(b.HasLostEffect) {
+					timedOutBuffs.Add(b);
+					b.OnLost(this);
+				}
+			});
+			timedOutBuffs.ForEach(b => {
+				buffs.Remove(b);
+			});
 		}
 
 		public void TakeDamage(float damage) {
@@ -108,7 +126,7 @@ namespace TowerDefence.Enemies {
 				Vector3 next = GetNextPosition();
 				Rotater?.UpdateTarget(next);
 				transform.position = Vector3.MoveTowards(transform.position,
-					next, Time.deltaTime * info.speed
+					next, Time.deltaTime * info.speed * speedMultiplier
 				);
 				if(Vector3.Distance(transform.position, next) < 0.1f) {
 					index++;
