@@ -50,8 +50,8 @@ namespace TowerDefence.GameControl.Waves {
 			}
 			currentLevelInt = 1;
 
-			//await Task.Delay(500);
-			//await UI.Instance.incomingPanel.PopupStart();
+			await Task.Delay(500);
+			await UI.Instance.incomingPanel.PopupStart();
 
 			levelCoroutine = StartCoroutine(StartLevels(levels));
 		}
@@ -71,18 +71,23 @@ namespace TowerDefence.GameControl.Waves {
 				//update values
 				currentLevelInt = i + 1;
 				//popup ui stuff
+				UI.Instance.incomingPanel.UpdateCount(level.waves);
 				UI.Instance.incomingPanel.PopupLevel(currentLevelInt, level, level.readyTime);
 				UI.Instance.levelPanel.Levels.Set(currentLevelInt);
 				UI.Instance.levelPanel.Escapes.Set(CurrentEscapes, MaxEscapes);
 				UI.Instance.levelPanel.Waves.Set(0);
 				yield return new WaitForSeconds(level.readyTime);
+				IsSpawningEnemies = true;
 				yield return CreateLevelWaves(level);
 				if(i != levels.Count - 1) {//not the last level
 					yield return new WaitForSeconds(level.finishWaitTime);
+					IsSpawningEnemies = false;
 				}
 			}
 			//pop up finish ui
 			//wait until enemies is empty
+			yield return new WaitUntil(() => Game.Instance.enemies.Count == 0);
+			IsSpawningEnemies = false;
 
 			UI.Instance.incomingPanel.PopupFinish();
 
@@ -99,7 +104,6 @@ namespace TowerDefence.GameControl.Waves {
 		}
 
 		private IEnumerator CreateLevelWaves(StageLevel level) {
-			IsSpawningEnemies = true;
 			for(int i = 0; i < level.waves.Count; i++) {
 				Wave wave = level.waves[i];
 				UI.Instance.levelPanel.ResetProgress();
@@ -115,7 +119,6 @@ namespace TowerDefence.GameControl.Waves {
 					yield return new WaitForSeconds(level.wavesInterval);
 				}
 			}
-			IsSpawningEnemies = false;
 		}
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TowerDefence.Data;
@@ -18,6 +19,7 @@ namespace TowerDefence.Enemies {
 
 		[field: SerializeField]
 		public EnemyRotater Rotater { get; private set; }
+		[Space]
 
 		//public float speed = 5;
 
@@ -26,8 +28,13 @@ namespace TowerDefence.Enemies {
 		public Vector3 offset;
 		public Vector2 randomOffsetLimit = new Vector2(0.4f, 0.4f);
 
+		[Space]
+		public float healthBarHeight = 0.2f;
+		public Vector2 healthBarSize = new Vector2(35, 5);
+
 		public BaseBuff buff;
 
+		[field: Space]
 		[field: SerializeField]
 		public float Health { get; private set; }
 
@@ -38,20 +45,21 @@ namespace TowerDefence.Enemies {
 
 		public Vector3? startPosition;
 
-		private void Awake() {
+		protected virtual void Awake() {
 			MaxHealth = info.health * 1;
 			Health = MaxHealth;
 		}
 
-		private void Start() {
+		protected virtual void Start() {
 			if(startPosition == null) {
+				index = 1;
 				StartCoroutine(MoveCoroutine());
 			} else {
 				StartCoroutine(StartMoveCoroutine());
 			}
 		}
 
-		private void Update() {
+		protected virtual void Update() {
 			buff?.Update(this);
 		}
 
@@ -90,6 +98,11 @@ namespace TowerDefence.Enemies {
 			yield return MoveCoroutine();
 		}
 
+		private Vector3 GetNextPosition() {
+			Vector2Int v = path.path[index].Coord;
+			return new Vector3(v.x, transform.position.y, v.y) + offset;
+		}
+
 		private IEnumerator MoveCoroutine() {
 			while(index != path.Length) {
 				Vector3 next = GetNextPosition();
@@ -121,9 +134,5 @@ namespace TowerDefence.Enemies {
 			}
 		}
 
-		private Vector3 GetNextPosition() {
-			Vector2Int v = path.path[index].Coord;
-			return new Vector3(v.x, transform.position.y, v.y) + offset;
-		}
 	}
 }

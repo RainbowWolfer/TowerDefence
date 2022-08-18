@@ -17,12 +17,15 @@ namespace TowerDefence.UserInterface {
 
 		protected override void Awake() {
 			base.Awake();
-			offest = new Vector3(0, 0.2f, 0);
 		}
 
 		protected override void Update() {
 			base.Update();
 			UpdateState();
+			offest = new Vector3(0, target.healthBarHeight, 0);
+			if(target.healthBarSize != Vector2.zero) {
+				Rt.sizeDelta = target.healthBarSize;
+			}
 		}
 
 		private void UpdateState() {

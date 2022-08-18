@@ -12,12 +12,18 @@ using UnityEngine.UI;
 
 namespace TowerDefence.UserInterface.LevelIncomingPanel {
 	public class IncomingPanel: MonoBehaviour {
+		private RectTransform Rt => transform as RectTransform;
+
 		[field: SerializeField]
 		public bool IsMouseOn { get; private set; }
 
 		[SerializeField]
 		private GameObject[] backgrounds;
-		private RectTransform Rt => transform as RectTransform;
+		[SerializeField]
+		private EnemyCountsManager countsManager;
+		[SerializeField]
+		private Animator anim;
+
 
 		[field: SerializeField]
 		public bool IsOn { get; private set; }
@@ -28,6 +34,8 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 		private TextMeshProUGUI titleText;
 		[SerializeField]
 		private RectTransform countPanel;
+		[SerializeField]
+		private CanvasGroup countGroup;
 		[SerializeField]
 		private Image timerFiller;
 		[SerializeField]
@@ -70,7 +78,11 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 			Rt.anchoredPosition = new Vector2(Rt.anchoredPosition.x,
 				Mathf.Lerp(
 					Rt.anchoredPosition.y,
-					IsOn ? 0 : !WavesManager.Instance.LevelGoing || WavesManager.Instance.IsSpawningEnemies ? 150 : 120,
+					IsOn ? 0 :
+						!WavesManager.Instance.LevelGoing
+						|| WavesManager.Instance.IsSpawningEnemies
+						? (anim.GetBool("Open") ? 125 : 150)
+						: 120,
 					Time.deltaTime * 10
 				)
 			);
@@ -90,14 +102,24 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 
 			//showTitle
 			titleText.rectTransform.anchoredPosition = new Vector2(0,
-				Mathf.Lerp(titleText.rectTransform.anchoredPosition.y, showTitle ? 0 : 150, Time.deltaTime * 10)
+				Mathf.Lerp(
+					titleText.rectTransform.anchoredPosition.y,
+					showTitle ? 0 : 150,
+					Time.deltaTime * 10
+				)
 			);
+			titleText.color = new Color(1, 1, 1, Mathf.Lerp(1, 0, titleText.rectTransform.anchoredPosition.y / 150));
 
 
 			//showCount
 			countPanel.anchoredPosition = new Vector2(0,
-				Mathf.Lerp(countPanel.anchoredPosition.y, showCount ? 0 : 150, Time.deltaTime * 10)
+				Mathf.Lerp(
+					countPanel.anchoredPosition.y,
+					showCount ? 0 : 150,
+					Time.deltaTime * 10
+				)
 			);
+			countGroup.alpha = Mathf.Lerp(1, 0, countPanel.anchoredPosition.y / 150);
 
 			CalculateTimer();
 		}
@@ -107,6 +129,12 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 
 			timerText.text = ((int)Mathf.Clamp(timer_duration - offset, 0, 9999)).FormatMinAndSec();
 			timerFiller.fillAmount = 1 - offset / timer_duration;
+
+			if(offset > timer_duration) {
+				anim.SetBool("Open", true);
+			} else {
+				anim.SetBool("Open", false);
+			}
 		}
 
 		public void SetTimer(float seconds) {
@@ -123,8 +151,16 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 			titleText.text = $">> {text} <<";
 		}
 
-		public void UpdateCount() {
-
+		public void UpdateCount(List<Wave> waves) {
+			Dictionary<EnemyType, int> counts = new Dictionary<EnemyType, int> {
+				{ EnemyType.Cube, waves.Select(i => i.cubes?.Result ?? 0).Sum() },
+				{ EnemyType.Robot, waves.Select(i => i.robots?.Result ?? 0).Sum() },
+				{ EnemyType.APC, waves.Select(i => i.apcs?.Result ?? 0).Sum() },
+				{ EnemyType.Hummer, waves.Select(i => i.hummers?.Result ?? 0).Sum() },
+				{ EnemyType.Tank, waves.Select(i => i.tanks?.Result ?? 0).Sum() },
+			};
+			countsManager.Clear();
+			countsManager.Set(counts);
 		}
 
 		public async Task PopupStart() {

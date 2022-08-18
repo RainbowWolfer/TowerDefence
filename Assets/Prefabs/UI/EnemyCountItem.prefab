@@ -24,7 +24,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7118175889841878404}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.000038508897}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -51,9 +51,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5adf1e9ffac1e314f9f1cc4b72a796c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 7118175890072444715}
   border: {fileID: 7118175890072444712}
   content: {fileID: 7118175890053782335}
   countText: {fileID: 7118175890242368617}
+  cube: {fileID: 21300000, guid: 9e14afe1921f17843aae4ec310512261, type: 3}
+  robot: {fileID: 21300000, guid: 1c8ace9269de21f4a9a51c1aa08b60bd, type: 3}
+  hummer: {fileID: 21300000, guid: de67a3085f38b964a9de946ccbcb179f, type: 3}
+  apc: {fileID: 21300000, guid: a87b92104f46c654a85732efa6acbdc3, type: 3}
+  tank: {fileID: 21300000, guid: 8a97860f6484b2747ad5471fbe513e9b, type: 3}
+  <IsMouseOn>k__BackingField: 0
 --- !u!1 &7118175890053782321
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +96,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
+  m_SizeDelta: {x: -6, y: -6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7118175890053782334
 CanvasRenderer:
@@ -217,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.52566385, g: 1, b: 0, a: 1}
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 4, y: 4}
   m_UseGraphicAlpha: 1
 --- !u!1 &7118175890242368619

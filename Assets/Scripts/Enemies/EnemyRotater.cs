@@ -14,9 +14,14 @@ namespace TowerDefence.Enemies {
 		private float turnSpeed = 5;
 
 		private Vector3 target;
+		private bool firstAssign = true;
 
 		public void UpdateTarget(Vector3 pos) {
 			target = pos;
+			if(firstAssign) {
+				firstAssign = false;
+				model.LookAt(target);
+			}
 		}
 
 		private void Update() {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 namespace TowerDefence.Effects {
-	[ExecuteInEditMode]
+	//[ExecuteInEditMode]
 	public class ArtilleryProjectile: MonoBehaviour {
 		public Vector3 start;
 		public Vector3 end;
@@ -71,7 +71,7 @@ namespace TowerDefence.Effects {
 				//do explosion
 				Game.Instance.EnemiesTakeAreaDamageV3(transform.position, radius, damage);
 
-
+				//do slow down
 
 				Destroy(gameObject);
 			}

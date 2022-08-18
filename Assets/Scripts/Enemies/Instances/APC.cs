@@ -7,7 +7,7 @@ using TowerDefence.Enemies.Interfaces;
 using TowerDefence.GameControl.Waves;
 using UnityEngine;
 
-namespace TowerDefence.Enemies {
+namespace TowerDefence.Enemies.Instances {
 	public class APC: Enemy, ISpawnOnDeath {
 		public int carriedCubes;
 		public int carriedRobots;

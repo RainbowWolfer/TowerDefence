@@ -28,8 +28,12 @@ namespace TowerDefence.GameControl.Waves {
 					finishWaitTime = 4,
 					waves = new List<Wave>() {
 						new Wave() {
-							apcs = new EnemyCount(20),
-							spawnInterval = 5f,
+							apcs = new EnemyCount(4),
+							cubes = new EnemyCount(4),
+							hummers = new EnemyCount(4),
+							robots = new EnemyCount(4),
+							tanks = new EnemyCount(4),
+							spawnInterval = 1f,
 						},
 					},
 				},
@@ -95,7 +99,7 @@ namespace TowerDefence.GameControl.Waves {
 				(tanks, EnemyType.Tank),
 			}.ForEach(c => {
 				if(c.count != null) {
-					for(int i = 0; i < c.count.GetCount(); i++) {
+					for(int i = 0; i < c.count.Result; i++) {
 						result.Add(c.type);
 					}
 				}
@@ -129,23 +133,25 @@ namespace TowerDefence.GameControl.Waves {
 		public int count;
 		public int maxCount;
 
+		public int Result { get; private set; }
+
 		public EnemyCount(int count) {
 			this.count = count;
 			type = EnemyCountType.Exact;
+			Result = count;
 		}
 
 		public EnemyCount(int count, int maxCount) {
 			this.count = count;
 			this.maxCount = maxCount;
 			type = EnemyCountType.Random;
+			Result = Random.Range(count, maxCount);
 		}
 
-		public int GetCount() {
-			return type switch {
-				EnemyCountType.Exact => count,
-				EnemyCountType.Random => Random.Range(count, maxCount),
-				_ => throw new Exception(),
-			};
+		public void Recalculate() {
+			if(type == EnemyCountType.Random) {
+				Result = Random.Range(count, maxCount);
+			}
 		}
 	}
 

@@ -45,10 +45,10 @@ MonoBehaviour:
     two: 3
     three: 3.5
   turnnigTime:
-    none: 0.3
-    one: 0.25
-    two: 0.2
-    three: 0.15
+    none: 0.2
+    one: 0.175
+    two: 0.15
+    three: 0.125
   ability:
     abilityRadius: 0
     cooldown: 0

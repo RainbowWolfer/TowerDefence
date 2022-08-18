@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using TMPro.Examples;
 using TowerDefence.Data;
 using TowerDefence.Enemies;
+using TowerDefence.Enemies.Instances;
 using TowerDefence.Enemies.Interfaces;
 using TowerDefence.Functions;
 using TowerDefence.GameControl.Waves;
 using TowerDefence.UserInterface;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 using Random = UnityEngine.Random;
 
 namespace TowerDefence {
