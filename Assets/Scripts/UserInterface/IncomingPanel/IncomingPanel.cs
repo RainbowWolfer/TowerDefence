@@ -57,6 +57,7 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 
 
 		private void Update() {
+			//click on expand button
 			if(IsMouseOnButton && Input.GetMouseButtonUp(0)) {
 				IsOn = !IsOn;
 				handled = true;
@@ -65,14 +66,16 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 			IsMouseOn = UIRayCaster.HasElements(backgrounds);
 			IsMouseOnButton = UIRayCaster.HasElements(buttonBackgrounds);
 
+			//self transition
 			Rt.anchoredPosition = new Vector2(Rt.anchoredPosition.x,
 				Mathf.Lerp(
 					Rt.anchoredPosition.y,
-					IsOn ? 0 : Game.Instance.waves.IsOnGoing ? 150 : 120,
+					IsOn ? 0 : !WavesManager.Instance.LevelGoing || WavesManager.Instance.IsSpawningEnemies ? 150 : 120,
 					Time.deltaTime * 10
 				)
 			);
 
+			//expand button
 			buttonArrow.localRotation = Quaternion.Lerp(buttonArrow.localRotation,
 				Quaternion.Euler(IsOn ? 180 : 0, 0, 0)
 			, Time.deltaTime * 10);
@@ -85,10 +88,13 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 				}
 			}
 
+			//showTitle
 			titleText.rectTransform.anchoredPosition = new Vector2(0,
 				Mathf.Lerp(titleText.rectTransform.anchoredPosition.y, showTitle ? 0 : 150, Time.deltaTime * 10)
 			);
 
+
+			//showCount
 			countPanel.anchoredPosition = new Vector2(0,
 				Mathf.Lerp(countPanel.anchoredPosition.y, showCount ? 0 : 150, Time.deltaTime * 10)
 			);
@@ -121,24 +127,45 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 
 		}
 
-		public void PopupLevel(int currentLevel, StageLevel level, float waitSeconds) {
+		public async Task PopupStart() {
+			UpdateTitle($"GET READY");
+			IsOn = true;
+			showTitle = true;
+			showCount = false;
+			SetTimer(4);
+			await Task.Delay(4000);
+			IsOn = false;
+			await Task.Delay(700);
+		}
+
+		public async void PopupFinish() {
+			UpdateTitle($"ALL CLEARED !");
+			showTitle = true;
+			showCount = false;
+			IsOn = true;
+			await Task.Delay(2000);
+			IsOn = false;
+		}
+
+		public async void PopupLevel(int currentLevel, StageLevel level, float waitSeconds) {
 			UpdateTitle($"LEVEL {currentLevel}");
 			SetTimer(waitSeconds);
 			IsOn = true;
-			StartCoroutine(PopUpLevelCoroutine(waitSeconds));
-		}
 
-		private IEnumerator PopUpLevelCoroutine(float waitSeconds) {
+			float w1 = waitSeconds * 0.3f;
+			float w2 = waitSeconds - w1;
+
 			handled = false;
 			showTitle = true;
 			showCount = false;
-			yield return new WaitForSeconds(waitSeconds * 0.3f);
+			await Task.Delay((int)(w1 * 1000));
 			showTitle = false;
 			showCount = true;
-			yield return new WaitForSeconds(waitSeconds - waitSeconds * 0.3f);
+			await Task.Delay((int)(w2 * 1000));
 			if(!handled) {
 				IsOn = false;
 			}
 		}
+
 	}
 }

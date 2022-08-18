@@ -51,6 +51,7 @@ MonoBehaviour:
     path: []
   index: 0
   offset: {x: 0, y: 0, z: 0}
+  randomOffsetLimit: {x: 0.1, y: 0.1}
   <Health>k__BackingField: 0
   <MaxHealth>k__BackingField: 0
 --- !u!114 &3085100891263091389

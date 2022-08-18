@@ -7,18 +7,25 @@ namespace TowerDefence.GameControl.Waves {
 	[Serializable]
 	public class StageLevel {
 		public int levelCount;
+
 		public float wavesInterval;
 		public float readyTime;
+		public float finishWaitTime;
+
+		public int apcCarriedCubes;
+		public int apcCarriedRobots;
+
 
 		public List<Wave> waves;
 
 		//public float delta_health = 5;
 
 		public static List<StageLevel> GetDefaultLevels() {
-			var levels = new List<StageLevel> {
+			List<StageLevel> levels = new List<StageLevel> {
 				new StageLevel() {
 					wavesInterval = 2,
 					readyTime = 5,
+					finishWaitTime = 4,
 					waves = new List<Wave>() {
 						new Wave() {
 							cubes = new EnemyCount(30, 50),
@@ -39,6 +46,7 @@ namespace TowerDefence.GameControl.Waves {
 				new StageLevel() {
 					wavesInterval = 2,
 					readyTime = 5,
+					finishWaitTime = 4,
 					waves = new List<Wave>() {
 						new Wave() {
 							cubes = new EnemyCount(60, 90),

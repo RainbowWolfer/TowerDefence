@@ -36,6 +36,7 @@ namespace TowerDefence.UserInterface.LevelPanels {
 		[SerializeField]
 		private bool fillerClockwise;
 
+		public float defaultPercentage = 1;
 		private float percentage;
 		private float speed = 5;
 
@@ -49,10 +50,11 @@ namespace TowerDefence.UserInterface.LevelPanels {
 		public void Set(int current, int? max = null) {
 			content.text = $"{current}";
 			if(max == null) {
-				percentage = 1;
 				EnableMouseOn = false;
+				percentage = defaultPercentage;
 				this.max.text = "";
 			} else {
+				EnableMouseOn = true;
 				if(fillerClockwise) {
 					percentage = 1 - current / (float)max;
 				} else {

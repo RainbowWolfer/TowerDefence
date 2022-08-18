@@ -50,12 +50,25 @@ namespace TowerDefence.Placements.Towers {
 		private void AimAt(Transform target) {
 			Vector3 chassisTarget = target.position - transform.position;
 			horAngle = Mathf.Atan2(chassisTarget.x, chassisTarget.z) * Mathf.Rad2Deg + 90;
-			chassis.transform.localRotation = Quaternion.Slerp(chassis.transform.localRotation, Quaternion.Euler(-90, 0, horAngle), Time.deltaTime / GetTurningTime());
+			chassis.transform.localRotation = Quaternion.Slerp(
+				chassis.transform.localRotation,
+				Quaternion.Euler(-90, 0, horAngle),
+				Time.deltaTime / GetTurningTime()
+			);
 
 			Vector3 turretTarget = target.position - (transform.position + new Vector3(0, 0.8f, 0));
 			float radius = new Vector2(turretTarget.x, turretTarget.z).magnitude;
 			verAngle = Mathf.Atan2(turretTarget.y, radius) * Mathf.Rad2Deg;
-			turret.transform.localEulerAngles = new Vector3(0, Mathf.SmoothDampAngle(turret.transform.localEulerAngles.y, verAngle, ref cv1, GetTurningTime()), 0);
+			turret.transform.localEulerAngles = new Vector3(
+				0,
+				Mathf.SmoothDampAngle(
+					turret.transform.localEulerAngles.y,
+					verAngle,
+					ref cv1,
+					GetTurningTime()
+				),
+				0
+			);
 		}
 
 		private bool CheckAimingReady() {

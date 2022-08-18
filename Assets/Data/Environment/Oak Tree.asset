@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1850f629360f584aa26ea112b2b5b80, type: 3}
   m_Name: Oak Tree
   m_EditorClassIdentifier: 
-  id: 0
-  towerName: OakTree
+  id: -1
   prefab: {fileID: 5743925546984635163, guid: ef64a3bc3b7a17a43a9c1a98ccc02fc5, type: 3}
   icon: {fileID: 0}
-  price: 0
   size: {x: 1, y: 1}
-  height: 1
+  height: 1.5
   upgradable: 1
+  price: 0
   upgradePrice: 0
   upgradedSellPrice: 0
   sellPrice: 0
@@ -27,7 +26,31 @@ MonoBehaviour:
   star1Exp: 1000
   star2Exp: 3000
   star3Exp: 6000
-  abilityEnabled: 0
-  rechargeTime: 0
-  enableAntiAir: 0
+  damageUpgradeMultuplier: 1
+  fireRateUpgradeMultuplier: 1
+  radiusUpgradeMultuplier: 1
+  damage:
+    none: 0
+    one: 0
+    two: 0
+    three: 0
+  fireRate:
+    none: 0
+    one: 0
+    two: 0
+    three: 0
+  attackRadius:
+    none: 0
+    one: 0
+    two: 0
+    three: 0
+  turnnigTime:
+    none: 0
+    one: 0
+    two: 0
+    three: 0
+  ability:
+    abilityRadius: 0
+    cooldown: 0
+    upgradedCooldown: 0
   description: 

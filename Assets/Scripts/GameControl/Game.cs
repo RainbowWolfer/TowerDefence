@@ -65,6 +65,7 @@ namespace TowerDefence {
 			ClearEnemies();
 
 			waves.levels = StageLevel.GetDefaultLevels();
+			waves.MaxEscapes = 20;
 			waves.StartGame();
 			//if(creatingEnemiesCoroutine != null) {
 			//	StopCoroutine(creatingEnemiesCoroutine);
@@ -106,7 +107,7 @@ namespace TowerDefence {
 			}
 		}
 
-		public void SpawnEnemy(EnemyType type) {
+		public Enemy SpawnEnemy(EnemyType type) {
 			Vector2Int start = level.StartCoord;
 			EnemyInfo info = Enemies.RequestByType(type);
 			Enemy enemy = Instantiate(info.prefab, enemiesParent).GetComponent<Enemy>();
@@ -119,6 +120,7 @@ namespace TowerDefence {
 			enemies.Add(enemy);
 
 			UI.Instance.flowIconManager.AddHealthBar(enemy);
+			return enemy;
 		}
 
 		private void ClearEnemies() {

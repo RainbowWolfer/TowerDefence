@@ -30,6 +30,9 @@ namespace TowerDefence.UserInterface.LevelPanels {
 
 		private void Start() {
 			ResetProgress();
+			Waves.defaultPercentage = 0;
+			Escapes.defaultPercentage = 1;
+			Levels.defaultPercentage = 1;
 		}
 
 		private void Update() {

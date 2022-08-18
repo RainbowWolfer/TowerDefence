@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TowerDefence.Data;
 using TowerDefence.Enemies.Buffs;
+using TowerDefence.GameControl.Waves;
 using TowerDefence.UserInterface;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -22,6 +23,7 @@ namespace TowerDefence.Enemies {
 		public Path path;
 		public int index = 0;
 		public Vector3 offset;
+		public Vector2 randomOffsetLimit = new Vector2(0.4f, 0.4f);
 
 		public BaseBuff buff;
 
@@ -73,6 +75,9 @@ namespace TowerDefence.Enemies {
 				}
 				yield return null;
 			}
+			//escaped
+			WavesManager.Instance.CurrentEscapes++;
+			WavesManager.UpdateEscapes();
 			Game.Instance.enemies.Remove(this);
 			UI.Instance.flowIconManager.RemoveHealthBar(this);
 			Destroy(gameObject);
@@ -81,9 +86,9 @@ namespace TowerDefence.Enemies {
 		private void GenerateRandomOffset() {
 			if(Random.Range(0, 100) <= 50) {
 				offset = new Vector3(
-					Random.Range(-0.4f, 0.4f),
+					Random.Range(-randomOffsetLimit.x, randomOffsetLimit.x),
 					0,
-					Random.Range(-0.4f, 0.4f)
+					Random.Range(-randomOffsetLimit.y, randomOffsetLimit.y)
 				);
 			}
 		}
