@@ -38,8 +38,8 @@ namespace TowerDefence {
 		public Vector2Int StartCoord { get; private set; }
 		public Path targetPath;
 
-		private int cash;
-		public int Cash {
+		private static int cash;
+		public static int Cash {
 			get => cash;
 			set {
 				cash = value;
@@ -51,6 +51,14 @@ namespace TowerDefence {
 			this.map = map;
 			DrawMap();
 			Cash = 1000;
+		}
+
+		private void Update() {
+			if(Input.GetKeyDown(KeyCode.T)) {
+				Cash -= 100;
+			} else if(Input.GetKeyDown(KeyCode.Y)) {
+				Cash += 100;
+			}
 		}
 
 
@@ -109,7 +117,7 @@ namespace TowerDefence {
 		public bool Check(int startX, int startY, Vector2Int size) {
 			//Debug.Log(size + " = " + new Vector2Int(startX, startY) + " = " + new Vector2Int(map.nodes.GetLength(0), map.nodes.GetLength(1)));
 			if(startX + size.x - 1 >= map.Nodes.GetLength(0) || startY + size.y - 1 >= map.Nodes.GetLength(1)) {//out of bounds
-																												//Debug.LogWarning("OUT OF BOUNDS");
+				///Debug.LogWarning("OUT OF BOUNDS");
 				return false;
 			}
 			bool result = true;
@@ -179,7 +187,7 @@ namespace TowerDefence {
 					Destroy(pool[new Vector2Int(i, j)]);
 				}
 			}
-			var obj = CreateGameObject(x, y, newID, mapParent);
+			GameObject obj = CreateGameObject(x, y, newID, mapParent);
 			for(int i = x; i < size.x + x; i++) {
 				for(int j = y; j < size.y + y; j++) {
 					pool[new Vector2Int(i, j)] = obj;

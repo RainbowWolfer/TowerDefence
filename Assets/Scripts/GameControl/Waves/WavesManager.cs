@@ -36,6 +36,9 @@ namespace TowerDefence.GameControl.Waves {
 			set => maxEscapes = Mathf.Clamp(value, 0, 999);
 		}
 
+		//percentage
+		public float healthMultiplier = 1f;
+
 		private void Awake() {
 			Instance = this;
 		}

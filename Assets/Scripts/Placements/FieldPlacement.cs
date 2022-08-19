@@ -53,11 +53,15 @@ namespace TowerDefence.Placements {
 		public bool IsUpgraded { get; protected set; }
 
 		public virtual void Upgrade() {
+			if(Level.Cash < info.upgradePrice) {
+				return;
+			}
 			IsUpgraded = true;
+			Level.Cash -= info.upgradePrice;
 		}
 
 		public void Sell() {
-			Game.Instance.level.Cash += IsUpgraded ? info.upgradedSellPrice : info.sellPrice;
+			Level.Cash += IsUpgraded ? info.UpgradedSellPrice : info.SellPrice;
 			Game.Instance.level.ClearNode(coord.x, coord.y);
 			Game.Instance.control.DeselectTower(true);
 		}

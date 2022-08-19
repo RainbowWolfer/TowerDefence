@@ -51,6 +51,10 @@ MonoBehaviour:
     path: []
   index: 0
   offset: {x: 0, y: 0, z: 0}
+  randomOffsetLimit: {x: 0.4, y: 0.4}
+  speedMultiplier: 1
+  healthBarHeight: 0.3
+  healthBarSize: {x: 25, y: 3}
   <Health>k__BackingField: 0
   <MaxHealth>k__BackingField: 0
 --- !u!114 &873092560
@@ -66,6 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 3514586564248895665}
+  turnSpeed: 5
 --- !u!1 &3514586564248895677
 GameObject:
   m_ObjectHideFlags: 0

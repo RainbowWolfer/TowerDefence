@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMPro;
+using TowerDefence.Data;
 using TowerDefence.GameControl.Waves;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,22 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 		private Image content;
 		[SerializeField]
 		private TextMeshProUGUI countText;
+		[SerializeField]
+		private RectTransform detail;
+
+		[Space]
+		[SerializeField]
+		private TextMeshProUGUI nameText;
+		[SerializeField]
+		private Image image;
+		[SerializeField]
+		private TextMeshProUGUI descriptionText;
+		[SerializeField]
+		private TextMeshProUGUI healthText;
+		[SerializeField]
+		private TextMeshProUGUI speedText;
+		[SerializeField]
+		private TextMeshProUGUI coinsText;
 
 		[Space]
 		[SerializeField]
@@ -35,6 +52,10 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 		[field: SerializeField]
 		public bool IsMouseOn { get; set; }
 
+		private void Start() {
+			detail.sizeDelta = new Vector2(detail.sizeDelta.x, 0);
+		}
+
 		private void Update() {
 			IsMouseOn = UIRayCaster.HasElement(background);
 
@@ -44,7 +65,11 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 				Time.deltaTime * 5
 			);
 
-
+			detail.sizeDelta = new Vector2(detail.sizeDelta.x, Mathf.Lerp(
+				detail.sizeDelta.y,
+				IsMouseOn ? 400 : 0,
+				Time.deltaTime * 15
+			));
 		}
 
 		public void Set(EnemyType type, int count) {
@@ -57,6 +82,14 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 				_ => null,
 			};
 			countText.text = $"{count}";
+
+			EnemyInfo info = Game.Instance.Enemies.RequestByType(type);
+			nameText.text = info.name;
+			image.sprite = content.sprite;
+			descriptionText.text = info.description;
+			healthText.text = $"{info.health.from} - {info.health.to}";
+			speedText.text = $"{info.speed.from} - {info.speed.to}";
+			coinsText.text = $"{info.coins.from} - {info.coins.to}";
 		}
 	}
 }

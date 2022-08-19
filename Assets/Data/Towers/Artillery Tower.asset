@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1850f629360f584aa26ea112b2b5b80, type: 3}
-  m_Name: ArtilleryTower
+  m_Name: Artillery Tower
   m_EditorClassIdentifier: 
   id: 6
   prefab: {fileID: 6308414570593603404, guid: b811fe72f39b0cc499dff3b50aed38d8, type: 3}
@@ -18,10 +18,10 @@ MonoBehaviour:
   size: {x: 1, y: 1}
   height: 1
   upgradable: 1
-  price: 20
-  upgradePrice: 100
-  upgradedSellPrice: 120
-  sellPrice: 20
+  price: 300
+  upgradePrice: 800
+  sellPrice: 150
+  upgradedSellPrice: 400
   shovelPrice: 0
   star1Exp: 1000
   star2Exp: 3000

@@ -14,5 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   prefab: {fileID: 917743836514988456, guid: 1bacebf27a2253f419c05472ebe76c15, type: 3}
-  speed: 0.7
-  health: 300
+  speed:
+    from: 80
+    to: 90
+  health:
+    from: 300
+    to: 350
+  coins:
+    from: 0
+    to: 0
+  description: A light and fast floating robot

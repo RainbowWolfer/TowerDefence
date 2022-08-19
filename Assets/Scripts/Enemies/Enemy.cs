@@ -28,6 +28,10 @@ namespace TowerDefence.Enemies {
 		public Vector3 offset;
 		public Vector2 randomOffsetLimit = new Vector2(0.4f, 0.4f);
 
+		private float speedData;
+		private float healthData;
+
+
 		[Space]
 		[Header("Multipliers")]
 		public float speedMultiplier = 1;
@@ -50,7 +54,11 @@ namespace TowerDefence.Enemies {
 		public Vector3? startPosition;
 
 		protected virtual void Awake() {
-			MaxHealth = info.health * 1;
+			speedData = info.speed.GetRandom();
+			healthData = info.health.GetRandom();
+
+			int level = WavesManager.Instance.currentLevelInt;
+			MaxHealth = healthData * (1 + WavesManager.Instance.healthMultiplier * (level - 1));
 			Health = MaxHealth;
 		}
 
@@ -68,7 +76,7 @@ namespace TowerDefence.Enemies {
 		}
 
 		private void BuffsUpdate() {
-			var timedOutBuffs = new List<BaseBuff>();
+			List<BaseBuff> timedOutBuffs = new List<BaseBuff>();
 			buffs.ForEach(b => {
 				b.Update(this);
 				if(b.HasLostEffect) {
@@ -81,10 +89,13 @@ namespace TowerDefence.Enemies {
 			});
 		}
 
-		public void TakeDamage(float damage) {
+		public bool TakeDamage(float damage) {
 			Health -= damage;
 			if(Health <= 0) {
 				Die();
+				return true;
+			} else {
+				return false;
 			}
 		}
 
@@ -126,7 +137,7 @@ namespace TowerDefence.Enemies {
 				Vector3 next = GetNextPosition();
 				Rotater?.UpdateTarget(next);
 				transform.position = Vector3.MoveTowards(transform.position,
-					next, Time.deltaTime * info.speed * speedMultiplier
+					next, Time.deltaTime * speedData / 100 * speedMultiplier
 				);
 				if(Vector3.Distance(transform.position, next) < 0.1f) {
 					index++;

@@ -14,5 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   prefab: {fileID: 4032069849945576485, guid: 40c4a508753770b4580a58f1dc74f1f9, type: 3}
-  speed: 0.7
-  health: 700
+  speed:
+    from: 70
+    to: 80
+  health:
+    from: 700
+    to: 800
+  coins:
+    from: 100
+    to: 110
+  description: This vehicle carries multiple enemies and leash them on death. It
+    was also built to restraint heavy fire.

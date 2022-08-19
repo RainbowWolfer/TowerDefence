@@ -14,5 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   prefab: {fileID: 2360163869848352330, guid: 72df0d0868611d94d8975c3cc528d6bf, type: 3}
-  speed: 0.5
-  health: 200
+  speed:
+    from: 50
+    to: 55
+  health:
+    from: 200
+    to: 250
+  coins:
+    from: 0
+    to: 0
+  description: The most common minors

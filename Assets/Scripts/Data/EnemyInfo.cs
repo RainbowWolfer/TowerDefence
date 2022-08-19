@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TowerDefence.Scripts.Data;
 using UnityEngine;
 
 namespace TowerDefence.Data {
@@ -16,8 +17,11 @@ namespace TowerDefence.Data {
 		public GameObject prefab;
 		//public Sprite icon;
 
-		public float speed;
-		public float health;
+		public Range speed;
+		public Range health;
+		public Range coins;
 
+		[TextArea]
+		public string description;
 	}
 }

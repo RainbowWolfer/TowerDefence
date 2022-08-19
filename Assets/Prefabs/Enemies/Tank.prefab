@@ -53,8 +53,9 @@ MonoBehaviour:
   index: 0
   offset: {x: 0, y: 0, z: 0}
   randomOffsetLimit: {x: 0.1, y: 0.1}
+  speedMultiplier: 1
   healthBarHeight: 0.4
-  healthBarSize: {x: 0, y: 0}
+  healthBarSize: {x: 40, y: 6}
   <Health>k__BackingField: 0
   <MaxHealth>k__BackingField: 0
   anim: {fileID: 4606110753849446496}

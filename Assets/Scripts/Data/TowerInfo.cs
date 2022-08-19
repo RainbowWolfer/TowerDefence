@@ -24,8 +24,8 @@ namespace TowerDefence.Data {
 		[Space]
 		public int price;
 		public int upgradePrice;
-		public int upgradedSellPrice;
-		public int sellPrice;
+		public int SellPrice => price / 2;
+		public int UpgradedSellPrice => upgradePrice / 2;
 
 		public int shovelPrice;//only used for environment cubes
 

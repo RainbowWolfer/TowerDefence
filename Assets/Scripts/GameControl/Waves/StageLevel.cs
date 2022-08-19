@@ -1,24 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace TowerDefence.GameControl.Waves {
 	[Serializable]
 	public class StageLevel {
-		public int levelCount;
-
 		public float wavesInterval;
 		public float readyTime;
 		public float finishWaitTime;
 
-		public int apcCarriedCubes;
-		public int apcCarriedRobots;
-
-
 		public List<Wave> waves;
-
-		//public float delta_health = 5;
 
 		public static List<StageLevel> GetDefaultLevels() {
 			List<StageLevel> levels = new List<StageLevel> {

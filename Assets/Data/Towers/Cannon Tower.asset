@@ -18,17 +18,15 @@ MonoBehaviour:
   size: {x: 1, y: 1}
   height: 1
   upgradable: 1
-  price: 0
-  upgradePrice: 0
-  upgradedSellPrice: 0
-  sellPrice: 0
-  shovelPrice: 0
+  price: 200
+  upgradePrice: 500
+  shovelPrice: 200
   star1Exp: 1000
   star2Exp: 3000
   star3Exp: 6000
-  damageUpgradeMultuplier: 2
-  fireRateUpgradeMultuplier: 0.5
-  radiusUpgradeMultuplier: 1.5
+  damageUpgradeMultuplier: 1.6
+  fireRateUpgradeMultuplier: 0.7
+  radiusUpgradeMultuplier: 1.25
   damage:
     none: 10
     one: 20
@@ -41,14 +39,14 @@ MonoBehaviour:
     three: 0.03
   attackRadius:
     none: 2
-    one: 2.5
-    two: 3
-    three: 3.5
+    one: 2.25
+    two: 2.5
+    three: 2.75
   turnnigTime:
-    none: 0.2
-    one: 0.175
-    two: 0.15
-    three: 0.125
+    none: 0.1
+    one: 0.09
+    two: 0.08
+    three: 0.07
   ability:
     abilityRadius: 0
     cooldown: 0

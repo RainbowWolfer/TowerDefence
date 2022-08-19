@@ -39,8 +39,11 @@ namespace TowerDefence.Placements.Towers {
 
 		private void Fire() {
 			float damage = GetDamage();
-			Target.TakeDamage(damage);
+			bool dead = Target.TakeDamage(damage);
 			Exp += damage;
+			if(dead) {
+				Kills++;
+			}
 		}
 
 		public override void Upgrade() {

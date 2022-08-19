@@ -18,10 +18,8 @@ MonoBehaviour:
   size: {x: 1, y: 1}
   height: 1
   upgradable: 1
-  price: 20
-  upgradePrice: 100
-  upgradedSellPrice: 120
-  sellPrice: 20
+  price: 600
+  upgradePrice: 1000
   shovelPrice: 0
   star1Exp: 1000
   star2Exp: 3000

@@ -18,10 +18,8 @@ MonoBehaviour:
   size: {x: 1, y: 1}
   height: 1
   upgradable: 1
-  price: 20
-  upgradePrice: 100
-  upgradedSellPrice: 120
-  sellPrice: 20
+  price: 550
+  upgradePrice: 1000
   shovelPrice: 0
   star1Exp: 1000
   star2Exp: 3000
@@ -45,10 +43,10 @@ MonoBehaviour:
     two: 4.5
     three: 5
   turnnigTime:
-    none: 0.4
-    one: 0.3
-    two: 0.2
-    three: 0.2
+    none: 0.2
+    one: 0.175
+    two: 0.15
+    three: 0.125
   ability:
     abilityRadius: 0
     cooldown: 0

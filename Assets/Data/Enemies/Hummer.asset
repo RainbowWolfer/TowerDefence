@@ -14,5 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   prefab: {fileID: 280539873996527756, guid: 78977301c67431f41b1c4658fd75cf81, type: 3}
-  speed: 0.7
-  health: 300
+  speed:
+    from: 70
+    to: 80
+  health:
+    from: 350
+    to: 400
+  coins:
+    from: 0
+    to: 0
+  description: A well-known military vehicle for scouting

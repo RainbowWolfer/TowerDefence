@@ -15,7 +15,7 @@ namespace TowerDefence.UserInterface {
 
 		public bool IsUpgraded => CurrentFieldPlacement.IsUpgraded;
 
-		public bool UpgradeAvailiable => Game.Instance.level.Cash >= CurrentFieldPlacement.info.upgradePrice;
+		public bool UpgradeAvailiable => Level.Cash >= CurrentFieldPlacement.info.upgradePrice;
 
 		[SerializeField]
 		private bool showDescription;
@@ -125,13 +125,11 @@ namespace TowerDefence.UserInterface {
 
 			description.sizeDelta = new Vector2(ShowDescription ? DESCRIPTION_FIXED_WIDTH : 0, description.sizeDelta.y);
 
-			upgradePriceText.text = $"${CurrentFieldPlacement.info.upgradePrice}";
-			sellPriceText.text = $"${(IsUpgraded ? CurrentFieldPlacement.info.upgradedSellPrice : CurrentFieldPlacement.info.sellPrice)}";
+			UpdatePrice();
 
 			UpdateKillCount();
 			UpdateExp();
 			abilityFiller.fillAmount = 0;
-
 		}
 
 		public override void Initialize(Placement placement, PlacementPanelManager manager) {
@@ -153,12 +151,18 @@ namespace TowerDefence.UserInterface {
 				throw new Exception($"{nameof(placement)} type cast error");
 			}
 
+			UpdateTitle();
+
 			upgradeIcon.MouseUp += s => this.Upgrade();
 			sellIcon.MouseUp += s => CurrentFieldPlacement.Sell();
 		}
 
+		public void UpdateTitle() {
+			title.text = $"{CurrentFieldPlacement.info.TowerName.Replace(' ', '_')} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+		}
+
 		public void UpdateKillCount() {
-			killCountText.text = $"{CurrentFieldPlacement.Kills}K";
+			killCountText.text = $"{CurrentFieldPlacement.Kills}";
 		}
 
 		public void UpdateExp() {
@@ -190,9 +194,15 @@ namespace TowerDefence.UserInterface {
 				return;
 			}
 			CurrentFieldPlacement.Upgrade();
-			sellPriceText.text = $"${(IsUpgraded ? CurrentFieldPlacement.info.upgradedSellPrice : CurrentFieldPlacement.info.sellPrice)}";
-			upgradePriceText.text = "----";
-			upgradeIconImage.color = new Color(0, 0.6667f, 1);
+			UpdatePrice();
+		}
+
+		private void UpdatePrice() {
+			upgradePriceText.text = IsUpgraded ? "----" : ("$" + CurrentFieldPlacement.info.upgradePrice);
+			sellPriceText.text = "$" + (IsUpgraded ?
+				CurrentFieldPlacement.info.UpgradedSellPrice :
+				CurrentFieldPlacement.info.SellPrice
+			);
 		}
 
 		private void Ability(Emplacement e) {
@@ -224,6 +234,21 @@ namespace TowerDefence.UserInterface {
 			if(CurrentFieldPlacement is Emplacement e) {
 				abilityIcon_outline.effectColor = e.Ability?.StatusType != AbilityStatusType.Ready ? Color.red : new Color(0.6f, 0.6f, 0.6f, 0.5f);
 				abilityFiller_outline.color = e.Ability?.StatusType != AbilityStatusType.Ready ? Color.red : Color.white;
+			}
+
+			if(IsUpgraded) {
+				upgradeIconImage.color = new Color(0, 0.6667f, 1);
+				upgradeIcon_outline.effectColor = new Color(0.6f, 0.6f, 0.6f, 0.5f);
+				upgradePriceText.color = Color.white;
+			} else {
+				upgradeIconImage.color = Color.white;
+				if(UpgradeAvailiable) {
+					upgradeIcon_outline.effectColor = new Color(0.6f, 0.6f, 0.6f, 0.5f);
+					upgradePriceText.color = Color.white;
+				} else {
+					upgradeIcon_outline.effectColor = Color.red;
+					upgradePriceText.color = Color.red;
+				}
 			}
 		}
 	}

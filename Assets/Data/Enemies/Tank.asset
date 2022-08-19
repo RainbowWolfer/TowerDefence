@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d680aba515e977a4abebc66c0bbdf4c2, type: 3}
   m_Name: Tank
   m_EditorClassIdentifier: 
-  id: 0
+  id: 4
   prefab: {fileID: 3085100891263091391, guid: 295c77386f61099458f4d31498d83a45, type: 3}
-  speed: 0.7
-  health: 300
+  speed:
+    from: 60
+    to: 70
+  health:
+    from: 600
+    to: 700
+  coins:
+    from: 0
+    to: 0
+  description: The most powerful vehicle in the world and it is realy tanky.
