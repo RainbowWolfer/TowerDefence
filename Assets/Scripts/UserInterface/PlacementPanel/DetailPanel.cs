@@ -97,8 +97,8 @@ namespace TowerDefence.UserInterface {
 		[Space]
 		[SerializeField]
 		private RectTransform description;
-		[SerializeField]
-		private TextMeshProUGUI descriptionText;
+		//[SerializeField]
+		//private TextMeshProUGUI descriptionText;
 
 		[Space]
 		[SerializeField]
@@ -107,6 +107,14 @@ namespace TowerDefence.UserInterface {
 		private PointEventHandler showMoreButton;
 		[SerializeField]
 		private Outline showMoreButton_outline;
+
+		[Space]
+		[SerializeField]
+		private GridsData damageData;
+		[SerializeField]
+		private GridsData radiusData;
+		[SerializeField]
+		private GridsData fireRateData;
 
 		protected override void Start() {
 			base.Start();
