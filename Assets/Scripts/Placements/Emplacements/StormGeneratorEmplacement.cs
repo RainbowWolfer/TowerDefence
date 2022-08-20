@@ -60,7 +60,7 @@ namespace TowerDefence.Placements.Emplacements {
 		protected override void Update() {
 			base.Update();
 			float percentage = Ability.CooldownPercentage;
-			Debug.Log($"{percentage} - {Ability.IsFiring}");
+			//Debug.Log($"{percentage} - {Ability.IsFiring}");
 
 			float colorSpeed = Time.deltaTime * 10;
 			switch(Ability.StatusType) {

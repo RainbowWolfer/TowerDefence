@@ -20,8 +20,6 @@ MonoBehaviour:
   upgradable: 1
   price: 300
   upgradePrice: 800
-  sellPrice: 150
-  upgradedSellPrice: 400
   shovelPrice: 0
   star1Exp: 1000
   star2Exp: 3000
@@ -54,3 +52,7 @@ MonoBehaviour:
     cooldown: 0
     upgradedCooldown: 0
   description: 
+  attackType: 2
+  damageData: 2
+  radiusData: 4
+  fireRateData: 2

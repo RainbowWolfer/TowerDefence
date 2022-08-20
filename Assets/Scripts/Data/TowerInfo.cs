@@ -55,5 +55,18 @@ namespace TowerDefence.Data {
 		[Space]
 		[TextArea()]
 		public string description;
+
+		[Space]
+		public AttackType attackType;
+		[Range(0, 5)]
+		public int damageData;
+		[Range(0, 5)]
+		public int radiusData;
+		[Range(0, 5)]
+		public int fireRateData;
+
+		public enum AttackType {
+			Single, Penetrate, Area
+		}
 	}
 }

@@ -7,10 +7,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using TowerDefence.Placements;
+using TowerDefence.Data;
 
 namespace TowerDefence.UserInterface {
 	public class DetailPanel: PlacementPanel {
-		//public override Placement CurrentPlacement { get => CurrentFieldPlacement; }
+		public static bool DescriptionShown { get; private set; }
+
 		public FieldPlacement CurrentFieldPlacement { get; private set; }
 
 		public bool IsUpgraded => CurrentFieldPlacement.IsUpgraded;
@@ -46,8 +48,10 @@ namespace TowerDefence.UserInterface {
 					return 590;
 				} else if(ShowSpecialAbility && ShowDescription) {
 					return 775;
+				} else if(ShowDescription) {
+					return 660;
 				} else {
-					return 440;
+					return 450;
 				}
 			}
 		}
@@ -66,39 +70,27 @@ namespace TowerDefence.UserInterface {
 
 		[Space]
 		[SerializeField]
-		private PointEventHandler upgradeIcon;
+		private IconButton upgradeButton;
 		[SerializeField]
-		private Image upgradeIconImage;
-		[SerializeField]
-		private Outline upgradeIcon_outline;
-		[SerializeField]
-		private TextMeshProUGUI upgradePriceText;
-
-		[Space]
-		[SerializeField]
-		private PointEventHandler sellIcon;
-		[SerializeField]
-		private Outline sellIcon_outline;
-		[SerializeField]
-		private TextMeshProUGUI sellPriceText;
+		private IconButton sellButton;
 
 		[Space]
 		[SerializeField]
 		private GameObject abilityObject;
 		[SerializeField]
-		private PointEventHandler abilityIcon;
+		private GameObject ability_background;
 		[SerializeField]
 		private Outline abilityIcon_outline;
 		[SerializeField]
 		private Image abilityFiller;
 		[SerializeField]
 		private Image abilityFiller_outline;
+		[SerializeField]
+		private Animator ability_anim;
 
 		[Space]
 		[SerializeField]
 		private RectTransform description;
-		//[SerializeField]
-		//private TextMeshProUGUI descriptionText;
 
 		[Space]
 		[SerializeField]
@@ -110,6 +102,8 @@ namespace TowerDefence.UserInterface {
 
 		[Space]
 		[SerializeField]
+		private TextMeshProUGUI attackTypeText;
+		[SerializeField]
 		private GridsData damageData;
 		[SerializeField]
 		private GridsData radiusData;
@@ -118,22 +112,16 @@ namespace TowerDefence.UserInterface {
 
 		protected override void Start() {
 			base.Start();
-			upgradeIcon.MouseEnter += s => upgradeIcon_outline.enabled = true;
-			upgradeIcon.MouseExit += s => upgradeIcon_outline.enabled = false;
-
-			sellIcon.MouseEnter += s => sellIcon_outline.enabled = true;
-			sellIcon.MouseExit += s => sellIcon_outline.enabled = false;
-
-			abilityIcon.MouseEnter += s => abilityIcon_outline.enabled = true;//&& is cd ready
-			abilityIcon.MouseExit += s => abilityIcon_outline.enabled = false;
 
 			showMoreButton.MouseEnter += s => showMoreButton_outline.enabled = true;
 			showMoreButton.MouseExit += s => showMoreButton_outline.enabled = false;
-			showMoreButton.MouseUp += s => ShowDescription = !ShowDescription;
+			showMoreButton.MouseUp += s => {
+				ShowDescription = !ShowDescription;
+				DescriptionShown = ShowDescription;
+			};
 
 			description.sizeDelta = new Vector2(ShowDescription ? DESCRIPTION_FIXED_WIDTH : 0, description.sizeDelta.y);
 
-			UpdatePrice();
 
 			UpdateKillCount();
 			UpdateExp();
@@ -145,24 +133,63 @@ namespace TowerDefence.UserInterface {
 			if(placement is Tower t) {
 				CurrentFieldPlacement = t;
 				ShowSpecialAbility = false;
-				ShowDescription = false;
+				ShowDescription = DescriptionShown;
 			} else if(placement is Emplacement e) {
 				CurrentFieldPlacement = e;
 				ShowSpecialAbility = true;
-				ShowDescription = false;
-				abilityIcon.MouseUp += s => {
-					if(e.Ability?.StatusType == AbilityStatusType.Ready && e.Ability?.IsFiring == false) {
-						Ability(e);
-					}
-				};
+				ShowDescription = DescriptionShown;
 			} else {
 				throw new Exception($"{nameof(placement)} type cast error");
 			}
 
 			UpdateTitle();
+			UpdateAttributes();
+			UpdateAttackType();
 
-			upgradeIcon.MouseUp += s => this.Upgrade();
-			sellIcon.MouseUp += s => CurrentFieldPlacement.Sell();
+			upgradeButton.OnClick = b => Upgrade();
+			upgradeButton.ExternalUpdate = (icon, outline, text) => {
+				if(IsUpgraded) {
+					text.text = "----";
+					text.color = Color.white;
+					icon.color = new Color(0, 0.6667f, 1);
+					outline.effectColor = new Color(0.6f, 0.6f, 0.6f, 0.5f);
+				} else {
+					text.text = "$" + CurrentFieldPlacement.info.upgradePrice;
+					if(UpgradeAvailiable) {
+						text.color = Color.white;
+						outline.effectColor = new Color(0.6f, 0.6f, 0.6f, 0.5f);
+					} else {
+						text.color = Color.red;
+						outline.effectColor = Color.red;
+					}
+				}
+			};
+
+			sellButton.OnClick = b => {
+				CurrentFieldPlacement.Sell();
+			};
+			sellButton.ExternalUpdate = (icon, outline, text) => {
+				text.text = "$" + (IsUpgraded ?
+					CurrentFieldPlacement.info.UpgradedSellPrice :
+					CurrentFieldPlacement.info.SellPrice
+				);
+
+			};
+		}
+
+		public void UpdateAttackType() {
+			attackTypeText.text = CurrentFieldPlacement.info.attackType switch {
+				TowerInfo.AttackType.Single => "Single",
+				TowerInfo.AttackType.Penetrate => "Penetrate",
+				TowerInfo.AttackType.Area => "Area",
+				_ => "Null",
+			};
+		}
+
+		public void UpdateAttributes() {
+			damageData.Set(CurrentFieldPlacement.info.damageData);
+			radiusData.Set(CurrentFieldPlacement.info.radiusData);
+			fireRateData.Set(CurrentFieldPlacement.info.fireRateData);
 		}
 
 		public void UpdateTitle() {
@@ -202,15 +229,6 @@ namespace TowerDefence.UserInterface {
 				return;
 			}
 			CurrentFieldPlacement.Upgrade();
-			UpdatePrice();
-		}
-
-		private void UpdatePrice() {
-			upgradePriceText.text = IsUpgraded ? "----" : ("$" + CurrentFieldPlacement.info.upgradePrice);
-			sellPriceText.text = "$" + (IsUpgraded ?
-				CurrentFieldPlacement.info.UpgradedSellPrice :
-				CurrentFieldPlacement.info.SellPrice
-			);
 		}
 
 		private void Ability(Emplacement e) {
@@ -222,6 +240,8 @@ namespace TowerDefence.UserInterface {
 		protected override void Update() {
 			base.Update();
 			UpdateLayout();
+
+			description.anchoredPosition = new Vector2(ShowSpecialAbility ? 525 : 410, 0);
 			description.sizeDelta = new Vector2(
 				Mathf.SmoothDamp(
 					description.sizeDelta.x,
@@ -232,9 +252,8 @@ namespace TowerDefence.UserInterface {
 			, description.sizeDelta.y);
 
 			abilityObject.SetActive(showSpecialAbility);
-			showMoreObject.SetActive(showSpecialAbility);
+			showMoreObject.SetActive(true);
 
-			upgradePriceText.color = UpgradeAvailiable ? Color.white : Color.red;
 			UpdateKillCount();
 			UpdateExp();
 			UpdateAbilityCooldown();
@@ -243,21 +262,23 @@ namespace TowerDefence.UserInterface {
 				abilityIcon_outline.effectColor = e.Ability?.StatusType != AbilityStatusType.Ready ? Color.red : new Color(0.6f, 0.6f, 0.6f, 0.5f);
 				abilityFiller_outline.color = e.Ability?.StatusType != AbilityStatusType.Ready ? Color.red : Color.white;
 			}
-
-			if(IsUpgraded) {
-				upgradeIconImage.color = new Color(0, 0.6667f, 1);
-				upgradeIcon_outline.effectColor = new Color(0.6f, 0.6f, 0.6f, 0.5f);
-				upgradePriceText.color = Color.white;
-			} else {
-				upgradeIconImage.color = Color.white;
-				if(UpgradeAvailiable) {
-					upgradeIcon_outline.effectColor = new Color(0.6f, 0.6f, 0.6f, 0.5f);
-					upgradePriceText.color = Color.white;
-				} else {
-					upgradeIcon_outline.effectColor = Color.red;
-					upgradePriceText.color = Color.red;
+			
+			if(UIRayCaster.HasElement(ability_background)) {
+				abilityIcon_outline.enabled = true;
+				ability_anim.SetBool("On", true);
+				if(Input.GetMouseButtonUp(0)) {
+					if(CurrentFieldPlacement is Emplacement ep) {
+						if(ep.Ability?.StatusType == AbilityStatusType.Ready
+							&& ep.Ability?.IsFiring == false) {
+							Ability(ep);
+						}
+					}
 				}
+			} else {
+				abilityIcon_outline.enabled = false;
+				ability_anim.SetBool("On", false);
 			}
+
 		}
 	}
 }

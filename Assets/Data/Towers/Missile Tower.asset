@@ -52,3 +52,7 @@ MonoBehaviour:
     cooldown: 0
     upgradedCooldown: 0
   description: 
+  attackType: 2
+  damageData: 2
+  radiusData: 3
+  fireRateData: 3
