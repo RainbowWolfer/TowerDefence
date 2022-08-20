@@ -18,39 +18,49 @@ namespace TowerDefence.UserInterface {
 		private TextMeshProUGUI titleText;
 		[SerializeField]
 		private TextMeshProUGUI descriptionText;
-		[SerializeField]
-		private TextMeshProUGUI shovelPriceText;
 
+		[Space]
 		[SerializeField]
-		private PointEventHandler shovelButton;
-		[SerializeField]
-		private Outline shovelButton_outline;
+		private IconButton shovelButton;
+
+		public bool ShovelAvaillable => Level.Cash >= TargetPlacement.info.shovelPrice;
 
 		public float descriptionWidth;
 		public override float Width => 500;
 
 		protected override void Awake() {
 			base.Awake();
-			shovelButton.MouseEnter += s => shovelButton_outline.enabled = true;
-			shovelButton.MouseExit += s => shovelButton_outline.enabled = false;
 		}
 
 		public override void Initialize(Placement placement, PlacementPanelManager manager) {
 			base.Initialize(placement, manager);
+			UpdateTexts();
 			if(placement is EnvironmentCube ec) {
 				this.environmentCube = ec;
-				shovelPriceText.text = $"${ec.info.shovelPrice}";
+				shovelButton.Text.text = $"${ec.info.shovelPrice}";
 
-				shovelButton.MouseUp += s => {
-					ec.Shovel();
+				shovelButton.OnClick = s => {
+					if(ShovelAvaillable) {
+						ec.Shovel();
+					}
+				};
+				shovelButton.ExternalUpdate = (icon, outline, text) => {
+					if(ShovelAvaillable) {
+						text.color = Color.white;
+						outline.effectColor = new Color(0.6f, 0.6f, 0.6f, 0.5f);
+					} else {
+						text.color = Color.red;
+						outline.effectColor = Color.red;
+					}
 				};
 			} else {
 				throw new Exception($"{nameof(placement)} type cast error");
 			}
 		}
 
-		public void UpdateLayout() {
-
+		public void UpdateTexts() {
+			titleText.text = $"{TargetPlacement.info.TowerName.Replace(' ', '_')} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+			descriptionText.text = TargetPlacement.info.description;
 		}
 	}
 }

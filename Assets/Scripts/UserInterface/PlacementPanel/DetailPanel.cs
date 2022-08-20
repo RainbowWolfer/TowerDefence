@@ -73,20 +73,16 @@ namespace TowerDefence.UserInterface {
 		private IconButton upgradeButton;
 		[SerializeField]
 		private IconButton sellButton;
+		[SerializeField]
+		private IconButton abilityButton;
 
 		[Space]
 		[SerializeField]
 		private GameObject abilityObject;
 		[SerializeField]
-		private GameObject ability_background;
-		[SerializeField]
-		private Outline abilityIcon_outline;
-		[SerializeField]
 		private Image abilityFiller;
 		[SerializeField]
 		private Image abilityFiller_outline;
-		[SerializeField]
-		private Animator ability_anim;
 
 		[Space]
 		[SerializeField]
@@ -175,6 +171,15 @@ namespace TowerDefence.UserInterface {
 				);
 
 			};
+
+			abilityButton.OnClick = b => {
+				if(CurrentFieldPlacement is Emplacement e) {
+					if(e.Ability?.StatusType == AbilityStatusType.Ready
+						&& e.Ability?.IsFiring == false) {
+						Ability(e);
+					}
+				}
+			};
 		}
 
 		public void UpdateAttackType() {
@@ -259,26 +264,9 @@ namespace TowerDefence.UserInterface {
 			UpdateAbilityCooldown();
 
 			if(CurrentFieldPlacement is Emplacement e) {
-				abilityIcon_outline.effectColor = e.Ability?.StatusType != AbilityStatusType.Ready ? Color.red : new Color(0.6f, 0.6f, 0.6f, 0.5f);
+				abilityButton.Outline.effectColor = e.Ability?.StatusType != AbilityStatusType.Ready ? Color.red : new Color(0.6f, 0.6f, 0.6f, 0.5f);
 				abilityFiller_outline.color = e.Ability?.StatusType != AbilityStatusType.Ready ? Color.red : Color.white;
 			}
-			
-			if(UIRayCaster.HasElement(ability_background)) {
-				abilityIcon_outline.enabled = true;
-				ability_anim.SetBool("On", true);
-				if(Input.GetMouseButtonUp(0)) {
-					if(CurrentFieldPlacement is Emplacement ep) {
-						if(ep.Ability?.StatusType == AbilityStatusType.Ready
-							&& ep.Ability?.IsFiring == false) {
-							Ability(ep);
-						}
-					}
-				}
-			} else {
-				abilityIcon_outline.enabled = false;
-				ability_anim.SetBool("On", false);
-			}
-
 		}
 	}
 }

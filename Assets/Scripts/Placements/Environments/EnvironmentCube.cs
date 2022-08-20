@@ -22,6 +22,7 @@ namespace TowerDefence.Placements.Environments {
 		}
 
 		public void Shovel() {
+			Level.Cash -= info.shovelPrice;
 			Game.Instance.level.ClearNode(coord.x, coord.y);
 			Game.Instance.control.DeselectTower(true);
 		}

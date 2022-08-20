@@ -20,9 +20,7 @@ MonoBehaviour:
   upgradable: 1
   price: 0
   upgradePrice: 0
-  upgradedSellPrice: 0
-  sellPrice: 0
-  shovelPrice: 0
+  shovelPrice: 200
   star1Exp: 1000
   star2Exp: 3000
   star3Exp: 6000
@@ -53,4 +51,9 @@ MonoBehaviour:
     abilityRadius: 0
     cooldown: 0
     upgradedCooldown: 0
-  description: 
+  description: "Firs are a genus of 48\u201356 species of evergreen coniferous trees
+    in the family Pinaceae."
+  attackType: 0
+  damageData: 0
+  radiusData: 0
+  fireRateData: 0

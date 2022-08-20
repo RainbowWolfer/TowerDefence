@@ -11,4 +11,15 @@ namespace TowerDefence.Scripts.Data {
 			return Random.Range(from, to);
 		}
 	}
+
+	[Serializable]
+	public struct Range<T> {
+		public T from;
+		public T to;
+
+		public Range(T from, T to) {
+			this.from = from;
+			this.to = to;
+		}
+	}
 }

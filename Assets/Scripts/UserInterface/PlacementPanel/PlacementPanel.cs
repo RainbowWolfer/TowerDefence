@@ -31,13 +31,6 @@ namespace TowerDefence.UserInterface {
 		[SerializeField]
 		private CanvasGroup canvas;
 
-		[SerializeField]
-		private PointEventHandler topHandler;
-		[SerializeField]
-		private PointEventHandler botHandler;
-
-		//public bool IsMouseOnPanel => MouseDetector.GetHasMouseOn();
-
 		public Placement TargetPlacement { get; private set; }
 
 		public virtual void Initialize(Placement placement, PlacementPanelManager manager) {
