@@ -21,6 +21,6 @@ MonoBehaviour:
     from: 350
     to: 400
   coins:
-    from: 0
-    to: 0
+    from: 50
+    to: 60
   description: A well-known military vehicle for scouting

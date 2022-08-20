@@ -10,10 +10,13 @@ using TMPro;
 using TowerDefence.Data;
 
 namespace TowerDefence.UserInterface {
-	public class Icon: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
+	public class Icon: MonoBehaviour {
 		private IconManager manager;
 		public TowerInfo Info { get; private set; }
 
+		public RectTransform Rt => transform as RectTransform;
+		[SerializeField]
+		private GameObject background;
 		[SerializeField]
 		private TextMeshProUGUI nameText;
 		[SerializeField]
@@ -28,10 +31,6 @@ namespace TowerDefence.UserInterface {
 		private Image bgImg;
 		[SerializeField]
 		private Image iconImg;
-
-		[SerializeField]
-		private bool isMouseOn;
-
 		private bool isSelected;
 		public bool IsSelected {
 			get => isSelected;
@@ -40,6 +39,10 @@ namespace TowerDefence.UserInterface {
 				bgImg.color = value ? Color.red : Color.white;
 			}
 		}
+
+		public bool CashAvailable => Level.Cash >= Info.price;
+
+		public bool IsMouseOn { get; private set; }
 
 		private Vector2 position;
 		private float offsetY;
@@ -59,20 +62,26 @@ namespace TowerDefence.UserInterface {
 		}
 
 		private void Update() {
-			var rt = transform as RectTransform;
-			rt.anchoredPosition = new Vector2(position.x,
-				Mathf.SmoothDamp(rt.anchoredPosition.y, position.y + offsetY, ref cv1, 0.1f)
+			IsMouseOn = UIRayCaster.HasElement(background);
+			Rt.anchoredPosition = new Vector2(position.x,
+				Mathf.SmoothDamp(Rt.anchoredPosition.y, position.y + offsetY, ref cv1, 0.1f)
 			);
 
-			offsetY = isMouseOn ? 20 : 0;
+			offsetY = IsMouseOn ? 20 : 0;
 
-			float desiredY = isMouseOn ? 0 : -descriptionPanel.sizeDelta.y;
+			float desiredY = IsMouseOn ? 0 : -descriptionPanel.sizeDelta.y;
 			descriptionPanel.anchoredPosition = new Vector2(0,
-				Mathf.SmoothDamp(descriptionPanel.anchoredPosition.y, desiredY, ref cv2, 0.1f)
+				Mathf.SmoothDamp(descriptionPanel.anchoredPosition.y, desiredY, ref cv2, 0.05f)
 			);
 
 			if(disappearing && (transform as RectTransform).anchoredPosition.y <= -99) {
 				manager.Remove(this);
+			}
+
+			priceText.color = CashAvailable ? Color.white : Color.red;
+
+			if(IsMouseOn && Input.GetMouseButtonUp(0)) {
+				manager.Select(this);
 			}
 		}
 
@@ -88,18 +97,6 @@ namespace TowerDefence.UserInterface {
 		public void Disappear() {
 			position.y = -100;
 			disappearing = true;
-		}
-
-		public void OnPointerEnter(PointerEventData eventData) {
-			isMouseOn = true;
-		}
-
-		public void OnPointerExit(PointerEventData eventData) {
-			isMouseOn = false;
-		}
-
-		public void OnPointerClick(PointerEventData eventData) {
-			manager.Select(this);
 		}
 	}
 }

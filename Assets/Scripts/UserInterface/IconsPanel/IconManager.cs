@@ -126,6 +126,10 @@ namespace TowerDefence.UserInterface {
 				OnSelectionChanged?.Invoke(null);
 				return;
 			}
+			if(!target.CashAvailable) {
+				//pop up notification
+				return;
+			}
 			icons.ForEach(i => i.IsSelected = i == target);
 			OnSelectionChanged?.Invoke(target);
 		}

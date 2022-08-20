@@ -23,7 +23,7 @@ namespace TowerDefence.UserInterface {
 		[SerializeField]
 		private IconButton shovelButton;
 
-		public bool ShovelAvaillable => Level.Cash >= TargetPlacement.info.shovelPrice;
+		public bool ShovelAvailable => Level.Cash >= TargetPlacement.info.shovelPrice;
 
 		public float descriptionWidth;
 		public override float Width => 500;
@@ -40,12 +40,12 @@ namespace TowerDefence.UserInterface {
 				shovelButton.Text.text = $"${ec.info.shovelPrice}";
 
 				shovelButton.OnClick = s => {
-					if(ShovelAvaillable) {
+					if(ShovelAvailable) {
 						ec.Shovel();
 					}
 				};
 				shovelButton.ExternalUpdate = (icon, outline, text) => {
-					if(ShovelAvaillable) {
+					if(ShovelAvailable) {
 						text.color = Color.white;
 						outline.effectColor = new Color(0.6f, 0.6f, 0.6f, 0.5f);
 					} else {

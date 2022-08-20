@@ -105,6 +105,7 @@ namespace TowerDefence.Enemies {
 			}
 			Game.Instance.enemies.Remove(this);
 			UI.Instance.flowIconManager.RemoveHealthBar(this);
+			Level.Cash += (int)info.coins.GetRandom();
 			Destroy(gameObject);
 		}
 

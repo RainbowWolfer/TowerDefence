@@ -21,6 +21,6 @@ MonoBehaviour:
     from: 300
     to: 350
   coins:
-    from: 0
-    to: 0
+    from: 20
+    to: 30
   description: A light and fast floating robot

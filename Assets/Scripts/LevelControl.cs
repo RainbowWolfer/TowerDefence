@@ -138,7 +138,12 @@ namespace TowerDefence {
 							} else {
 								UpdatePlacing(coord);
 								if(LeftClick) {
-									level.EditNode(coord, iconSelection.id);
+									if(Level.Cash >= iconSelection.price) {
+										level.EditNode(coord, iconSelection.id);
+										Level.Cash -= iconSelection.price;
+									} else {
+										//pop up notification
+									}
 								}
 							}
 							break;
