@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &632525518183445377
+--- !u!1 &8260685643133512848
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 632525518183445383}
-  - component: {fileID: 632525518183445376}
+  - component: {fileID: 8260685643133512849}
+  - component: {fileID: 8260685643133512850}
   m_Layer: 0
-  m_Name: CoinsBurst
+  m_Name: PrefabsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &632525518183445383
+--- !u!4 &8260685643133512849
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632525518183445377}
+  m_GameObject: {fileID: 8260685643133512848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,22 +31,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &632525518183445376
+--- !u!114 &8260685643133512850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632525518183445377}
+  m_GameObject: {fileID: 8260685643133512848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 900ece1b46bdd2c42a27c9c0fc481c37, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e4567be2d9dccb4f8e05a068944924a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 1266525684393306384, guid: 632f664e70835874cb79c11f04d975e3, type: 3}
-  coinCount: 3
-  coinSize: 0.5
-  radius: 1
-  upForce: 1
-  interval: 0.05
-  dieTime: 5
+  <CoinsBurst>k__BackingField: {fileID: 632525518183445377, guid: 4954c699656a94e448870cabebf7ad4b, type: 3}

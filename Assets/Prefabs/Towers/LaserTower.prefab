@@ -815,7 +815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 11400000, guid: b79f8a407e57b7e41a19ea15c95a711d, type: 2}
   coord: {x: 0, y: 0}
-  turrert: {fileID: 9056276565470760132}
+  turret: {fileID: 9056276565470760132}
   gun: {fileID: 5879248244423634348}
   laser_l: {fileID: 4419555183131548147}
   laser_r: {fileID: 6752229558865305249}

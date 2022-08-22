@@ -3,6 +3,11 @@
 namespace TowerDefence {
 	public sealed class Timer {
 		private float nextTime = 0;
+
+		public void SetNextTime(float time) {
+			nextTime = time;
+		}
+
 		public bool EverySeconds(float rate) {
 			if(nextTime < Time.time) {
 				nextTime = Time.time + rate;

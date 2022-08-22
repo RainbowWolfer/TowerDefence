@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TowerDefence.Enemies;
+using TowerDefence.Functions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace TowerDefence.Placements.Towers {
 	/// <summary>
@@ -12,9 +14,9 @@ namespace TowerDefence.Placements.Towers {
 	/// GetDamage() -> strat damage
 	/// GetDamageLength() -> start + length = end damage
 	/// </summary>
-	public class LaserTower: Tower {
+	public class LaserTower: Tower, ITurret {
 		[SerializeField]
-		private Transform turrert;
+		private Transform turret;
 		[SerializeField]
 		private Transform gun;
 
@@ -38,10 +40,12 @@ namespace TowerDefence.Placements.Towers {
 		private float fireTime;
 		private float Percentage => fireTime / GetChargingSpeed();
 
-		private bool aimReady;
+		public float HorAngle { get; set; }
+		public float VerAngle { get; set; }
+		private readonly LoopTimer randomRotateTimer = new LoopTimer(5, 2, 8);
 
-		private float horAngle;
-		private float verAngle;
+		public Vector3 RandomFreePoint { get; set; }
+		public float FreeTimeTurningSpeed => 0.5f;
 
 		private float cv1;
 		private float cv2;
@@ -60,15 +64,16 @@ namespace TowerDefence.Placements.Towers {
 			laserColor = _laserColor;
 			laser_l.colorGradient = GetFixedColor(_laserColor);
 			laser_r.colorGradient = GetFixedColor(_laserColor);
+			randomRotateTimer.ResetToNextInterval();
 		}
 
 		protected override void Update() {
 			base.Update();
 			if(Target != null) {
-				AimAt(Target.transform);
-				aimReady = CheckAimingReady();
-				if(aimReady) {
+				CalculateAngles(Target.transform.position);
+				if(CheckAimingReady()) {
 					Fire(Target);
+					randomRotateTimer.ResetToNextInterval();
 				} else {
 					laser_l.enabled = false;
 					laser_r.enabled = false;
@@ -76,12 +81,25 @@ namespace TowerDefence.Placements.Towers {
 			} else {
 				laser_l.enabled = false;
 				laser_r.enabled = false;
+				if(randomRotateTimer.EveryTime(true)) {
+					RandomFreePoint = new Vector3(
+						Random.Range(-2, 2f),
+						Random.Range(-0.2f, 0.2f),
+						Random.Range(-2, 2f)
+					);
+					CalculateAngles(gun.position + RandomFreePoint);
+				}
 			}
+			UpdateModel();
 			_laserColor = Color.Lerp(_laserColor, laserColor, Time.deltaTime * 5);
 			laser_l.colorGradient = GetFixedColor(_laserColor);
 			laser_r.colorGradient = GetFixedColor(_laserColor);
 
 			headLight.material.SetColor("_EmissionColor", _laserColor * Mathf.Lerp(0, 100, Percentage));
+		}
+
+		public override float GetTurningTime() {
+			return Target == null ? FreeTimeTurningSpeed : base.GetTurningTime();
 		}
 
 		private void OnValidate() {
@@ -136,30 +154,34 @@ namespace TowerDefence.Placements.Towers {
 			});
 		}
 
-		private void AimAt(Transform target) {
-			Vector3 direction = target.position - (transform.position + new Vector3(0, 1.37f, 0));
-			horAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + 90;
+		public void CalculateAngles(Vector3 target) {
+			Vector3 direction = target - (transform.position + new Vector3(0, 1.37f, 0));
+			HorAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + 90;
 
 			float radius = new Vector2(direction.x, direction.z).magnitude;
-			verAngle = Mathf.Atan2(direction.y, radius) * Mathf.Rad2Deg;
+			VerAngle = Mathf.Atan2(direction.y, radius) * Mathf.Rad2Deg;
 
-			verAngle = Mathf.Clamp(verAngle, -35, 60);
-			turrert.localEulerAngles = new Vector3(0, 0, Mathf.SmoothDampAngle(turrert.localEulerAngles.z, horAngle, ref cv1, 0.1f));
-			gun.localEulerAngles = new Vector3(0, Mathf.SmoothDampAngle(gun.localEulerAngles.y, verAngle, ref cv2, 0.1f), 0);
+			VerAngle = Mathf.Clamp(VerAngle, -35, 60);
+
 		}
 
-		private bool CheckAimingReady() {
-			float hor = Mathf.Abs(turrert.localEulerAngles.z - horAngle);
+		public bool CheckAimingReady() {
+			float hor = Mathf.Abs(turret.localEulerAngles.z - HorAngle);
 			if(hor > 180) {
 				hor -= 360;
 			}
-			float ver = Mathf.Abs(gun.localEulerAngles.y - verAngle);
+			float ver = Mathf.Abs(gun.localEulerAngles.y - VerAngle);
 			if(ver > 180) {
 				ver -= 360;
 			}
 			const float deviation = 5;
 			//Debug.Log($"hor:{hor} ;\tver:{ver}");
 			return Mathf.Abs(hor) < deviation && Mathf.Abs(ver) < deviation;
+		}
+
+		public void UpdateModel() {
+			turret.localEulerAngles = new Vector3(0, 0, Mathf.SmoothDampAngle(turret.localEulerAngles.z, HorAngle, ref cv1, 0.1f));
+			gun.localEulerAngles = new Vector3(0, Mathf.SmoothDampAngle(gun.localEulerAngles.y, VerAngle, ref cv2, 0.1f), 0);
 		}
 
 		public override void Upgrade() {

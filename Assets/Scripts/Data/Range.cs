@@ -10,6 +10,10 @@ namespace TowerDefence.Scripts.Data {
 		public float GetRandom() {
 			return Random.Range(from, to);
 		}
+
+		public override string ToString() {
+			return $"Range ({from}-{to})";
+		}
 	}
 
 	[Serializable]
@@ -20,6 +24,10 @@ namespace TowerDefence.Scripts.Data {
 		public Range(T from, T to) {
 			this.from = from;
 			this.to = to;
+		}
+
+		public override string ToString() {
+			return $"Range {typeof(T)} ({from}-{to})";
 		}
 	}
 }

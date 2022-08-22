@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TMPro;
 using TowerDefence.Effects;
+using TowerDefence.Functions;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using Random = UnityEngine.Random;
 
 namespace TowerDefence.Placements.Towers {
 	//[ExecuteInEditMode]
-	public class ArtilleryTower: Tower {
+	public class ArtilleryTower: Tower, ITurret {
 		[SerializeField]
 		private Animator anim;
 
@@ -27,11 +23,13 @@ namespace TowerDefence.Placements.Towers {
 		[Space]
 		[SerializeField]
 		private GameObject projectilePrefab;
-
-		private float horAngle;
-		public float verAngle;
-
 		private readonly Timer fireTimer = new Timer();
+		private readonly LoopTimer randomRotateTimer = new LoopTimer(5, 2, 8);
+
+		public float HorAngle { get; set; }
+		public float VerAngle { get; set; }
+		public Vector3 RandomFreePoint { get; set; }
+		public float FreeTimeTurningSpeed => 0.5f;
 
 		//public Transform obj;
 
@@ -41,13 +39,25 @@ namespace TowerDefence.Placements.Towers {
 
 		protected override void Start() {
 			base.Start();
+			randomRotateTimer.ResetToNextInterval();
 		}
 
 		protected override void Update() {
 			base.Update();
 			if(Target != null) {
-				AimAt(Target.transform);
+				CalculateAngles(Target.transform.position);
+				randomRotateTimer.ResetToNextInterval();
+			} else {
+				if(randomRotateTimer.EveryTime(true)) {
+					RandomFreePoint = new Vector3(
+						Random.Range(-2, 2f),
+						Random.Range(-0.2f, 0.2f),
+						Random.Range(-2, 2f)
+					);
+					CalculateAngles(turret.position + RandomFreePoint);
+				}
 			}
+			UpdateModel();
 
 			float distance = Target == null ? 0 : Vector2.Distance(
 				new Vector2(transform.position.x, transform.position.z),
@@ -78,6 +88,10 @@ namespace TowerDefence.Placements.Towers {
 			//Debug.Break();
 		}
 
+		public override float GetTurningTime() {
+			return Target == null ? FreeTimeTurningSpeed : base.GetTurningTime();
+		}
+
 		public float GetBlastRadius() {
 			return (Star switch {
 				Star.None => 1,
@@ -92,8 +106,8 @@ namespace TowerDefence.Placements.Towers {
 			return 1f;
 		}
 
-		private bool CheckAimingReady() {
-			float hor = Mathf.Abs(chassis.transform.localEulerAngles.z - horAngle);
+		public bool CheckAimingReady() {
+			float hor = Mathf.Abs(chassis.transform.localEulerAngles.z - HorAngle);
 			if(hor > 180) {
 				hor -= 360;
 			}
@@ -101,25 +115,29 @@ namespace TowerDefence.Placements.Towers {
 			return Mathf.Abs(hor) < deviation;
 		}
 
-		private void AimAt(Transform target) {
-			Vector3 chassisTarget = target.position - transform.position;
-			horAngle = Mathf.Atan2(chassisTarget.x, chassisTarget.z) * Mathf.Rad2Deg - 90;
-			chassis.transform.localRotation = Quaternion.Slerp(
-				chassis.transform.localRotation,
-				Quaternion.Euler(0, 0, horAngle),
-				Time.deltaTime / GetTurningTime()
-			);
+		public void CalculateAngles(Vector3 target) {
+			Vector3 chassisTarget = target - transform.position;
+			HorAngle = Mathf.Atan2(chassisTarget.x, chassisTarget.z) * Mathf.Rad2Deg - 90;
+
 
 			float targetDistance = Vector2.Distance(
-				new Vector2(target.position.x, target.position.z),
+				new Vector2(target.x, target.z),
 				new Vector2(transform.position.x, transform.position.z)
 			);
 			float maxRadius = GetAttackRadius();
 			float minRadius = 1f;
 			float radiusPercentage = Mathf.Clamp(targetDistance / (maxRadius - minRadius), 0, 1f);
-			verAngle = Mathf.Lerp(10f, 45f, radiusPercentage);
+			VerAngle = Mathf.Lerp(10f, 45f, radiusPercentage);
+		}
+
+		public void UpdateModel() {
+			chassis.transform.localRotation = Quaternion.Slerp(
+				chassis.transform.localRotation,
+				Quaternion.Euler(0, 0, HorAngle),
+				Time.deltaTime / GetTurningTime()
+			);
 			turret.localEulerAngles = new Vector3(0,
-				Mathf.MoveTowards(turret.localEulerAngles.y, verAngle, Time.deltaTime * 25)
+				Mathf.MoveTowards(turret.localEulerAngles.y, VerAngle, Time.deltaTime * 25)
 			, 0);
 		}
 	}

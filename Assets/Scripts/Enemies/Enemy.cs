@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using TowerDefence.Data;
 using TowerDefence.Enemies.Buffs;
 using TowerDefence.Enemies.Interfaces;
+using TowerDefence.GameControl;
 using TowerDefence.GameControl.Waves;
+using TowerDefence.Scripts.Enemies;
 using TowerDefence.UserInterface;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -52,10 +54,6 @@ namespace TowerDefence.Enemies {
 		public float HealthPercentage => Health / MaxHealth;
 
 		public Vector3? startPosition;
-
-		//[SerializeField]
-		//private GameObject coinsBurstPrefab;
-
 		protected virtual void Awake() {
 			speedData = info.speed.GetRandom();
 			healthData = info.health.GetRandom();
@@ -108,10 +106,14 @@ namespace TowerDefence.Enemies {
 			}
 			Game.Instance.enemies.Remove(this);
 			UI.Instance.flowIconManager.RemoveHealthBar(this);
-			Level.Cash += (int)info.coins.GetRandom();
-			//GameObject obj = Instantiate(coinsBurstPrefab);
-			//obj.transform.position = transform.position + Vector3.up * 0.2f;
+			int coin = (int)info.coins.GetRandom();
+			Level.Cash += coin;
+
 			Destroy(gameObject);
+
+			var coins = Instantiate(PrefabsManagaer.Instance.CoinsBurst).GetComponent<CoinsBurst>();
+			coins.Set(coin);
+			coins.transform.position = transform.position + Vector3.up * 0.2f;
 		}
 
 		private IEnumerator StartMoveCoroutine() {
