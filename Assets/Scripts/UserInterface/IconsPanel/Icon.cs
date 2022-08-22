@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 using TowerDefence.Data;
+using TowerDefence.UserInterface.IconsPanel;
 
 namespace TowerDefence.UserInterface {
 	public class Icon: MonoBehaviour {
@@ -22,11 +23,30 @@ namespace TowerDefence.UserInterface {
 		[SerializeField]
 		private TextMeshProUGUI priceText;
 
+		[Space]
 		[SerializeField]
 		private RectTransform descriptionPanel;
 		[SerializeField]
+		private CanvasGroup descriptionCanvas;
+		[SerializeField]
 		private TextMeshProUGUI descriptionText;
+		[SerializeField]
+		private TextMeshProUGUI descriptionNameText;
+		[SerializeField]
+		private TextMeshProUGUI attackTypeText;
+		[SerializeField]
+		private GridsData damageData;
+		[SerializeField]
+		private GridsData radiusData;
+		[SerializeField]
+		private GridsData fireRateData;
+		[SerializeField]
+		private TextMeshProUGUI price;
+		[SerializeField]
+		private TextMeshProUGUI upgradePrice;
+		private const float DESCRIPTION_TARGET_HEIGHT = 395;
 
+		[Space]
 		[SerializeField]
 		private Image bgImg;
 		[SerializeField]
@@ -44,6 +64,10 @@ namespace TowerDefence.UserInterface {
 
 		public bool IsMouseOn { get; private set; }
 
+		[field: Space]
+		[field: SerializeField]
+		public FlyoutContent Flyout { get; set; }
+
 		private Vector2 position;
 		private float offsetY;
 
@@ -52,9 +76,15 @@ namespace TowerDefence.UserInterface {
 		private float cv1;
 		private float cv2;
 
+		private void Start() {
+			descriptionPanel.sizeDelta = new Vector2(descriptionPanel.sizeDelta
+			.x, 0);
+			descriptionCanvas.alpha = 0;
+		}
+
 		public void Initialize(float posX, TowerInfo info, IconManager manager) {
-			this.Info = info;
 			this.manager = manager;
+			Info = info;
 			UpdateDisplay();
 			(transform as RectTransform).anchoredPosition = new Vector2(posX, -100);
 			position = new Vector2(posX, 100);
@@ -69,16 +99,19 @@ namespace TowerDefence.UserInterface {
 
 			offsetY = IsMouseOn ? 20 : 0;
 
-			float desiredY = IsMouseOn ? 0 : -descriptionPanel.sizeDelta.y;
-			descriptionPanel.anchoredPosition = new Vector2(0,
-				Mathf.SmoothDamp(descriptionPanel.anchoredPosition.y, desiredY, ref cv2, 0.05f)
+			float desiredHeight = IsMouseOn ? DESCRIPTION_TARGET_HEIGHT : 0;
+			descriptionPanel.sizeDelta = new Vector2(descriptionPanel.sizeDelta.x,
+				Mathf.SmoothDamp(descriptionPanel.sizeDelta.y, desiredHeight, ref cv2, 0.05f)
 			);
+			descriptionCanvas.alpha = Mathf.Lerp(0, 1, descriptionPanel.sizeDelta.y / DESCRIPTION_TARGET_HEIGHT);
 
 			if(disappearing && (transform as RectTransform).anchoredPosition.y <= -99) {
 				manager.Remove(this);
 			}
 
 			priceText.color = CashAvailable ? Color.white : Color.red;
+			price.color = CashAvailable ? Color.white : Color.red;
+			upgradePrice.color = Level.Cash >= Info.price + Info.upgradePrice ? Color.white : Color.red;
 
 			if(IsMouseOn && Input.GetMouseButtonUp(0)) {
 				manager.Select(this);
@@ -92,6 +125,15 @@ namespace TowerDefence.UserInterface {
 			nameText.text = string.IsNullOrEmpty(Info.TowerName) ? "Undefined" : Info.TowerName;
 			priceText.text = $"${Info.price}";
 			iconImg.sprite = Info.icon;
+
+			descriptionNameText.text = Info.TowerName;
+			descriptionText.text = Info.description;
+			damageData.Set(Info.damageData);
+			radiusData.Set(Info.radiusData);
+			fireRateData.Set(Info.fireRateData);
+			attackTypeText.text = Info.GetAttackType();
+			price.text = $"${Info.price}";
+			upgradePrice.text = $"${Info.upgradePrice}";
 		}
 
 		public void Disappear() {

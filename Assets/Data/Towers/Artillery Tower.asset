@@ -51,7 +51,8 @@ MonoBehaviour:
     abilityRadius: 0
     cooldown: 0
     upgradedCooldown: 0
-  description: 
+  description: A special design artillery that can deal great damage in massive area
+    and slow enemies within
   attackType: 2
   damageData: 2
   radiusData: 4

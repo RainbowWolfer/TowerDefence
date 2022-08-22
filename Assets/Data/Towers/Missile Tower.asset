@@ -51,7 +51,8 @@ MonoBehaviour:
     abilityRadius: 0
     cooldown: 0
     upgradedCooldown: 0
-  description: 
+  description: Mounted with 4 powerful missile launchers, it can destory its targets
+    in area within seconds
   attackType: 2
   damageData: 2
   radiusData: 3

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace TowerDefence.Functions {
@@ -47,6 +44,14 @@ namespace TowerDefence.Functions {
 				}
 			}
 			return $"{minute.ToDuo()}:{seconds.ToDuo()}";
+		}
+
+		public static Quaternion RandomRotation() {
+			return Quaternion.Euler(
+				Random.Range(0, 360),
+				Random.Range(0, 360),
+				Random.Range(0, 360)
+			);
 		}
 	}
 }

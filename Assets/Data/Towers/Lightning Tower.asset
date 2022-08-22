@@ -51,7 +51,8 @@ MonoBehaviour:
     abilityRadius: 0
     cooldown: 0
     upgradedCooldown: 0
-  description: 
+  description: Inspired by tesla coil, it can deal massive damage to single enemy
+  attackType: 0
   damageData: 4
   radiusData: 2
   fireRateData: 1

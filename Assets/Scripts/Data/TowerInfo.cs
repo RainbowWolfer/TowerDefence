@@ -65,6 +65,15 @@ namespace TowerDefence.Data {
 		[Range(0, 5)]
 		public int fireRateData;
 
+		public string GetAttackType() {
+			return attackType switch {
+				AttackType.Single => "Single",
+				AttackType.Penetrate => "Penetrate",
+				AttackType.Area => "Area",
+				_ => "Null",
+			};
+		}
+
 		public enum AttackType {
 			Single, Penetrate, Area
 		}

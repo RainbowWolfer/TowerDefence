@@ -51,7 +51,8 @@ MonoBehaviour:
     abilityRadius: 0
     cooldown: 0
     upgradedCooldown: 0
-  description: 
+  description: A slow-firing but powerful laser shooting towser that can penetrate
+    through enemies in line
   attackType: 1
   damageData: 5
   radiusData: 4

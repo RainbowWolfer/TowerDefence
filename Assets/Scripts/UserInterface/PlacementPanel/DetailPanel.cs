@@ -183,12 +183,7 @@ namespace TowerDefence.UserInterface {
 		}
 
 		public void UpdateAttackType() {
-			attackTypeText.text = CurrentFieldPlacement.info.attackType switch {
-				TowerInfo.AttackType.Single => "Single",
-				TowerInfo.AttackType.Penetrate => "Penetrate",
-				TowerInfo.AttackType.Area => "Area",
-				_ => "Null",
-			};
+			attackTypeText.text = CurrentFieldPlacement.info.GetAttackType();
 		}
 
 		public void UpdateAttributes() {

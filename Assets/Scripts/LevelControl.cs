@@ -143,6 +143,7 @@ namespace TowerDefence {
 										Level.Cash -= iconSelection.price;
 									} else {
 										//pop up notification
+										NotificationPanel.InsufficientFund();
 									}
 								}
 							}

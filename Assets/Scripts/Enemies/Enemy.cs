@@ -53,6 +53,9 @@ namespace TowerDefence.Enemies {
 
 		public Vector3? startPosition;
 
+		//[SerializeField]
+		//private GameObject coinsBurstPrefab;
+
 		protected virtual void Awake() {
 			speedData = info.speed.GetRandom();
 			healthData = info.health.GetRandom();
@@ -106,6 +109,8 @@ namespace TowerDefence.Enemies {
 			Game.Instance.enemies.Remove(this);
 			UI.Instance.flowIconManager.RemoveHealthBar(this);
 			Level.Cash += (int)info.coins.GetRandom();
+			//GameObject obj = Instantiate(coinsBurstPrefab);
+			//obj.transform.position = transform.position + Vector3.up * 0.2f;
 			Destroy(gameObject);
 		}
 

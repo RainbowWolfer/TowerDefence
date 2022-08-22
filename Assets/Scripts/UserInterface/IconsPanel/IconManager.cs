@@ -95,6 +95,7 @@ namespace TowerDefence.UserInterface {
 			for(int i = 0; i < towers.Count; i++) {
 				Icon icon = Instantiate(prefab_icon, transform).GetComponent<Icon>();
 				icon.Initialize(110 + i * 190, towers[i], this);
+				icon.Flyout.offsetX = i == 0 ? 170 : 0;
 				icons.Add(icon);
 			}
 		}
@@ -128,6 +129,7 @@ namespace TowerDefence.UserInterface {
 			}
 			if(!target.CashAvailable) {
 				//pop up notification
+				NotificationPanel.InsufficientFund();
 				return;
 			}
 			icons.ForEach(i => i.IsSelected = i == target);

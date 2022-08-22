@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8110125192266791620}
   - component: {fileID: 680503638151351386}
   - component: {fileID: 8968830284376248453}
+  - component: {fileID: 7865939960072813773}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -81,6 +82,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7865939960072813773
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5258954803454702638}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.9999999, z: 0.9999999}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5743925546984635163
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a41fb1e7f45dba4b8d9e1964d7adfa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  info: {fileID: 0}
+  coord: {x: 0, y: 0}
   rotationParent: {fileID: 6478565130631462337}
   axis: {x: 0, y: 1, z: 0}
   enableRandomRotationOnStart: 1
@@ -140,6 +156,7 @@ GameObject:
   - component: {fileID: 6478565130631462337}
   - component: {fileID: 5583826159401141264}
   - component: {fileID: 8668000850822175990}
+  - component: {fileID: 1430101692839659791}
   m_Layer: 0
   m_Name: Oak
   m_TagString: Untagged
@@ -210,3 +227,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1430101692839659791
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6451761846554939609}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2969581950451696975, guid: 7031ef4d6034f38438a37e450ac177a1, type: 3}

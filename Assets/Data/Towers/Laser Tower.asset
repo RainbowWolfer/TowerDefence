@@ -51,7 +51,8 @@ MonoBehaviour:
     abilityRadius: 0
     cooldown: 0
     upgradedCooldown: 0
-  description: 
+  description: 'A futuristic tower that shoots laser which build up damage overtime '
+  attackType: 0
   damageData: 3
   radiusData: 2
   fireRateData: 5

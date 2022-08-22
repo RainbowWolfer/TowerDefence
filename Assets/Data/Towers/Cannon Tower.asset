@@ -51,7 +51,9 @@ MonoBehaviour:
     abilityRadius: 0
     cooldown: 0
     upgradedCooldown: 0
-  description: 
+  description: A powerful tower equiepped with 4 full-auto cannons that can tear
+    apart every enemy
+  attackType: 0
   damageData: 1
   radiusData: 2
   fireRateData: 5
