@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TowerDefence.Enemies;
 using TowerDefence.GameControl;
+using TowerDefence.Placements.Towers;
 using UnityEngine;
 
 namespace TowerDefence.Placements {
@@ -45,13 +46,17 @@ namespace TowerDefence.Placements {
 		}
 
 		public virtual float GetTurningTime() {
-			return Star switch {
-				Star.None => info.turnnigTime.none,
-				Star.Star1 => info.turnnigTime.one,
-				Star.Star2 => info.turnnigTime.two,
-				Star.Star3 => info.turnnigTime.three,
-				_ => throw new Exception(),
-			};
+			if(this is ITurret turret && Target == null) {
+				return turret.FreeTimeTurningSpeed;
+			} else {
+				return Star switch {
+					Star.None => info.turnnigTime.none,
+					Star.Star1 => info.turnnigTime.one,
+					Star.Star2 => info.turnnigTime.two,
+					Star.Star3 => info.turnnigTime.three,
+					_ => throw new Exception(),
+				};
+			}
 		}
 
 		protected virtual void Awake() {
@@ -69,7 +74,7 @@ namespace TowerDefence.Placements {
 			Target = targetUpdater.Target;
 		}
 
-		public void ResetStats(){
+		public void ResetStats() {
 			Exp = 0;
 			Star = 0;
 			Kills = 0;

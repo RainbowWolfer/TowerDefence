@@ -98,10 +98,6 @@ namespace TowerDefence.Placements.Towers {
 			headLight.material.SetColor("_EmissionColor", _laserColor * Mathf.Lerp(0, 100, Percentage));
 		}
 
-		public override float GetTurningTime() {
-			return Target == null ? FreeTimeTurningSpeed : base.GetTurningTime();
-		}
-
 		private void OnValidate() {
 			laser_l.colorGradient = GetFixedColor(laserColor);
 			laser_r.colorGradient = GetFixedColor(laserColor);

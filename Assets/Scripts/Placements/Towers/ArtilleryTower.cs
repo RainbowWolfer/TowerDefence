@@ -88,10 +88,6 @@ namespace TowerDefence.Placements.Towers {
 			//Debug.Break();
 		}
 
-		public override float GetTurningTime() {
-			return Target == null ? FreeTimeTurningSpeed : base.GetTurningTime();
-		}
-
 		public float GetBlastRadius() {
 			return (Star switch {
 				Star.None => 1,

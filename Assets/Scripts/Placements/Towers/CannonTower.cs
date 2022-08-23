@@ -65,10 +65,6 @@ namespace TowerDefence.Placements.Towers {
 			}
 		}
 
-		public override float GetTurningTime() {
-			return Target == null ? FreeTimeTurningSpeed : base.GetTurningTime();
-		}
-
 		public void CalculateAngles(Vector3 target) {
 			Vector3 chassisTarget = target - transform.position;
 			HorAngle = Mathf.Atan2(chassisTarget.x, chassisTarget.z) * Mathf.Rad2Deg + 90;
