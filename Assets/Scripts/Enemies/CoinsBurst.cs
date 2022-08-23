@@ -26,6 +26,9 @@ namespace TowerDefence.Scripts.Enemies {
 			for(int i = 0; i < coinCount; i++) {
 				var rb = Instantiate(coinPrefab, transform).GetComponent<Rigidbody>();
 
+				rb.transform.localPosition = new Vector3(0,
+					Random.Range(0, 0.5f)
+				, 0);
 				rb.transform.localScale = Vector3.one * coinSize;
 
 				Destroy(rb.gameObject, dieTime);

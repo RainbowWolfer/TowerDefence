@@ -79,6 +79,7 @@ namespace TowerDefence.Placements.Towers {
 				firePoint.position,
 				firePoint.rotation
 			);
+			projectile.owner = this;
 			projectile.start = firePoint.position;
 			projectile.end = Target.transform.position;
 			projectile.curve = artilleryCurve;

@@ -105,6 +105,7 @@ namespace TowerDefence.Placements.Towers {
 			};
 
 			var missile = Instantiate(missilePrefab).GetComponent<Missile>();
+			missile.owner = this;
 			missile.transform.position = t.position;
 			missile.target = targetPosition;
 			missile.radius = GetBlastRadius();
@@ -132,7 +133,7 @@ namespace TowerDefence.Placements.Towers {
 		public void CalculateAngles(Vector3 target) {
 			Vector3 chassisTarget = target - transform.position;
 			HorAngle = Mathf.Atan2(chassisTarget.x, chassisTarget.z) * Mathf.Rad2Deg + 90;
-			
+
 			Vector3 turretTarget = target - (transform.position + new Vector3(0, 0.8f, 0));
 			float radius = new Vector2(turretTarget.x, turretTarget.z).magnitude;
 			VerAngle = Mathf.Atan2(turretTarget.y, radius) * Mathf.Rad2Deg;

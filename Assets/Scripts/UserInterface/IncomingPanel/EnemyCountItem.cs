@@ -21,6 +21,8 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 		private TextMeshProUGUI countText;
 		[SerializeField]
 		private RectTransform detail;
+		[SerializeField]
+		private CanvasGroup detailCanvas;
 
 		[Space]
 		[SerializeField]
@@ -70,6 +72,7 @@ namespace TowerDefence.UserInterface.LevelIncomingPanel {
 				IsMouseOn ? 400 : 0,
 				Time.deltaTime * 15
 			));
+			detailCanvas.alpha = Mathf.Lerp(0, 1, detail.sizeDelta.y / 400);
 		}
 
 		public void Set(EnemyType type, int count) {

@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using TowerDefence.Enemies;
 using TowerDefence.Enemies.Buffs;
+using TowerDefence.Placements;
 using UnityEngine;
 
 namespace TowerDefence.Effects {
 	//[ExecuteInEditMode]
 	public class ArtilleryProjectile: MonoBehaviour {
+		public Tower owner;
 		public Vector3 start;
 		public Vector3 end;
 		public AnimationCurve curve;
@@ -71,8 +73,10 @@ namespace TowerDefence.Effects {
 
 			if(percentage >= 1) {
 				//do explosion
-				Game.Instance.EnemiesTakeAreaDamageV3(transform.position, radius, damage);
-
+				float totalDamage = Game.Instance.EnemiesTakeAreaDamageV3(transform.position, radius, damage);
+				if(owner != null) {
+					owner.Exp += totalDamage;
+				}
 				//do slow down
 				List<Enemy> enemies = Game.Instance.GetEnemiesInRangeV3(transform.position, radius);
 				foreach(Enemy e in enemies) {

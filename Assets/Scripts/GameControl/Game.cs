@@ -106,12 +106,14 @@ namespace TowerDefence {
 			}
 		}
 
-		public void EnemiesTakeAreaDamageV3(Vector3 position, float radius, float damage) {
+		public float EnemiesTakeAreaDamageV3(Vector3 position, float radius, float damage) {
 			List<Enemy> enemiesInRange = GetEnemiesInRangeV3(position, radius);
-
+			float totalDamage = 0;
 			foreach(Enemy e in enemiesInRange) {
 				e.TakeDamage(damage);
+				totalDamage += damage;
 			}
+			return totalDamage;
 		}
 
 		private void AddEnemy(Enemy enemy) {

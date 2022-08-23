@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 328961097}
   - component: {fileID: 328961098}
+  - component: {fileID: 1939773736}
   m_Layer: 5
   m_Name: Detail
   m_TagString: Untagged
@@ -135,6 +136,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: 0, y: 0, z: 0, w: 0}
   m_Softness: {x: 0, y: 0}
+--- !u!225 &1939773736
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328961096}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2675344235468192400
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,6 +1101,7 @@ MonoBehaviour:
   content: {fileID: 7118175890053782335}
   countText: {fileID: 7118175890242368617}
   detail: {fileID: 328961097}
+  detailCanvas: {fileID: 1939773736}
   nameText: {fileID: 3153967821189126587}
   image: {fileID: 8570613068799578563}
   descriptionText: {fileID: 2096411951603767334}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1484241053317423710}
   - component: {fileID: 1484241053317423709}
   m_Layer: 0
-  m_Name: Injector
+  m_Name: RobotInjector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

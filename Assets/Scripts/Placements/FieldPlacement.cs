@@ -3,30 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TowerDefence.Effects.Visuals;
 using TowerDefence.Functions;
+using TowerDefence.GameControl;
 using UnityEngine;
 
 namespace TowerDefence.Placements {
 	public abstract class FieldPlacement: Placement {
+		public Action<Star> OnLevelUp { get; set; }
 		private float exp;
 		public float Exp {
 			get => exp;
-			protected set {
+			set {
 				exp = value;
 				if(value >= info.star3Exp) {
 					if(Star == Star.Star3) {
 						return;
 					}
+					OnLevelUp?.Invoke(Star.Star3);
 					Star = Star.Star3;
 				} else if(value >= info.star2Exp) {
 					if(Star == Star.Star2) {
 						return;
 					}
+					OnLevelUp?.Invoke(Star.Star2);
 					Star = Star.Star2;
 				} else if(value >= info.star1Exp) {
 					if(Star == Star.Star1) {
 						return;
 					}
+					OnLevelUp?.Invoke(Star.Star1);
 					Star = Star.Star1;
 				}
 			}
@@ -58,6 +64,8 @@ namespace TowerDefence.Placements {
 			}
 			IsUpgraded = true;
 			Level.Cash -= info.upgradePrice;
+			var effect = Instantiate(PrefabsManagaer.Instance.TowerUpgradeEffect, transform).GetComponent<UpgradeEffect>();
+			effect.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 		}
 
 		public void Sell() {

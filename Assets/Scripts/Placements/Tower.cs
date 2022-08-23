@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TowerDefence.Effects.Visuals;
 using TowerDefence.Enemies;
 using TowerDefence.GameControl;
 using TowerDefence.Placements.Towers;
@@ -66,6 +67,13 @@ namespace TowerDefence.Placements {
 		protected override void Start() {
 			base.Start();
 			ResetStats();
+			OnLevelUp += s => {
+				if(s > Star) {
+					var effect = Instantiate(PrefabsManagaer.Instance.TowerLevelUpEffect, transform).GetComponent<LevelUpEffect>();
+					effect.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+					effect.star = s;
+				}
+			};
 		}
 
 		protected override void Update() {

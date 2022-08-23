@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CoinsBurst>k__BackingField: {fileID: 632525518183445377, guid: 4954c699656a94e448870cabebf7ad4b, type: 3}
+  <TowerLevelUpEffect>k__BackingField: {fileID: 3943492658906158372, guid: 372172752eef8ad4690d32baac55d8b6, type: 3}
+  <TowerUpgradeEffect>k__BackingField: {fileID: 4068398855550453070, guid: b35d3103497b9574bb0cc001b2301678, type: 3}

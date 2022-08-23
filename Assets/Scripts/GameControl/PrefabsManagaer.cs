@@ -15,6 +15,12 @@ namespace TowerDefence.GameControl {
 		[field: SerializeField]
 		public GameObject CoinsBurst { get; private set; }
 
+		[field: SerializeField]
+		public GameObject TowerLevelUpEffect { get; private set; }
+
+		[field: SerializeField]
+		public GameObject TowerUpgradeEffect { get; private set; }
+
 
 	}
 }

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TowerDefence.Placements;
 using UnityEngine;
 
 namespace TowerDefence.Effects {
 	//[ExecuteInEditMode]
 	public class Missile: MonoBehaviour {
+		public Tower owner;
+
 		public Vector3? target;
 		public float distanceThreshold = 0.1f;
 
@@ -34,7 +37,10 @@ namespace TowerDefence.Effects {
 		}
 
 		private void Explode() {
-			Game.Instance.EnemiesTakeAreaDamageV3(transform.position, radius, damage);
+			var totalDamage = Game.Instance.EnemiesTakeAreaDamageV3(transform.position, radius, damage);
+			if(owner != null) {
+				owner.Exp += totalDamage;
+			}
 			Destroy(gameObject);
 		}
 	}
