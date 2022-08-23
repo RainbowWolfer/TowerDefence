@@ -11227,7 +11227,7 @@ GameObject:
   - component: {fileID: 378657090}
   - component: {fileID: 378657089}
   m_Layer: 5
-  m_Name: Image
+  m_Name: CoinIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11265,7 +11265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.85, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -22539,7 +22539,7 @@ GameObject:
   - component: {fileID: 764220356}
   - component: {fileID: 764220355}
   m_Layer: 5
-  m_Name: Text (TMP) (01)
+  m_Name: DiamondText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22553,7 +22553,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764220353}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00036658146}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00031943}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1159412871}
@@ -22561,8 +22561,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 22, y: -36.299797}
-  m_SizeDelta: {x: 400, y: 69.14}
+  m_AnchoredPosition: {x: 36.149994, y: -36.9}
+  m_SizeDelta: {x: 165.81, y: 42.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &764220355
 MonoBehaviour:
@@ -22593,8 +22593,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294961165
+  m_fontColor: {r: 0.05098039, g: 0.9083097, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -22618,7 +22618,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -22628,7 +22628,7 @@ MonoBehaviour:
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
+  m_wordWrappingRatios: 0.24
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
@@ -22647,7 +22647,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 30, y: 5, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -33142,6 +33142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cashText: {fileID: 1537800852}
+  cashImage: {fileID: 378657089}
+  speedThreshold: 300
+  maxScale: 1.3
 --- !u!1 &1163604115
 GameObject:
   m_ObjectHideFlags: 0
@@ -35815,7 +35818,7 @@ GameObject:
   - component: {fileID: 1264124551}
   - component: {fileID: 1264124550}
   m_Layer: 5
-  m_Name: Image (01)
+  m_Name: DiamondIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35853,7 +35856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.05098039, g: 0.9098039, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -43482,7 +43485,7 @@ GameObject:
   - component: {fileID: 1537800853}
   - component: {fileID: 1537800852}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CoinText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43496,7 +43499,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537800850}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00036658146}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1159412871}
@@ -43504,8 +43507,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45, y: 23.700203}
-  m_SizeDelta: {x: 400, y: 69.14}
+  m_AnchoredPosition: {x: 37.630005, y: 29.199997}
+  m_SizeDelta: {x: 162.85, y: 53.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1537800852
 MonoBehaviour:
@@ -43536,8 +43539,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278245887
+  m_fontColor: {r: 1, g: 0.851, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -43561,7 +43564,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -43590,7 +43593,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 30, y: 5, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -52411,6 +52414,7 @@ MonoBehaviour:
   itemPrefab: {fileID: 9128063546298044187, guid: 37f1eaa122e1abc43bcd7521cd268a50, type: 3}
   icon_level: {fileID: 21300000, guid: bf01b4c500853bf478a6d552febdb50c, type: 3}
   icon_fund: {fileID: 21300000, guid: 05b2687b311720549a6cc6c0d735f9c6, type: 3}
+  icon_diamond: {fileID: 21300000, guid: 34870f5d4ab78674c91503b21f0da25d, type: 3}
 --- !u!114 &1851891243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53600,23 +53604,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 457175218757728579, guid: a47c9b7f39989ce43b7ca27daef673b9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1089404
+      value: 1.4491976
       objectReference: {fileID: 0}
     - target: {fileID: 457175218757728579, guid: a47c9b7f39989ce43b7ca27daef673b9, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.14621939
+      value: 0.49810487
       objectReference: {fileID: 0}
     - target: {fileID: 457175218757728579, guid: a47c9b7f39989ce43b7ca27daef673b9, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.14621939
+      value: -0.49810487
       objectReference: {fileID: 0}
     - target: {fileID: 457175218757728579, guid: a47c9b7f39989ce43b7ca27daef673b9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6918236
+      value: -0.50188804
       objectReference: {fileID: 0}
     - target: {fileID: 457175218757728579, guid: a47c9b7f39989ce43b7ca27daef673b9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.6918236
+      value: -0.50188804
       objectReference: {fileID: 0}
     - target: {fileID: 942350583520175097, guid: a47c9b7f39989ce43b7ca27daef673b9, type: 3}
       propertyPath: m_IsActive
@@ -63147,19 +63151,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3135120313489092019, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.02766613
+      value: -0.0069230767
       objectReference: {fileID: 0}
     - target: {fileID: 3135120313489092019, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.02766613
+      value: -0.0069230767
       objectReference: {fileID: 0}
     - target: {fileID: 3135120314255410676, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.02766613
+      value: -0.0069230767
       objectReference: {fileID: 0}
     - target: {fileID: 3135120314255410676, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.02766613
+      value: -0.0069230767
       objectReference: {fileID: 0}
     - target: {fileID: 3135120314600544770, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}
       propertyPath: m_LocalScale.x
@@ -63171,23 +63175,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3135120314600544770, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.20533226
+      value: 0.16384615
       objectReference: {fileID: 0}
     - target: {fileID: 3135120314888901415, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.02766613
+      value: -0.0069230767
       objectReference: {fileID: 0}
     - target: {fileID: 3135120314888901415, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.02766613
+      value: -0.0069230767
       objectReference: {fileID: 0}
     - target: {fileID: 3135120315473184668, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.02766613
+      value: -0.0069230767
       objectReference: {fileID: 0}
     - target: {fileID: 3135120315473184668, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.02766613
+      value: -0.0069230767
       objectReference: {fileID: 0}
     - target: {fileID: 3172951061040718473, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}
       propertyPath: radius
@@ -63243,11 +63247,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3172951061144288631, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.32083583
+      value: 0.9781872
       objectReference: {fileID: 0}
     - target: {fileID: 3172951061144288631, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.94713485
+      value: 0.20772544
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8887bf3f3f111cf469dfdb7f0a436a5b, type: 3}

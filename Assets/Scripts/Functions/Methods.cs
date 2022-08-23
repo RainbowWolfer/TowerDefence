@@ -53,5 +53,10 @@ namespace TowerDefence.Functions {
 				Random.Range(0, 360)
 			);
 		}
+
+		public static bool TryGetComponentInParent<T>(this Component component, out T result) where T : Component {
+			result = component.GetComponentInParent<T>();
+			return result != null;
+		}
 	}
 }

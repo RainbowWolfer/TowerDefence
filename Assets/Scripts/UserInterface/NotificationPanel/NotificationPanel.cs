@@ -19,6 +19,8 @@ namespace TowerDefence.UserInterface {
 		private Sprite icon_level;
 		[SerializeField]
 		private Sprite icon_fund;
+		[SerializeField]
+		private Sprite icon_diamond;
 
 		private void Awake() {
 			Instance = this;
@@ -30,7 +32,7 @@ namespace TowerDefence.UserInterface {
 
 		private void Update() {
 			if(Input.GetKeyDown(KeyCode.B)) {
-				Add("Cool", icon_fund, new Color(1, 0, 0, 0.3f));
+				EarnDiamonds(10);
 			}
 
 			for(int i = 0; i < items.Count; i++) {
@@ -78,11 +80,18 @@ namespace TowerDefence.UserInterface {
 			Instance.Add("Insufficient Fund", Instance.icon_fund, new Color(1, 0, 0, 0.3f));
 		}
 
-		public static void TowerLevelUp() {
+		//public static void TowerLevelUp() {
+		//	if(Instance == null) {
+		//		return;
+		//	}
+		//	Instance.Add("Tower Level Up", Instance.icon_level, new Color(0, 0.85f, 1, 0.3f));
+		//}
+
+		public static void EarnDiamonds(int amount) {
 			if(Instance == null) {
 				return;
 			}
-			Instance.Add("Tower Level Up", Instance.icon_level, new Color(0, 0.85f, 1, 0.3f));
+			Instance.Add($"Diamonds Earned : {amount}", Instance.icon_diamond, new Color(0, 0.85f, 1, 0.3f));
 		}
 	}
 }

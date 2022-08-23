@@ -76,6 +76,11 @@ namespace TowerDefence.UserInterface {
 		private float cv1;
 		private float cv2;
 
+		private float tooltipTime;
+		private float tooltipTimeThreshold = 0.5f;
+
+		public bool ShowToolTip => tooltipTime > tooltipTimeThreshold;
+
 		private void Start() {
 			descriptionPanel.sizeDelta = new Vector2(descriptionPanel.sizeDelta
 			.x, 0);
@@ -93,13 +98,19 @@ namespace TowerDefence.UserInterface {
 
 		private void Update() {
 			IsMouseOn = UIRayCaster.HasElement(background);
+			if(IsMouseOn) {
+				tooltipTime += Time.deltaTime;
+			} else {
+				tooltipTime = 0;
+			}
+
 			Rt.anchoredPosition = new Vector2(position.x,
 				Mathf.SmoothDamp(Rt.anchoredPosition.y, position.y + offsetY, ref cv1, 0.1f)
 			);
 
 			offsetY = IsMouseOn ? 20 : 0;
 
-			float desiredHeight = IsMouseOn ? DESCRIPTION_TARGET_HEIGHT : 0;
+			float desiredHeight = IsMouseOn && ShowToolTip ? DESCRIPTION_TARGET_HEIGHT : 0;
 			descriptionPanel.sizeDelta = new Vector2(descriptionPanel.sizeDelta.x,
 				Mathf.SmoothDamp(descriptionPanel.sizeDelta.y, desiredHeight, ref cv2, 0.05f)
 			);

@@ -34,7 +34,8 @@ namespace TowerDefence.Effects.Visuals {
 		}
 
 		private void Update() {
-			textParent.LookAt(CameraController.Instance.mainCamera.transform);
+			//textParent.LookAt(CameraController.Instance.mainCamera.transform);
+			textParent.forward = -CameraController.Instance.mainCamera.transform.forward;
 
 			if(show) {
 				text.transform.localPosition = new Vector3(-0.12f,

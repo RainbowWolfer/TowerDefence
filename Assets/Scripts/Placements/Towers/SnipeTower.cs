@@ -89,7 +89,7 @@ namespace TowerDefence.Placements.Towers {
 			Vector3 direction = Target.transform.position - raycastCenter.position;
 			RaycastHit[] hits = Physics.RaycastAll(raycastCenter.position, direction, 9, LayerMask.GetMask("Enemy"));
 			foreach(RaycastHit item in hits) {
-				if(item.collider.TryGetComponent<Enemy>(out var e) && !enemyList.Contains(e)) {
+				if(item.collider.TryGetComponentInParent<Enemy>(out var e) && !enemyList.Contains(e)) {
 					enemyList.Add(e);
 				}
 			}
