@@ -37,9 +37,10 @@ namespace TowerDefence.Effects {
 		}
 
 		private void Explode() {
-			var totalDamage = Game.Instance.EnemiesTakeAreaDamageV3(transform.position, radius, damage);
+			(float totalDamage, int kills) = Game.Instance.EnemiesTakeAreaDamageV3(transform.position, radius, damage);
 			if(owner != null) {
 				owner.Exp += totalDamage;
+				owner.Kills += kills;
 			}
 			Destroy(gameObject);
 		}

@@ -134,7 +134,11 @@ namespace TowerDefence.Placements.Towers {
 				new Color(0, 0.65f, 1f, 1f),
 				Percentage
 			);
-			enemy.TakeDamage(damage);
+			bool dead = enemy.TakeDamage(damage);
+			if(dead) {
+				Kills++;
+			}
+			Exp += damage;
 		}
 
 		private void UpdateLaser(Transform target) {

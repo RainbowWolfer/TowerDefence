@@ -95,7 +95,10 @@ namespace TowerDefence.Placements.Towers {
 			}
 			for(int i = 0; i < enemyList.Count; i++) {
 				float damage = GetDamage() * (i * -0.1f + 1.1f);//get damage decay (index)
-				enemyList[i].TakeDamage(damage);
+				bool dead = enemyList[i].TakeDamage(damage);
+				if(dead) {
+					Kills++;
+				}
 				Exp += damage;
 			}
 		}

@@ -51,9 +51,10 @@ namespace TowerDefence.Placements {
 				}
 			}
 		}
+		public int Kills { get; set; }
+
 
 		public Star Star { get; protected set; }
-		public int Kills { get; protected set; }
 
 
 		public bool IsUpgraded { get; protected set; }

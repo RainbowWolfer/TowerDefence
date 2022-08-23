@@ -73,9 +73,10 @@ namespace TowerDefence.Effects {
 
 			if(percentage >= 1) {
 				//do explosion
-				float totalDamage = Game.Instance.EnemiesTakeAreaDamageV3(transform.position, radius, damage);
+				(float totalDamage, int kills) = Game.Instance.EnemiesTakeAreaDamageV3(transform.position, radius, damage);
 				if(owner != null) {
 					owner.Exp += totalDamage;
+					owner.Kills += kills;
 				}
 				//do slow down
 				List<Enemy> enemies = Game.Instance.GetEnemiesInRangeV3(transform.position, radius);

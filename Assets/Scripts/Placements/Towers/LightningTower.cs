@@ -59,7 +59,12 @@ namespace TowerDefence.Placements.Towers {
 
 		private void DoDamage() {
 			if(Target != null) {
-				Target.TakeDamage(GetDamage());
+				float damage = GetDamage();
+				bool dead = Target.TakeDamage(damage);
+				if(dead) {
+					Kills++;
+				}
+				Exp += damage;
 			}
 		}
 
