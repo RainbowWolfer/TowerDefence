@@ -117,10 +117,19 @@ namespace TowerDefence.UserInterface {
 
 		private Vector2 cv1;
 		private void Update() {
-			background.color = Color.Lerp(background.color, currentColor, Time.deltaTime * colorChangingSpeed);
+			background.color = Color.Lerp(
+				background.color,
+				currentColor,
+				Time.deltaTime * colorChangingSpeed
+			);
 
 			if(enableSizeTransition) {
-				rectTransform.sizeDelta = Vector2.SmoothDamp(rectTransform.sizeDelta, size, ref cv1, 0.1f);
+				rectTransform.sizeDelta = Vector2.SmoothDamp(
+					rectTransform.sizeDelta,
+					size,
+					ref cv1,
+					0.1f
+				);
 			}
 		}
 

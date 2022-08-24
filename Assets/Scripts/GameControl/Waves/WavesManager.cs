@@ -82,7 +82,7 @@ namespace TowerDefence.GameControl.Waves {
 				yield return new WaitForSeconds(level.readyTime);
 				IsSpawningEnemies = true;
 				yield return CreateLevelWaves(level);
-				NotificationPanel.EarnDiamonds(10);
+				//NotificationPanel.EarnDiamonds(10);
 				if(i != levels.Count - 1) {//not the last level
 					yield return new WaitForSeconds(level.finishWaitTime);
 					IsSpawningEnemies = false;
