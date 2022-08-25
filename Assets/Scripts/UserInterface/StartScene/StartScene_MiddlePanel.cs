@@ -68,6 +68,9 @@ namespace TowerDefence.UserInterface.StartScene {
 				cvs.Add(new CV());
 			}
 
+		}
+
+		private void OnEnable() {
 			Rt.anchoredPosition3D = new Vector3(
 				Rt.anchoredPosition3D.x,
 				Rt.anchoredPosition3D.y,
@@ -179,6 +182,8 @@ namespace TowerDefence.UserInterface.StartScene {
 						if(OnMouseClick) {
 							index++;
 						}
+					} else {
+						mouseOnIndex = -1;
 					}
 				}
 			}
@@ -187,9 +192,9 @@ namespace TowerDefence.UserInterface.StartScene {
 				QuitOpen();
 			}
 
-			if(Input.GetKeyDown(KeyCode.LeftBracket)) {
+			if(Input.GetKeyDown(KeyCode.LeftArrow)) {
 				index--;
-			} else if(Input.GetKeyDown(KeyCode.RightBracket)) {
+			} else if(Input.GetKeyDown(KeyCode.RightArrow)) {
 				index++;
 			}
 			index = Mathf.Clamp(index, 0, panels.Length - 1);

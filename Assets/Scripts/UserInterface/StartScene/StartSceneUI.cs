@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TowerDefence.Local;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,8 @@ namespace TowerDefence.UserInterface.StartScene {
 		public StartScene_BottomPanel BottomPanel { get; private set; }
 		[field: SerializeField]
 		public StartScene_LoadingPanel LoadingPanel { get; private set; }
+		[field: SerializeField]
+		public StartScene_NameInputPanel NameInputPanel { get; private set; }
 
 
 		private Coroutine loadingSceneCoroutine;
@@ -28,10 +31,40 @@ namespace TowerDefence.UserInterface.StartScene {
 		}
 
 		private void Start() {
+			TopPanel.gameObject.SetActive(false);
+			MiddlePanel.gameObject.SetActive(false);
+			BottomPanel.gameObject.SetActive(false);
+			LoadingPanel.gameObject.SetActive(false);
+			NameInputPanel.gameObject.SetActive(false);
+
+			Player player = Player.FromJson(PlayerPrefs.GetString("UserJson", ""));
+			if(player != null) {
+				Player.Current = player;
+				StartPanels();
+			} else {
+				StartNameInput();
+			}
+		}
+
+		public void StartNameInput() {
+			TopPanel.gameObject.SetActive(true);
+			MiddlePanel.gameObject.SetActive(false);
+			BottomPanel.gameObject.SetActive(false);
+			LoadingPanel.gameObject.SetActive(false);
+			NameInputPanel.gameObject.SetActive(true);
+		}
+
+		public void StartPanels() {
 			TopPanel.gameObject.SetActive(true);
 			MiddlePanel.gameObject.SetActive(true);
 			BottomPanel.gameObject.SetActive(true);
 			LoadingPanel.gameObject.SetActive(false);
+			NameInputPanel.gameObject.SetActive(false);
+		}
+
+		public void RegisterNewUser(string username) {
+			Player.Current = new Player(username);
+			StartPanels();
 		}
 
 		public void LoadMainScene() {

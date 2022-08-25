@@ -73,6 +73,10 @@ namespace TowerDefence.UserInterface.StartScene {
 			Show = true;
 		}
 
+		private void OnEnable() {
+			Rt.anchoredPosition = new Vector2(0, -100);
+		}
+
 		private void Update() {
 			IsMouseOnSettingsButton = UIRayCaster.HasElements(settingsButtonBackgrounds);
 			IsMouseOnUserButton = UIRayCaster.HasElements(userButtonBackgrounds);
@@ -117,12 +121,12 @@ namespace TowerDefence.UserInterface.StartScene {
 			}
 
 			Rt.anchoredPosition = new Vector2(0,
-			Mathf.Lerp(
-				Rt.anchoredPosition.y,
-				Show ? (panelType != PanelType.None ? 600 : 0) : -100,
-				Time.deltaTime * 15
-			)
-		);
+				Mathf.Lerp(
+					Rt.anchoredPosition.y,
+					Show ? (panelType != PanelType.None ? 600 : 0) : -100,
+					Time.deltaTime * 15
+				)
+			);
 		}
 
 
