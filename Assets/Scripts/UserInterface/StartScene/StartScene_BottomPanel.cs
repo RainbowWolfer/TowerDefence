@@ -10,19 +10,25 @@ using UnityEngine.UI;
 namespace TowerDefence.UserInterface.StartScene {
 	public class StartScene_BottomPanel: MonoBehaviour {
 		public RectTransform Rt => transform as RectTransform;
+		private StartScene_MiddlePanel MiddlePanel => StartSceneUI.Instance.MiddlePanel;
 
-		[SerializeField]
-		private StartScene_BottomPanelsMamagement panelsMamagement;
+
 		[SerializeField]
 		private SettingsPanel settingsPanel;
 
 		[Space]
 		[SerializeField]
 		private GameObject[] settingsButtonBackgrounds;
-		private bool isMouseOnSettingsButton;
+		public bool IsMouseOnSettingsButton { get; private set; }
+
 		[SerializeField]
 		private GameObject[] userButtonBackgrounds;
-		private bool isMouseOnUserButton;
+		public bool IsMouseOnUserButton { get; private set; }
+
+		[Space]
+		[SerializeField]
+		private GameObject background;
+		public bool IsMouseOnPanel { get; private set; }
 
 
 		[Space]
@@ -42,6 +48,7 @@ namespace TowerDefence.UserInterface.StartScene {
 		//public bool IsUserOpen { get; set; }
 
 		public PanelType panelType = PanelType.None;
+		public bool Show { get; set; }
 
 		private void Awake() {
 			settingsPanel.openPanelIndexes = new int[] { 1, 2 };
@@ -62,34 +69,37 @@ namespace TowerDefence.UserInterface.StartScene {
 			homepage.OnClick = () => {
 				Application.OpenURL("https://rainbowwolfer.github.io");
 			};
+
+			Show = true;
 		}
 
 		private void Update() {
-			isMouseOnSettingsButton = UIRayCaster.HasElements(settingsButtonBackgrounds);
-			isMouseOnUserButton = UIRayCaster.HasElements(userButtonBackgrounds);
+			IsMouseOnSettingsButton = UIRayCaster.HasElements(settingsButtonBackgrounds);
+			IsMouseOnUserButton = UIRayCaster.HasElements(userButtonBackgrounds);
+			IsMouseOnPanel = UIRayCaster.HasElement(background);
 
 			foreach(GameObject item in settingsButtonBackgrounds) {
 				if(item.TryGetComponent(out Image image)) {
-					image.color = Color.Lerp(image.color, isMouseOnSettingsButton ? Color.gray : Color.black, Time.deltaTime * 15);
+					image.color = Color.Lerp(image.color, IsMouseOnSettingsButton ? Color.gray : Color.black, Time.deltaTime * 15);
 				}
 			}
 			foreach(GameObject item in userButtonBackgrounds) {
 				if(item.TryGetComponent(out Image image)) {
-					image.color = Color.Lerp(image.color, isMouseOnUserButton ? Color.gray : Color.black, Time.deltaTime * 15);
+					image.color = Color.Lerp(image.color, IsMouseOnUserButton ? Color.gray : Color.black, Time.deltaTime * 15);
 				}
 			}
 
 			settingsText.text = panelType == PanelType.Settings ? "> Settings <" : "Settings";
 			userText.text = panelType == PanelType.User ? "> User <" : "User";
 
-			if(isMouseOnSettingsButton && Input.GetMouseButtonUp(0)) {
+			if(IsMouseOnSettingsButton && Input.GetMouseButtonUp(0)) {
 				if(panelType == PanelType.Settings) {
 					panelType = PanelType.None;
 				} else {
 					panelType = PanelType.Settings;
 				}
 			}
-			if(isMouseOnUserButton && Input.GetMouseButtonUp(0)) {
+			if(IsMouseOnUserButton && Input.GetMouseButtonUp(0)) {
 				if(panelType == PanelType.User) {
 					panelType = PanelType.None;
 				} else {
@@ -97,13 +107,22 @@ namespace TowerDefence.UserInterface.StartScene {
 				}
 			}
 
+			if(!IsMouseOnUserButton && !IsMouseOnSettingsButton && !IsMouseOnPanel && Input.GetMouseButtonUp(0) && panelType != PanelType.None) {
+				MiddlePanel.ResetDelayedActionTimer();
+				panelType = PanelType.None;
+			}
+
+			if(Input.GetKeyDown(KeyCode.Escape)) {
+				panelType = PanelType.None;
+			}
+
 			Rt.anchoredPosition = new Vector2(0,
-				Mathf.Lerp(
-					Rt.anchoredPosition.y,
-					panelType != PanelType.None ? 600 : 0,
-					Time.deltaTime * 15
-				)
-			);
+			Mathf.Lerp(
+				Rt.anchoredPosition.y,
+				Show ? (panelType != PanelType.None ? 600 : 0) : -100,
+				Time.deltaTime * 15
+			)
+		);
 		}
 
 

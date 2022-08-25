@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMPro;
+using TowerDefence.Scripts.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,9 @@ namespace TowerDefence.UserInterface.StartScene {
 
 		public bool IsMouseOn { get; set; }
 
+		public Range<Color> backgroundColorRange = new Range<Color>(new Color(0.65f, 0.65f, 0.65f), new Color(0.264f, 0.264f, 0.264f));
+		public Range<Color> foregroundColorRange = new Range<Color>(Color.black, Color.white);
+
 		private void Update() {
 			IsMouseOn = UIRayCaster.HasElement(background.gameObject);
 
@@ -34,11 +38,11 @@ namespace TowerDefence.UserInterface.StartScene {
 			}
 
 			background.color = Color.Lerp(background.color,
-				IsMouseOn ? new Color(0.65f, 0.65f, 0.65f) : new Color(0.264f, 0.264f, 0.264f),
+				IsMouseOn ? backgroundColorRange.from : backgroundColorRange.to,
 				Time.deltaTime * 15
 			);
 
-			text.color = Color.Lerp(text.color, IsMouseOn ? Color.black : Color.white, Time.deltaTime * 15);
+			text.color = Color.Lerp(text.color, IsMouseOn ? foregroundColorRange.from : foregroundColorRange.to, Time.deltaTime * 15);
 			if(icon != null) {
 				icon.color = text.color;
 			}
