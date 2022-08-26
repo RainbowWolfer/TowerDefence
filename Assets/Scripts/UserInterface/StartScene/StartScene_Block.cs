@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace TowerDefence.UserInterface.StartScene {
 	[ExecuteInEditMode]

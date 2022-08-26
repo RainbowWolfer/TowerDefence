@@ -64,7 +64,21 @@ namespace TowerDefence.UserInterface.StartScene {
 
 		public void RegisterNewUser(string username) {
 			Player.Current = new Player(username);
+			PlayerPrefs.SetString("UserJson", Player.ToJson());
 			StartPanels();
+		}
+
+		private void Update() {
+			if(Input.GetKeyDown(KeyCode.Delete)) {
+				PlayerPrefs.DeleteAll();
+			}
+			if(Player.Current != null) {
+				if(Input.GetKeyDown(KeyCode.Q)) {
+					Player.Current.diamond += 500;
+				} else if(Input.GetKeyDown(KeyCode.W)) {
+					Player.Current.diamond -= 40;
+				}
+			}
 		}
 
 		public void LoadMainScene() {

@@ -6,10 +6,14 @@ namespace TowerDefence.Local {
 	public class Player {
 		public static Player Current { get; set; }
 
-		public string name;
+		public string username;
+
+		public int diamond = 0;
+		public int rank = 1;
+		public Cards cards;
 
 		public Player(string name) {
-			this.name = name;
+			this.username = name;
 		}
 
 		public static string ToJson() {

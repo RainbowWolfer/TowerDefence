@@ -25,12 +25,19 @@ namespace TowerDefence.UserInterface.StartScene {
 			errorText.text = "";
 		}
 
+		private void Start() {
+			input.ActivateInputField();
+		}
+
 		private void Update() {
 			IsMouseOnInput = UIRayCaster.HasElement(inputBackground.gameObject);
 			inputBackground.color = Color.Lerp(inputBackground.color,
 				IsMouseOnInput ? new Color(1f, 1f, 1f) : new Color(0.063f, 0.65f, 1f),
 			Time.deltaTime * 15);
 
+			if(Input.GetKeyUp(KeyCode.Return)) {
+				OnConfirmInput();
+			}
 		}
 
 		public string GetText() => input.text.Trim();

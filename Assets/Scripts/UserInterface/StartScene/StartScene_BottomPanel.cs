@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,12 +36,17 @@ namespace TowerDefence.UserInterface.StartScene {
 		[SerializeField]
 		private AboutDetailButton homepage;
 
+		[Space]
+		[SerializeField]
+		private HorizontalScroll userCardsScroll;
+
 		//[field: Space]
 		//[field: SerializeField]
 		//public bool IsSettingsOpen { get; set; }
 		//[field: SerializeField]
 		//public bool IsUserOpen { get; set; }
 
+		[Space]
 		public PanelType panelType = PanelType.None;
 		public bool Show { get; set; }
 
@@ -119,6 +119,8 @@ namespace TowerDefence.UserInterface.StartScene {
 			if(Input.GetKeyDown(KeyCode.Escape)) {
 				panelType = PanelType.None;
 			}
+
+			userCardsScroll.EnableScroll = panelType == PanelType.User;
 
 			Rt.anchoredPosition = new Vector2(0,
 				Mathf.Lerp(

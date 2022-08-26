@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TowerDefence.Local {
+	[Serializable]
+	public class Cards {
+		public CardInfo emplacementsCooldown;
+		public CardInfo towerDamage;
+		public CardInfo upgradePrice;
+		public CardInfo buyPrice;
+		public CardInfo sellPrice;
+		public CardInfo shovelPrice;
+		public CardInfo shovelTools;
+		public CardInfo passiveCash;
+		public CardInfo cashEarnedMultiplier;
+		public CardInfo diamondChances;
+		public CardInfo diamondAmount;
+		public CardInfo diamondUpgradePrice;
+	}
+
+	[Serializable]
+	public class CardInfo {
+		public int currentLevel;
+		public int cardsCount;
+	}
+}
