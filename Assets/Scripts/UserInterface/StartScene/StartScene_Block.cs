@@ -32,6 +32,7 @@ namespace TowerDefence.UserInterface.StartScene {
 		public bool IsMouseOn { get; set; }
 
 		public string text;
+		public Action OnStart;
 
 
 		private Vector2 cv1;
@@ -44,6 +45,7 @@ namespace TowerDefence.UserInterface.StartScene {
 				Open = false;
 			};
 			playButton.OnClick = () => {
+				OnStart?.Invoke();
 				StartSceneUI.Instance.LoadMainScene();
 			};
 		}
