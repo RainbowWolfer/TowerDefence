@@ -37,7 +37,9 @@ namespace TowerDefence.UserInterface.StartScene {
 		}
 
 		private void Update() {
+			//just make the children layout keep updating
 			ScrollRt.sizeDelta = new Vector2(Mathf.Sin(Time.time), 0);
+
 			//animation
 			ScrollRt.anchoredPosition = new Vector2(
 				Mathf.SmoothDamp(

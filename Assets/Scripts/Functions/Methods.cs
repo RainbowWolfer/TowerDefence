@@ -58,5 +58,16 @@ namespace TowerDefence.Functions {
 			result = component.GetComponentInParent<T>();
 			return result != null;
 		}
+
+		public static string Format(this string raw, params object[] args) {
+			if(string.IsNullOrWhiteSpace(raw)) {
+				return raw;
+			}
+			string result = raw;
+			for(int i = 0; i < args.Length; i++) {
+				result = result.Replace("{{" + i + "}}", args[i].ToString());
+			}
+			return result;
+		}
 	}
 }

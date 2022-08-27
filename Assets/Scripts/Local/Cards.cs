@@ -19,6 +19,8 @@ namespace TowerDefence.Local {
 		public CardInfo diamondChances;
 		public CardInfo diamondAmount;
 		public CardInfo diamondUpgradePrice;
+		public CardInfo cardsEarnedChances;
+		public CardInfo cardsEarnedAmount;
 	}
 
 	[Serializable]

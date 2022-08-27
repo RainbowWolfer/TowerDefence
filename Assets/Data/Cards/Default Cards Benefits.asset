@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emplacementCooldown:
     type: 0
-    startValue: 1
-    slopeEachLevel: -0.01
+    startBenefit: 1
+    slopeBenefit: -0.01
     maxLevel: 50
     startDiamondCost: 4
     slopeDiamondCost: 2
@@ -26,10 +26,185 @@ MonoBehaviour:
 
       {{0}} ({{1}})'
     descriptions: []
+  towerDamage:
+    type: 0
+    startBenefit: 1
+    slopeBenefit: 0.01
+    maxLevel: 100
+    startDiamondCost: 4
+    slopeDiamondCost: 2
+    exponentDiamondCost: 1
+    startCardsCount: 2
+    slopeCardsCount: 2
+    description: 'Increase All Towers Damage
+
+      {{0}} ({{1}})'
+    descriptions: []
+  upgradePrice:
+    type: 0
+    startBenefit: 1
+    slopeBenefit: -0.03
+    maxLevel: 10
+    startDiamondCost: 2
+    slopeDiamondCost: 2
+    exponentDiamondCost: 2
+    startCardsCount: 5
+    slopeCardsCount: 5
+    description: 'Reduce Upgrade Price Of All Towers
+
+      {{0}} ({{1}})'
+    descriptions: []
+  buyPrice:
+    type: 0
+    startBenefit: 1
+    slopeBenefit: -0.01
+    maxLevel: 20
+    startDiamondCost: 2
+    slopeDiamondCost: 2
+    exponentDiamondCost: 2
+    startCardsCount: 4
+    slopeCardsCount: 4
+    description: 'Reduce Buy Price Of All Towers
+
+      {{0}} ({{1}})'
+    descriptions: []
+  sellPrice:
+    type: 0
+    startBenefit: 1
+    slopeBenefit: 0.02
+    maxLevel: 20
+    startDiamondCost: 3
+    slopeDiamondCost: 3
+    exponentDiamondCost: 2
+    startCardsCount: 5
+    slopeCardsCount: 4
+    description: 'Increase Sell Price Of All Towers
+
+      {{0}} ({{1}})'
+    descriptions: []
+  shovelPrice:
+    type: 0
+    startBenefit: 1
+    slopeBenefit: -0.05
+    maxLevel: 10
+    startDiamondCost: 6
+    slopeDiamondCost: 6
+    exponentDiamondCost: 1
+    startCardsCount: 3
+    slopeCardsCount: 3
+    description: 'Reduce All Shovel Price
+
+      {{0}} ({{1}})'
+    descriptions: []
   shovelTools:
     type: 1
-    startValue: 0
-    slopeEachLevel: 0
+    startBenefit: 0
+    slopeBenefit: 0
+    maxLevel: 3
+    startDiamondCost: 2
+    slopeDiamondCost: 2
+    exponentDiamondCost: 1
+    startCardsCount: 2
+    slopeCardsCount: 2
+    description: 
+    descriptions:
+    - (Unlock Quick Shovel Tool 3x3)
+    - 'Quick Shovel Tool Size 3x3
+
+      (Upgrade To 4x4)'
+    - 'Quick Shovel Tool Size 4x4
+
+      (Upgrade To 5x5)'
+    - Quick Shovel Tool Size (5x5)
+  passiveCash:
+    type: 2
+    startBenefit: 0
+    slopeBenefit: 5
+    maxLevel: 30
+    startDiamondCost: 5
+    slopeDiamondCost: 5
+    exponentDiamondCost: 1
+    startCardsCount: 2
+    slopeCardsCount: 4
+    description: 'Increase Cash Earned Overtime
+
+      {{0}} ({{1}})'
+    descriptions: []
+  cashEarnedMultiplier:
+    type: 0
+    startBenefit: 1
+    slopeBenefit: 0.01
+    maxLevel: 50
+    startDiamondCost: 10
+    slopeDiamondCost: 1
+    exponentDiamondCost: 1
+    startCardsCount: 4
+    slopeCardsCount: 4
+    description: 'Increase All Cash Earned
+
+      {{0}} ({{1}})'
+    descriptions: []
+  diamondChances:
+    type: 0
+    startBenefit: 0.1
+    slopeBenefit: 0.02
+    maxLevel: 40
+    startDiamondCost: 4
+    slopeDiamondCost: 4
+    exponentDiamondCost: 1
+    startCardsCount: 5
+    slopeCardsCount: 5
+    description: 'Increase Diamond Drop Chance when killed elite enemies
+
+      {{0}}
+      {{1}}'
+    descriptions: []
+  diamondAmount:
+    type: 0
+    startBenefit: 1
+    slopeBenefit: 0.05
+    maxLevel: 20
+    startDiamondCost: 6
+    slopeDiamondCost: 2
+    exponentDiamondCost: 1
+    startCardsCount: 4
+    slopeCardsCount: 2
+    description: 'Increase Diamond Drop Amount
+
+      {{0}} {{1}}'
+    descriptions: []
+  diamondUpgradePrice:
+    type: 0
+    startBenefit: 1
+    slopeBenefit: -0.03
+    maxLevel: 15
+    startDiamondCost: 10
+    slopeDiamondCost: 10
+    exponentDiamondCost: 1
+    startCardsCount: 10
+    slopeCardsCount: 2
+    description: 'Reduce Diamonds Requiared to buy a card
+
+      {{0}} {{1}}'
+    descriptions: []
+  cardsEarnedChances:
+    type: 0
+    startBenefit: 1
+    slopeBenefit: 0.1
+    maxLevel: 10
+    startDiamondCost: 0
+    slopeDiamondCost: 0
+    exponentDiamondCost: 0
+    startCardsCount: 0
+    slopeCardsCount: 0
+    description: 'Increase cards drop chance when defeating levels
+
+      {{0}} {{1}}'
+    descriptions: []
+  cardsEarnedAmount:
+    type: 0
+    startBenefit: 0
+    slopeBenefit: 0
     maxLevel: 0
     startDiamondCost: 0
     slopeDiamondCost: 0
@@ -37,8 +212,4 @@ MonoBehaviour:
     startCardsCount: 0
     slopeCardsCount: 0
     description: 
-    descriptions:
-    - Unlock Quick Shovel Tool (2x2)
-    - Upgrade Tool Size To 3x3
-    - Upgrade Tool Size To 4x4
-    - Upgrade Tool Size To 5x5
+    descriptions: []

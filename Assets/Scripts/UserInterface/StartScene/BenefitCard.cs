@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMPro;
+using TowerDefence.Functions;
 using TowerDefence.Local;
 using TowerDefence.Scripts.Data;
 using UnityEngine;
@@ -118,8 +119,21 @@ namespace TowerDefence.UserInterface.StartScene {
 			}
 			int level = CardInfo.currentLevel;
 			switch(Data.type) {
+				case CardsBenefits.CurveType.Number: {
+					string current = $"{Data.GetBenefit(level)}";
+					string sign = Data.slopeBenefit > 0 ? "+" : "";
+					string next = $"{sign}{Data.slopeBenefit}";
+					description.text = Data.description.Format(current, next);
+					levelNumber.gameObject.SetActive(true);
+					dots.gameObject.SetActive(false);
+					levelNumber.text = $"X{level}";
+				}
+				break;
 				case CardsBenefits.CurveType.Percentage: {
-					description.text = Data.description;
+					string current = $"{Data.GetBenefit(level) * 100}%";
+					string sign = Data.slopeBenefit > 0 ? "+" : "";
+					string next = $"{sign}{Data.slopeBenefit * 100}%";
+					description.text = Data.description.Format(current, next);
 					levelNumber.gameObject.SetActive(true);
 					dots.gameObject.SetActive(false);
 					levelNumber.text = $"X{level}";
@@ -136,33 +150,41 @@ namespace TowerDefence.UserInterface.StartScene {
 					throw new Exception($"New type ({Data.type}) not implemented");
 			}
 
+			if(level < Data.maxLevel) {
 
-			int diamondsCost = Data.GetDiamondCost(level);
-			buy.SetText(diamondsCost);
-			if(Player.Current.diamond < diamondsCost) {
-				buy.foregroundColorRange.from = Color.red;
-				buy.foregroundColorRange.to = Color.red;
-			} else {
-				buy.foregroundColorRange.from = Color.black;
-				buy.foregroundColorRange.to = Color.white;
-			}
 
-			int cardsMax = Data.GetCardsCount(level);
-			progressText.text = $"{CardInfo.cardsCount} / {cardsMax}";
-			if(CardInfo.cardsCount < cardsMax) {
-				buy.gameObject.SetActive(true);
-				upgrade.gameObject.SetActive(false);
+				int diamondsCost = Data.GetDiamondCost(level);
+				buy.SetText(diamondsCost);
+				if(Player.Current.diamond < diamondsCost) {
+					buy.foregroundColorRange.from = Color.red;
+					buy.foregroundColorRange.to = Color.red;
+				} else {
+					buy.foregroundColorRange.from = Color.black;
+					buy.foregroundColorRange.to = Color.white;
+				}
+
+				int cardsMax = Data.GetCardsCount(level);
+				progressText.text = $"{CardInfo.cardsCount} / {cardsMax}";
+				if(CardInfo.cardsCount < cardsMax) {
+					buy.gameObject.SetActive(true);
+					upgrade.gameObject.SetActive(false);
+				} else {
+					buy.gameObject.SetActive(false);
+					upgrade.gameObject.SetActive(true);
+				}
+
+				progressFiller.fillAmount = Mathf.SmoothDamp(
+					progressFiller.fillAmount,
+					CardInfo.cardsCount / (float)cardsMax,
+					ref cv2, 0.1f
+				);
+
 			} else {
 				buy.gameObject.SetActive(false);
-				upgrade.gameObject.SetActive(true);
+				upgrade.gameObject.SetActive(false);
+				progressText.text = "MAX";
+				progressFiller.fillAmount = 1;
 			}
-
-			progressFiller.fillAmount = Mathf.SmoothDamp(
-				progressFiller.fillAmount,
-				CardInfo.cardsCount / (float)cardsMax,
-				ref cv2, 0.1f
-			);
-
 
 		}
 

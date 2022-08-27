@@ -20,20 +20,25 @@ namespace TowerDefence.UserInterface.StartScene {
 
 
 		[Header("Cards")]
+		[Header("Towers")]
 		public BenefitCard emplacementCoolDown;
 		public BenefitCard towerDamage;
 		public BenefitCard upgradePrice;
 		public BenefitCard buyPrice;
-
 		public BenefitCard sellPrice;
+		[Header("Environments")]
 		public BenefitCard shovelPrice;
 		public BenefitCard shovelTools;
+		[Header("Cards")]
+		public BenefitCard cardsEarnedChances;
+		public BenefitCard cardsEarnedAmount;
+		[Header("Finances")]
 		public BenefitCard passiveCash;
-
 		public BenefitCard cashEarnedMultiplier;
 		public BenefitCard diamondChances;
 		public BenefitCard diamondAmount;
 		public BenefitCard diamondUpgradePrice;
+
 
 		public BenefitCard[] AllCards { get; private set; }
 
@@ -54,6 +59,8 @@ namespace TowerDefence.UserInterface.StartScene {
 				diamondChances,
 				diamondAmount,
 				diamondUpgradePrice,
+				cardsEarnedChances,
+				cardsEarnedAmount,
 			};
 
 			foreach(BenefitCard item in AllCards) {
@@ -73,9 +80,24 @@ namespace TowerDefence.UserInterface.StartScene {
 			cashEarnedMultiplier.SetTitle("Cash Multiplier");
 			diamondChances.SetTitle("Diamond Chances");
 			diamondAmount.SetTitle("Diamond Amount");
-			diamondUpgradePrice.SetTitle("Card Price");
+			diamondUpgradePrice.SetTitle("Diamond Upgrade Price");
+			cardsEarnedChances.SetTitle("Cards Chance");
+			cardsEarnedAmount.SetTitle("Cards Amount");
 
 			emplacementCoolDown.Data = Datas.emplacementCooldown;
+			towerDamage.Data = Datas.towerDamage;
+			upgradePrice.Data = Datas.upgradePrice;
+			buyPrice.Data = Datas.buyPrice;
+			sellPrice.Data = Datas.sellPrice;
+			shovelPrice.Data = Datas.shovelPrice;
+			shovelTools.Data = Datas.shovelTools;
+			passiveCash.Data = Datas.passiveCash;
+			cashEarnedMultiplier.Data = Datas.cashEarnedMultiplier;
+			diamondChances.Data = Datas.diamondChances;
+			diamondAmount.Data = Datas.diamondAmount;
+			diamondUpgradePrice.Data = Datas.diamondUpgradePrice;
+			cardsEarnedChances.Data = Datas.cardsEarnedChances;
+			cardsEarnedAmount.Data = Datas.cardsEarnedAmount;
 		}
 
 		private void Update() {
@@ -95,6 +117,8 @@ namespace TowerDefence.UserInterface.StartScene {
 			diamondChances.CardInfo = PlayerCards.diamondChances;
 			diamondAmount.CardInfo = PlayerCards.diamondAmount;
 			diamondUpgradePrice.CardInfo = PlayerCards.diamondUpgradePrice;
+			cardsEarnedChances.CardInfo = PlayerCards.cardsEarnedChances;
+			cardsEarnedAmount.CardInfo = PlayerCards.cardsEarnedAmount;
 
 		}
 

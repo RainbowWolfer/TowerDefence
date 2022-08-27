@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TowerDefence.Local;
 using UnityEngine;
 
 namespace TowerDefence.Scripts.Data {
@@ -10,23 +11,20 @@ namespace TowerDefence.Scripts.Data {
 	[CreateAssetMenu(fileName = "Cards Benefits", menuName = "Data/Cards Benefits")]
 	[Serializable]
 	public class CardsBenefits: ScriptableObject {
-		/**
-			emplacementsCooldown;
-			towerDamage;
-			upgradePrice;
-			buyPrice;
-			sellPrice;
-			shovelPrice;
-			shovelTools;
-			passiveCash;
-			cashEarnedMultiplier;
-			diamondChances;
-			diamondAmount;
-			diamondUpgradePrice;
-		*/
-
 		public CardData emplacementCooldown;
+		public CardData towerDamage;
+		public CardData upgradePrice;
+		public CardData buyPrice;
+		public CardData sellPrice;
+		public CardData shovelPrice;
 		public CardData shovelTools;
+		public CardData passiveCash;
+		public CardData cashEarnedMultiplier;
+		public CardData diamondChances;
+		public CardData diamondAmount;
+		public CardData diamondUpgradePrice;
+		public CardData cardsEarnedChances;
+		public CardData cardsEarnedAmount;
 
 
 		[Serializable]
@@ -34,10 +32,10 @@ namespace TowerDefence.Scripts.Data {
 			public CurveType type;
 
 			[Header("Benefits")]
-			public float startValue;
-			public float slopeEachLevel;
+			public float startBenefit;
+			public float slopeBenefit;
 			public int maxLevel;
-			public float EdgeValue => startValue + slopeEachLevel * maxLevel;
+			public float EdgeValue => startBenefit + slopeBenefit * maxLevel;
 
 			[Header("Diamond")]
 			public int startDiamondCost;
@@ -68,12 +66,12 @@ namespace TowerDefence.Scripts.Data {
 
 			public float GetBenefit(int level) {
 				level = Mathf.Clamp(level, 0, maxLevel);
-				return startValue + slopeEachLevel * level;
+				return startBenefit + slopeBenefit * level;
 			}
 		}
 
 		public enum CurveType {
-			Percentage, Fixed
+			Percentage, Fixed, Number
 		}
 	}
 }
