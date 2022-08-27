@@ -77,6 +77,8 @@ namespace TowerDefence.UserInterface.StartScene {
 					Player.Current.diamond += 500;
 				} else if(Input.GetKeyDown(KeyCode.W)) {
 					Player.Current.diamond -= 40;
+				} else if(Input.GetKeyDown(KeyCode.E)) {
+					Player.Current.cards.emplacementsCooldown.cardsCount += 40;
 				}
 			}
 		}

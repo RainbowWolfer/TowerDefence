@@ -31,7 +31,14 @@ namespace TowerDefence.UserInterface.StartScene {
 		private CanvasGroup canvas;
 
 		[Space]
-		public RectTransform[] panels;
+		[SerializeField]
+		private StartScene_Block tutorial;
+		[SerializeField]
+		private StartScene_Block campaign;
+		[SerializeField]
+		private StartScene_Block endless;
+		public StartScene_Block[] Panels { get; private set; }
+
 
 		[Space]
 		public int index;
@@ -62,9 +69,19 @@ namespace TowerDefence.UserInterface.StartScene {
 
 		private float timeDelayedAction;
 
+		private void Awake() {
+			Panels = new StartScene_Block[] { tutorial, campaign, endless };
+			foreach(StartScene_Block item in Panels) {
+				item.Open = false;
+			}
+			tutorial.text = "Tutorial";
+			campaign.text = "Campaign";
+			endless.text = "Endless";
+		}
+
 		private void Start() {
 			mouseOnIndex = -1;
-			foreach(var _ in panels) {
+			foreach(var _ in Panels) {
 				cvs.Add(new CV());
 			}
 
@@ -76,8 +93,8 @@ namespace TowerDefence.UserInterface.StartScene {
 				Rt.anchoredPosition3D.y,
 				-1000
 			);
-			foreach(RectTransform item in panels) {
-				item.GetComponent<CanvasGroup>().alpha = 0;
+			foreach(StartScene_Block item in Panels) {
+				item.Canvas.alpha = 0;
 			}
 		}
 
@@ -108,11 +125,11 @@ namespace TowerDefence.UserInterface.StartScene {
 			);
 
 			//panels movements
-			for(int i = 0; i < panels.Length; i++) {
+			for(int i = 0; i < Panels.Length; i++) {
 				int offset = i - index;
-				RectTransform item = panels[i];
-				CanvasGroup canvas = item.GetComponent<CanvasGroup>();
-				StartScene_Block block = item.GetComponent<StartScene_Block>();
+				StartScene_Block block = Panels[i];
+				RectTransform item = block.Rt;
+				CanvasGroup canvas = block.Canvas;
 
 				item.anchoredPosition3D = new Vector3(
 					Mathf.SmoothDamp(
@@ -168,7 +185,7 @@ namespace TowerDefence.UserInterface.StartScene {
 				if(IsMouseOnMiddle) {
 					mouseOnIndex = index;
 					if(OnMouseClick) {
-						panels[index].GetComponent<StartScene_Block>().Open = true;
+						Panels[index].Open = true;
 						BottomPanel.Show = false;
 					}
 				} else {
@@ -197,14 +214,13 @@ namespace TowerDefence.UserInterface.StartScene {
 			} else if(Input.GetKeyDown(KeyCode.RightArrow)) {
 				index++;
 			}
-			index = Mathf.Clamp(index, 0, panels.Length - 1);
+			index = Mathf.Clamp(index, 0, Panels.Length - 1);
 
 		}
 
 		private bool HasPanelOpen() {
-			foreach(RectTransform item in panels) {
-				var block = item.GetComponent<StartScene_Block>();
-				if(block.Open) {
+			foreach(StartScene_Block item in Panels) {
+				if(item.Open) {
 					return true;
 				}
 			}
@@ -213,9 +229,8 @@ namespace TowerDefence.UserInterface.StartScene {
 
 		private void QuitOpen() {
 			BottomPanel.Show = true;
-			foreach(RectTransform item in panels) {
-				var block = item.GetComponent<StartScene_Block>();
-				block.Open = false;
+			foreach(StartScene_Block item in Panels) {
+				item.Open = false;
 			}
 		}
 

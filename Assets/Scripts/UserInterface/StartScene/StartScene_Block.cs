@@ -14,6 +14,8 @@ namespace TowerDefence.UserInterface.StartScene {
 		private StartScene_MiddlePanel MiddlePanel => StartSceneUI.Instance.MiddlePanel;
 		private StartScene_BottomPanel BottomPanel => StartSceneUI.Instance.BottomPanel;
 
+		[field: SerializeField]
+		public CanvasGroup Canvas { get; private set; }
 		[SerializeField]
 		private TextMeshProUGUI bottomText;
 		[SerializeField]
@@ -72,7 +74,7 @@ namespace TowerDefence.UserInterface.StartScene {
 				ref cv1, 0.1f
 			);
 
-
+			bottomText.text = text;
 
 			if(Open) {
 				//action for inner content

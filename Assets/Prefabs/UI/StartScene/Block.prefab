@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c43276139d6bef4a833ba2d6f2db6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Canvas>k__BackingField: {fileID: 601437408991757638}
   bottomText: {fileID: 601437410413377467}
   imageMask: {fileID: 601437409670817706}
   backButton: {fileID: 8845663605134868837}

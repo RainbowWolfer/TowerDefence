@@ -122,7 +122,7 @@ namespace TowerDefence.UserInterface.StartScene {
 				case CardsBenefits.CurveType.Number: {
 					string current = $"{Data.GetBenefit(level)}";
 					string sign = Data.slopeBenefit > 0 ? "+" : "";
-					string next = $"{sign}{Data.slopeBenefit}";
+					string next = level < Data.maxLevel ? $"{sign}{Data.slopeBenefit}" : "MAX";
 					description.text = Data.description.Format(current, next);
 					levelNumber.gameObject.SetActive(true);
 					dots.gameObject.SetActive(false);
@@ -132,7 +132,7 @@ namespace TowerDefence.UserInterface.StartScene {
 				case CardsBenefits.CurveType.Percentage: {
 					string current = $"{Data.GetBenefit(level) * 100}%";
 					string sign = Data.slopeBenefit > 0 ? "+" : "";
-					string next = $"{sign}{Data.slopeBenefit * 100}%";
+					string next = level < Data.maxLevel ? $"{sign}{Data.slopeBenefit * 100}%" : "MAX";
 					description.text = Data.description.Format(current, next);
 					levelNumber.gameObject.SetActive(true);
 					dots.gameObject.SetActive(false);
