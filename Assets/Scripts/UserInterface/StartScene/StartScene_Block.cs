@@ -38,7 +38,7 @@ namespace TowerDefence.UserInterface.StartScene {
 		private Vector2 cv1;
 		private Vector2 cv2;
 
-		private void Awake() {
+		protected virtual void Awake() {
 			backButton.OnClick = () => {
 				MiddlePanel.ResetDelayedActionTimer();
 				BottomPanel.Show = true;
@@ -50,7 +50,7 @@ namespace TowerDefence.UserInterface.StartScene {
 			};
 		}
 
-		private void Update() {
+		protected virtual void Update() {
 			Vector2 targetSize;
 			Vector2 thumbnailSize;
 			if(Open) {
