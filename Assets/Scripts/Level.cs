@@ -47,6 +47,9 @@ namespace TowerDefence {
 			}
 		}
 
+		public int Power { get; set; }
+
+
 		public void Initialize(MapInfo map) {
 			this.map = map;
 			DrawMap();
