@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -21,6 +22,8 @@ namespace TowerDefence.UserInterface {
 		private Sprite icon_fund;
 		[SerializeField]
 		private Sprite icon_diamond;
+		[SerializeField]
+		private Sprite icon_powers;
 
 		private void Awake() {
 			Instance = this;
@@ -77,7 +80,7 @@ namespace TowerDefence.UserInterface {
 			if(Instance == null) {
 				return;
 			}
-			Instance.Add("Insufficient Fund", Instance.icon_fund, new Color(1, 0, 0, 0.3f));
+			Instance.Add("Insufficient Fund", Instance.icon_fund, new Color(1, 0.6f, 0, 0.3f));
 		}
 
 		//public static void TowerLevelUp() {
@@ -92,6 +95,13 @@ namespace TowerDefence.UserInterface {
 				return;
 			}
 			Instance.Add($"Diamonds Earned : {amount}", Instance.icon_diamond, new Color(0, 0.85f, 1, 0.3f));
+		}
+
+		public static void LowPowers() {
+			if(Instance == null) {
+				return;
+			}
+			Instance.Add($"Low Power", Instance.icon_powers, new Color(1, 0, 0, 0.3f));
 		}
 	}
 }

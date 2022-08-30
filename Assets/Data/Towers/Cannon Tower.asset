@@ -21,8 +21,8 @@ MonoBehaviour:
   price: 200
   upgradePrice: 500
   shovelPrice: 200
-  powers: -1
-  upgradedPowers: -3
+  powers: -3
+  upgradedPowers: -5
   star1Exp: 1000
   star2Exp: 3000
   star3Exp: 6000

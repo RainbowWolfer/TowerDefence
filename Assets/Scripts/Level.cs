@@ -51,12 +51,17 @@ namespace TowerDefence {
 		public int MaxPowers { get; set; }
 
 		public bool PowerSufficient => CurrentPowers <= MaxPowers;
+		public bool HasShownNotification { get; set; }
 
 
 		public void Initialize(MapInfo map) {
 			this.map = map;
 			DrawMap();
 			Cash = 1000;
+		}
+
+		private void Awake() {
+			HasShownNotification = false;
 		}
 
 		private void Update() {
@@ -66,6 +71,14 @@ namespace TowerDefence {
 				Cash += 100;
 			}
 			(CurrentPowers, MaxPowers) = CalculatePowers();
+			if(!PowerSufficient) {
+				if(!HasShownNotification) {
+					NotificationPanel.LowPowers();
+				}
+				HasShownNotification = true;
+			} else {
+				HasShownNotification = false;
+			}
 		}
 
 

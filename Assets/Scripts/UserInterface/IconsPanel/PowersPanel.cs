@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
 
 namespace TowerDefence.UserInterface {
 	public class PowersPanel: MonoBehaviour {
