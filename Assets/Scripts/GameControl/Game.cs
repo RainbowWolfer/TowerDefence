@@ -182,7 +182,7 @@ namespace TowerDefence {
 
 		public static Vector3 GetMousePosition() {
 			Ray ray = CameraController.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
-			if(Physics.Raycast(ray, out RaycastHit hit, 100, ~LayerMask.GetMask("UI"))) {
+			if(Physics.Raycast(ray, out RaycastHit hit, 100, LayerMask.GetMask("Ground"))) {
 				return hit.point;
 			}
 			return new Vector3(int.MinValue, int.MinValue);

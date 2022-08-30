@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1850f629360f584aa26ea112b2b5b80, type: 3}
-  m_Name: Storm Generator
+  m_Name: Nuclear PowerPlant
   m_EditorClassIdentifier: 
-  id: 7
-  prefab: {fileID: 7240353841431022235, guid: 2e3f873440b1b3d4aa3dc258179bf79f, type: 3}
+  id: 9
+  prefab: {fileID: 8091210357887968709, guid: a8296d8da7b4d464fb69984986dbc0f2, type: 3}
   icon: {fileID: 0}
-  size: {x: 3, y: 3}
-  height: 2.2
+  size: {x: 4, y: 4}
+  height: 2.5
   upgradable: 1
   price: 0
   upgradePrice: 0
   shovelPrice: 0
-  powers: -10
-  upgradedPowers: -15
+  powers: 150
+  upgradedPowers: 300
   star1Exp: 1000
   star2Exp: 3000
   star3Exp: 6000

@@ -11,6 +11,7 @@ namespace TowerDefence.Functions {
 			Interval = interval;
 			RandomRange = range;
 		}
+
 		public LoopTimer(float interval, float from, float to) {
 			Interval = interval;
 			RandomRange = new Range<float>(from, to);

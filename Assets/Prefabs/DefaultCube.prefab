@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5281180859571796616}
   - component: {fileID: 5281180859571796617}
   - component: {fileID: -4615632794835161027}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DefaultCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,6 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a41fb1e7f45dba4b8d9e1964d7adfa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  info: {fileID: 0}
+  coord: {x: 0, y: 0}
   rotationParent: {fileID: 0}
   axis: {x: 0, y: 0, z: 0}
   enableRandomRotationOnStart: 0

@@ -47,7 +47,10 @@ namespace TowerDefence {
 			}
 		}
 
-		public int Power { get; set; }
+		public int CurrentPowers { get; set; }
+		public int MaxPowers { get; set; }
+
+		public bool PowerSufficient => CurrentPowers <= MaxPowers;
 
 
 		public void Initialize(MapInfo map) {
@@ -62,6 +65,7 @@ namespace TowerDefence {
 			} else if(Input.GetKeyDown(KeyCode.Y)) {
 				Cash += 100;
 			}
+			(CurrentPowers, MaxPowers) = CalculatePowers();
 		}
 
 
@@ -233,7 +237,7 @@ namespace TowerDefence {
 			var p = obj.GetComponent<Placement>();
 			p.info = info;
 			p.coord = new Vector2Int(x, y);
-			obj.name = $"OBJ({id}) ({x},{y})";
+			obj.name = $"{info.TowerName} ({id}) ({x},{y})";
 			obj.transform.localPosition = new Vector3(x, -0.3f, y);
 			return obj;
 		}
@@ -301,6 +305,34 @@ namespace TowerDefence {
 			foreach(GameObject item in list) {
 				Destroy(item);
 			}
+		}
+
+		private (int current, int powers) CalculatePowers() {
+			int current = 0;
+			int powers = 0;
+
+			List<GameObject> objs = new List<GameObject>();
+
+			foreach(GameObject go in pool.Values) {
+				if(objs.Contains(go)) {
+					continue;
+				} else {
+					objs.Add(go);
+				}
+				if(!go.TryGetComponent(out FieldPlacement field)) {
+					continue;
+				}
+				TowerInfo info = field.info;
+				int p = field.IsUpgraded ? info.upgradedPowers : info.powers;
+				if(p > 0) {
+					powers += p;
+				} else if(p < 0) {
+					current += Mathf.Abs(p);
+				} else {
+					continue;
+				}
+			}
+			return (current, powers);
 		}
 	}
 }

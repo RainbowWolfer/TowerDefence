@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4032069849945576483}
   - component: {fileID: 1133834987112776428}
   - component: {fileID: 1429092956}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: APC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,12 +52,11 @@ MonoBehaviour:
   index: 0
   offset: {x: 0, y: 0, z: 0}
   randomOffsetLimit: {x: 0.2, y: 0.2}
+  speedMultiplier: 1
   healthBarHeight: 0.4
   healthBarSize: {x: 0, y: 0}
   <Health>k__BackingField: 0
   <MaxHealth>k__BackingField: 0
-  carriedCubes: 0
-  carriedRobots: 0
 --- !u!114 &1429092956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,9 +122,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6421364631882472010, guid: 1355990e782d58444bd1c62df42e44db, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1355990e782d58444bd1c62df42e44db, type: 3}
       propertyPath: m_Name
       value: Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1355990e782d58444bd1c62df42e44db, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 951636146637939270, guid: 1355990e782d58444bd1c62df42e44db, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1355990e782d58444bd1c62df42e44db, type: 3}

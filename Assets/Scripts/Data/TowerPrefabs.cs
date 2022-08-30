@@ -11,6 +11,7 @@ namespace TowerDefence.Data {
 		public TowerInfo defaultCube;
 
 		[Space]
+		[Header("Towers")]
 		public TowerInfo cannonTower;
 		public TowerInfo lightningTower;
 		public TowerInfo laserTower;
@@ -19,8 +20,12 @@ namespace TowerDefence.Data {
 		public TowerInfo artilleryTower;
 
 		[Space]
+		[Header("Emplacements")]
 		public TowerInfo stormGeneratorEmplacement;
+		public TowerInfo windPowerPlant;
+		public TowerInfo nuclearPowerPlant;
 
+		[Header("Environments")]
 		[Space]
 		public TowerInfo oakTree;
 		public TowerInfo firTree;
@@ -46,6 +51,8 @@ namespace TowerDefence.Data {
 				5 => missileTower,
 				6 => artilleryTower,
 				7 => stormGeneratorEmplacement,
+				8 => windPowerPlant,
+				9 => nuclearPowerPlant,
 				_ => throw new Exception($"Tower ID({id}) is not found"),
 			};
 			target.id = id;

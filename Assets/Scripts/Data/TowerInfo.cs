@@ -19,8 +19,10 @@ namespace TowerDefence.Data {
 		[Space]
 		public Vector2Int size = new Vector2Int(1, 1);
 		public float height = 1f;
+
 		[Space]
 		public bool upgradable = true;
+
 		[Space]
 		public int price;
 		public int upgradePrice;
@@ -28,6 +30,10 @@ namespace TowerDefence.Data {
 		public int UpgradedSellPrice => upgradePrice / 2;
 
 		public int shovelPrice;//only used for environment cubes
+
+		[Space]
+		public int powers;
+		public int upgradedPowers;
 
 		[Space]
 		public float star1Exp = 1000;

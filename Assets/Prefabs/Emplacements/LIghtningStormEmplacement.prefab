@@ -587,7 +587,8 @@ GameObject:
   - component: {fileID: 6575415210422356804}
   - component: {fileID: 2503369014964764122}
   - component: {fileID: 6321872112112754949}
-  m_Layer: 0
+  - component: {fileID: 9161206721033001072}
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,6 +658,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &9161206721033001072
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7149443693004359086}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 2.9999995, z: 0.9999999}
+  m_Center: {x: -1, y: 0.9999999, z: 0}
 --- !u!1 &7240353841431022235
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,7 +682,7 @@ GameObject:
   - component: {fileID: 8012246620237320225}
   - component: {fileID: 3067093494884374828}
   m_Layer: 0
-  m_Name: LIghtningStormEmplacement
+  m_Name: LightningStormEmplacement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
