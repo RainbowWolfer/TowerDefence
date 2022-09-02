@@ -60,6 +60,8 @@ MonoBehaviour:
   fill4: {fileID: 6950007619397452534}
   fill5: {fileID: 6508190779465659914}
   data: 4
+  upgradeData: 0
+  upgraded: 0
 --- !u!114 &2022021898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,6 +374,8 @@ MonoBehaviour:
   fill4: {fileID: 8941808487724418769}
   fill5: {fileID: 3463063850406378346}
   data: 1
+  upgradeData: 0
+  upgraded: 0
 --- !u!114 &9210591157067086938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,6 +538,8 @@ MonoBehaviour:
   fill4: {fileID: 1930464928925730283}
   fill5: {fileID: 5567021580917568673}
   data: 3
+  upgradeData: 0
+  upgraded: 0
 --- !u!114 &1556780438398326348
 MonoBehaviour:
   m_ObjectHideFlags: 0

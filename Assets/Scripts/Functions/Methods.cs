@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TowerDefence.Functions {
 	public static class Methods {
@@ -68,6 +69,18 @@ namespace TowerDefence.Functions {
 				result = result.Replace("{{" + i + "}}", args[i].ToString());
 			}
 			return result;
+		}
+
+
+		public static void SetNativeSizeByHeight(this Image image, float height, float maxWidth = float.MaxValue) {
+			image.SetNativeSize();
+			float aspect = image.rectTransform.sizeDelta.y / image.rectTransform.sizeDelta.x;
+			float width = height / aspect;
+			if(width > maxWidth) {
+				height = aspect * maxWidth;
+				width = maxWidth;
+			}
+			image.rectTransform.sizeDelta = new Vector2(width, height);
 		}
 	}
 }

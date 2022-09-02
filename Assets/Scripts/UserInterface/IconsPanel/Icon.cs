@@ -117,7 +117,7 @@ namespace TowerDefence.UserInterface {
 			descriptionCanvas.alpha = Mathf.Lerp(0, 1, descriptionPanel.sizeDelta.y / DESCRIPTION_TARGET_HEIGHT);
 
 			if(disappearing && (transform as RectTransform).anchoredPosition.y <= -99) {
-				manager.Remove(this);
+				//manager.Remove(this);
 			}
 
 			priceText.color = CashAvailable ? Color.white : Color.red;
@@ -125,7 +125,7 @@ namespace TowerDefence.UserInterface {
 			upgradePrice.color = Level.Cash >= Info.price + Info.upgradePrice ? Color.white : Color.red;
 
 			if(IsMouseOn && Input.GetMouseButtonUp(0)) {
-				manager.Select(this);
+				//manager.Select(this);
 			}
 		}
 
@@ -143,6 +143,7 @@ namespace TowerDefence.UserInterface {
 			radiusData.Set(Info.radiusData);
 			fireRateData.Set(Info.fireRateData);
 			attackTypeText.text = Info.GetAttackType();
+
 			price.text = $"${Info.price}";
 			upgradePrice.text = $"${Info.upgradePrice}";
 		}

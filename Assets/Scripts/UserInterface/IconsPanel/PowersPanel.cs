@@ -34,8 +34,8 @@ namespace TowerDefence.UserInterface {
 		private float cv2;
 
 		private void Update() {
-			current = Game.Instance.level.CurrentPowers;
-			powers = Game.Instance.level.MaxPowers;
+			current = Level.CurrentPowers;
+			powers = Level.MaxPowers;
 
 			d_current = Mathf.SmoothDamp(d_current, current, ref cv1, transitionTime);
 			d_powers = Mathf.SmoothDamp(d_powers, powers, ref cv2, transitionTime);

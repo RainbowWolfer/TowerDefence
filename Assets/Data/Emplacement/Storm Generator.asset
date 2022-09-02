@@ -54,7 +54,14 @@ MonoBehaviour:
     cooldown: 0
     upgradedCooldown: 0
   description: 
+  specials: {fileID: 11400000, guid: d980be149348c664c869fefd2d8a4598, type: 2}
   attackType: 2
-  damageData: 3
-  radiusData: 2
-  fireRateData: 1
+  damageData:
+    from: 0
+    to: 0
+  radiusData:
+    from: 0
+    to: 0
+  fireRateData:
+    from: 0
+    to: 0

@@ -55,7 +55,14 @@ MonoBehaviour:
     upgradedCooldown: 0
   description: A special design artillery that can deal great damage in massive area
     and slow enemies within
+  specials: {fileID: 11400000, guid: 41fb94ff8ccea334e911cb160f477c3e, type: 2}
   attackType: 2
-  damageData: 2
-  radiusData: 4
-  fireRateData: 2
+  damageData:
+    from: 2
+    to: 3
+  radiusData:
+    from: 4
+    to: 5
+  fireRateData:
+    from: 2
+    to: 3

@@ -515,6 +515,8 @@ MonoBehaviour:
   fill4: {fileID: 880269721430207569}
   fill5: {fileID: 13516367379447987}
   data: 4
+  upgradeData: 0
+  upgraded: 0
 --- !u!114 &1385578661235234688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,6 +603,8 @@ MonoBehaviour:
   fill4: {fileID: 5715280821569777764}
   fill5: {fileID: 6229854605618596460}
   data: 1
+  upgradeData: 0
+  upgraded: 0
 --- !u!114 &1518183858128828044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2095,7 +2099,7 @@ GameObject:
   - component: {fileID: 2775232754070447881}
   - component: {fileID: 2040434037}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: Icon_OLD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2782,6 +2786,8 @@ MonoBehaviour:
   fill4: {fileID: 8431806005178312369}
   fill5: {fileID: 8917879158687920431}
   data: 3
+  upgradeData: 0
+  upgraded: 0
 --- !u!114 &1425855772119671771
 MonoBehaviour:
   m_ObjectHideFlags: 0

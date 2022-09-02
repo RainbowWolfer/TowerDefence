@@ -55,7 +55,14 @@ MonoBehaviour:
     upgradedCooldown: 0
   description: Mounted with 4 powerful missile launchers, it can destory its targets
     in area within seconds
+  specials: {fileID: 11400000, guid: 41fb94ff8ccea334e911cb160f477c3e, type: 2}
   attackType: 2
-  damageData: 2
-  radiusData: 3
-  fireRateData: 3
+  damageData:
+    from: 2
+    to: 3
+  radiusData:
+    from: 3
+    to: 4
+  fireRateData:
+    from: 3
+    to: 4

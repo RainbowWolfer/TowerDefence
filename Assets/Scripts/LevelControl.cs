@@ -138,6 +138,7 @@ namespace TowerDefence {
 							} else {
 								UpdatePlacing(coord);
 								if(LeftClick) {
+									Level.CheckForLowPowers();
 									if(Level.Cash >= iconSelection.price) {
 										level.EditNode(coord, iconSelection.id);
 										Level.Cash -= iconSelection.price;
@@ -152,9 +153,9 @@ namespace TowerDefence {
 							if(iconSelection == null) {
 								selector.SetState(ModelSelector.ShowMode.Full, coord, height, size);
 								if(LeftClick) {
-									Placement pla = level.GetPlacement(coord);
-									UI.Instance.placementPanelManager.Request(pla);
-									TowerSelection = pla;
+									Placement placement = level.GetPlacement(coord);
+									UI.Instance.placementPanelManager.Request(placement);
+									TowerSelection = placement;
 									selector_confirm.SetState(ModelSelector.ShowMode.Full, coord, height, size);
 								} else if(RightClick && TowerSelection != null) {
 									DeselectTower();

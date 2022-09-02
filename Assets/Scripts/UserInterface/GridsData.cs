@@ -1,37 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TowerDefence.Scripts.Data;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TowerDefence.UserInterface {
 	public class GridsData: MonoBehaviour {
 		[SerializeField]
-		private GameObject fill1;
+		private Image fill1;
 		[SerializeField]
-		private GameObject fill2;
+		private Image fill2;
 		[SerializeField]
-		private GameObject fill3;
+		private Image fill3;
 		[SerializeField]
-		private GameObject fill4;
+		private Image fill4;
 		[SerializeField]
-		private GameObject fill5;
+		private Image fill5;
 
+		[Space]
 		[Range(0, 5)]
 		public int data;
+		[Range(0, 5)]
+		public int upgradeData;
+
+		[Space]
+		public bool upgraded;
 
 		private void OnValidate() {
-			Set(data);
+			Set(data, upgradeData);
 		}
 
-		public void Set(int data) {
+		public void Set(int data, int upgradeData) {
+			Set(new Range<int>(data, upgradeData));
+		}
+
+		public void Set(Range<int> range) {
+			data = range.from;
+			upgradeData = range.to;
 			data = Mathf.Clamp(data, 0, 5);
-			fill1.SetActive(data >= 1);
-			fill2.SetActive(data >= 2);
-			fill3.SetActive(data >= 3);
-			fill4.SetActive(data >= 4);
-			fill5.SetActive(data >= 5);
+			upgradeData = Mathf.Clamp(upgradeData, data, 5);
+
+			float Alpha(float i) {
+				if(upgraded) {
+					return upgradeData >= i ? 1 : 0;
+				} else {
+					return data >= i ? 1 : upgradeData >= i ? 0.2f : 0;
+				}
+			}
+			try {
+				fill1.color = new Color(1, 1, 1, Alpha(1));
+				fill2.color = new Color(1, 1, 1, Alpha(2));
+				fill3.color = new Color(1, 1, 1, Alpha(3));
+				fill4.color = new Color(1, 1, 1, Alpha(4));
+				fill5.color = new Color(1, 1, 1, Alpha(5));
+			} catch { }
 		}
 	}
 }

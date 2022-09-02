@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TowerDefence.Scripts.Data;
 using UnityEngine;
 
 namespace TowerDefence.Data {
@@ -63,13 +64,13 @@ namespace TowerDefence.Data {
 		public string description;
 
 		[Space]
+		public SpecialsData specials;
+
+		[Space]
 		public AttackType attackType;
-		[Range(0, 5)]
-		public int damageData;
-		[Range(0, 5)]
-		public int radiusData;
-		[Range(0, 5)]
-		public int fireRateData;
+		public Range<int> damageData;
+		public Range<int> radiusData;
+		public Range<int> fireRateData;
 
 		public string GetAttackType() {
 			return attackType switch {

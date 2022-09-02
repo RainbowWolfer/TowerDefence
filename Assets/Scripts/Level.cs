@@ -39,6 +39,8 @@ namespace TowerDefence {
 		public Path targetPath;
 
 		private static int cash;
+		private static int maxPowers;
+
 		public static int Cash {
 			get => cash;
 			set {
@@ -47,11 +49,15 @@ namespace TowerDefence {
 			}
 		}
 
-		public int CurrentPowers { get; set; }
-		public int MaxPowers { get; set; }
+		public static int BasePowers => 20;
+		public static int CurrentPowers { get; set; }
+		public static int MaxPowers {
+			get => maxPowers + BasePowers;
+			set => maxPowers = value;
+		}
 
-		public bool PowerSufficient => CurrentPowers <= MaxPowers;
-		public bool HasShownNotification { get; set; }
+		public static bool PowerSufficient => CurrentPowers <= MaxPowers;
+		public static bool HasShownNotification { get; set; }
 
 
 		public void Initialize(MapInfo map) {
@@ -78,6 +84,12 @@ namespace TowerDefence {
 				HasShownNotification = true;
 			} else {
 				HasShownNotification = false;
+			}
+		}
+
+		public static void CheckForLowPowers() {
+			if(!PowerSufficient) {
+				NotificationPanel.LowPowers();
 			}
 		}
 

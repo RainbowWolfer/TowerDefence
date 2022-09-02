@@ -55,6 +55,12 @@ MonoBehaviour:
     upgradedCooldown: 0
   description: 'A futuristic tower that shoots laser which build up damage overtime '
   attackType: 0
-  damageData: 3
-  radiusData: 2
-  fireRateData: 5
+  damageData:
+    from: 3
+    to: 4
+  radiusData:
+    from: 2
+    to: 3
+  fireRateData:
+    from: 4
+    to: 5
