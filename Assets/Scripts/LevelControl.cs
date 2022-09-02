@@ -19,11 +19,17 @@ namespace TowerDefence {
 		[SerializeField]
 		private GapCircleRange attackRange;
 
+		//place
 		private GameObject placingObject;
 		private MeshRenderer[] renderers;
 		private Vector2Int placingSize;
 
+		//ability
 		private Emplacement abilityEmplacement;
+
+		//shovel
+		public bool IsInShovelTool;
+		public float ShovelToolCooldown;
 
 		[SerializeField]
 		private Material red;
@@ -86,8 +92,8 @@ namespace TowerDefence {
 						abilityEmplacement.Fire(coord);
 
 						//select tower
-						var height = abilityEmplacement.info.height;
-						var size = abilityEmplacement.info.size;
+						float height = abilityEmplacement.info.height;
+						Vector2Int size = abilityEmplacement.info.size;
 						selector.SetState(ModelSelector.ShowMode.Full, abilityEmplacement.coord, height, size);
 						UI.Instance.placementPanelManager.Request(abilityEmplacement);
 						TowerSelection = abilityEmplacement;
@@ -98,6 +104,25 @@ namespace TowerDefence {
 				} else {//mouse out of level
 					if(LeftClick || RightClick) {
 						StopAbility();
+						return;
+					}
+				}
+
+			} else if(IsInShovelTool) {//shovel tool mode
+				circleRangeSelector.gameObject.SetActive(false);
+				if(RightClick) {
+					StopShovelTool();
+					return;
+				}
+				Vector2Int coord = GetMouseCoord();
+				if(level.CheckWithin(coord)) {
+					//update indicator object 
+					if(LeftClick) {
+						
+					}
+				} else {//mouse out of level
+					if(LeftClick || RightClick) {
+						StopShovelTool();
 						return;
 					}
 				}
@@ -195,6 +220,14 @@ namespace TowerDefence {
 		public void StopAbility() {
 			abilityEmplacement = null;
 			DeselectTower();
+		}
+
+		public void StartShovelTool(int size) {
+
+		}
+
+		public void StopShovelTool() {
+
 		}
 
 		private void GeneratePlacingObject(TowerInfo info) {

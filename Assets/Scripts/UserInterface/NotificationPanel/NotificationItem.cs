@@ -46,7 +46,7 @@ namespace TowerDefence.UserInterface {
 
 			if(Time.time - startTime >= 3f) {
 				fade = true;
-				targetPosotion = new Vector2(0, 700);
+				targetPosotion = new Vector2(0, NotificationPanel.DISAPPEAR_Y);
 			}
 		}
 	}

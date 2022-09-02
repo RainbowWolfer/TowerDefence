@@ -20,6 +20,8 @@ namespace TowerDefence.UserInterface {
 		[SerializeField]
 		private Sprite icon_powers;
 
+		public const float DISAPPEAR_Y = -600;
+
 		private void Awake() {
 			Instance = this;
 		}
@@ -39,10 +41,10 @@ namespace TowerDefence.UserInterface {
 					continue;
 				}
 				if(i >= maxCount) {
-					item.targetPosotion = new Vector2(0, 700);
+					item.targetPosotion = new Vector2(0, DISAPPEAR_Y);
 					item.fade = true;
 				} else {
-					item.targetPosotion = new Vector2(0, 60 * i);
+					item.targetPosotion = new Vector2(0, -60 * i);
 				}
 			}
 
@@ -57,7 +59,7 @@ namespace TowerDefence.UserInterface {
 
 		public void Add(string text, Sprite sprite, Color color) {
 			var item = Instantiate(itemPrefab, transform).GetComponent<NotificationItem>();
-			item.Rt.anchoredPosition = new Vector2(item.Rt.sizeDelta.x, 0);
+			item.Rt.anchoredPosition = new Vector2(-item.Rt.sizeDelta.x, 0);
 			item.parent = this;
 			item.Set(text, sprite, color);
 			items.Insert(0, item);

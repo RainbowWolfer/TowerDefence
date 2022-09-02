@@ -23,10 +23,14 @@ namespace TowerDefence.Data {
 
 		[Header("Environments")]
 		[Space]
+		[Header("Trees")]
 		public TowerInfo oakTree;
 		public TowerInfo firTree;
 		public TowerInfo palmTree;
 		public TowerInfo poplarTree;
+
+		[Header("Buildings")]
+		public TowerInfo abandonedCastle;
 
 		[Space]
 		public TowerInfo tankTrap;
@@ -34,6 +38,7 @@ namespace TowerDefence.Data {
 
 		public TowerInfo RequestByID(short id) {
 			TowerInfo target = id switch {
+				-6 => abandonedCastle,
 				-5 => tankTrap,
 				-4 => poplarTree,
 				-3 => palmTree,

@@ -82,5 +82,12 @@ namespace TowerDefence.Functions {
 			}
 			image.rectTransform.sizeDelta = new Vector2(width, height);
 		}
+
+		public static T GetRandomInArray<T>(params T[] array) {
+			if(array == null || array.Length == 0) {
+				return default;
+			}
+			return array[Random.Range(0, array.Length)];
+		}
 	}
 }

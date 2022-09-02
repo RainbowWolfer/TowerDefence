@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1850f629360f584aa26ea112b2b5b80, type: 3}
+  m_Name: Abandoned Castle
+  m_EditorClassIdentifier: 
+  id: -5
+  prefab: {fileID: 8863153874958048094, guid: eea6f4564766a6f4081997213d892920, type: 3}
+  icon: {fileID: 0}
+  size: {x: 2, y: 2}
+  height: 2
+  upgradable: 0
+  price: 0
+  upgradePrice: 0
+  shovelPrice: 500
+  powers: 0
+  upgradedPowers: 0
+  star1Exp: 0
+  star2Exp: 0
+  star3Exp: 0
+  damageUpgradeMultuplier: 1
+  fireRateUpgradeMultuplier: 1
+  radiusUpgradeMultuplier: 1
+  damage:
+    none: 0
+    one: 0
+    two: 0
+    three: 0
+  fireRate:
+    none: 0
+    one: 0
+    two: 0
+    three: 0
+  attackRadius:
+    none: 0
+    one: 0
+    two: 0
+    three: 0
+  turnnigTime:
+    none: 0
+    one: 0
+    two: 0
+    three: 0
+  ability:
+    abilityRadius: 0
+    cooldown: 0
+    upgradedCooldown: 0
+  description: An old style castle left abandoned in the wild.
+  specials: {fileID: 0}
+  attackType: 0
+  damageData:
+    from: 0
+    to: 0
+  radiusData:
+    from: 0
+    to: 0
+  fireRateData:
+    from: 0
+    to: 0

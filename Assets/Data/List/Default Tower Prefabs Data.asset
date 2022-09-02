@@ -26,4 +26,5 @@ MonoBehaviour:
   firTree: {fileID: 11400000, guid: 2878665732baa654a8c106804a913116, type: 2}
   palmTree: {fileID: 11400000, guid: 7e0186063e7464242bde5095aaccfa2b, type: 2}
   poplarTree: {fileID: 11400000, guid: 2a0b4cdf2c9b6344b8894e623ea51a68, type: 2}
+  abandonedCastle: {fileID: 11400000, guid: 65543b3f78b00e44a8192da1262896a3, type: 2}
   tankTrap: {fileID: 11400000, guid: 7bb5f4ab29279d94b85becc66e828c45, type: 2}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TowerDefence.Functions;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,7 +19,7 @@ namespace TowerDefence {
 		}
 
 		public static MapInfo GetDefaultMapInfo() {
-			var map = new MapInfo("Default", 20, 10);
+			MapInfo map = new MapInfo("Default", 20, 10);
 			for(int x = 0; x < map.Nodes.GetLength(0); x++) {
 				for(int y = 0; y < map.Nodes.GetLength(1); y++) {
 					map.Nodes[x, y] = new Node(x, y) {
@@ -34,7 +35,7 @@ namespace TowerDefence {
 			width /= 2;
 			height /= 2;
 			FNode[,] nodes = new FNode[width, height];
-			var unvisited = new List<FNode>();
+			List<FNode> unvisited = new List<FNode>();
 			for(int x = 0; x < width; x++) {
 				for(int y = 0; y < height; y++) {
 					nodes[x, y] = new FNode(x, y);
@@ -49,7 +50,7 @@ namespace TowerDefence {
 				FNode right = GetFNode(coord + new Vector2Int(1, 0));
 				FNode up = GetFNode(coord + new Vector2Int(0, -1));
 				FNode down = GetFNode(coord + new Vector2Int(0, 1));
-				var randomList = new List<FNode>();
+				List<FNode> randomList = new List<FNode>();
 				foreach(FNode item in new FNode[] { left, right, up, down }) {
 					if(item == null) {
 						continue;
@@ -107,7 +108,7 @@ namespace TowerDefence {
 
 			FNode end = nodes[Random.Range((int)(width * 0.8f), width), Random.Range((int)(height * 0.8f), height)];
 
-			var path = new List<FNode>() { end };
+			List<FNode> path = new List<FNode>() { end };
 			while(end != null) {
 				end = end.previous;
 				path.Add(end);
@@ -133,7 +134,7 @@ namespace TowerDefence {
 				}
 			}
 			path.Reverse();
-			var tmp = path.ToList();
+			List<FNode> tmp = path.ToList();
 			for(int i = 0; i < path.Count - 1; i++) {
 				FNode from = path[i];
 				FNode to = path[i + 1];
@@ -150,11 +151,13 @@ namespace TowerDefence {
 				return true;
 			}
 			float threashold = 0.9f;
-			var map = new MapInfo("Random", width, height);
+			MapInfo map = new MapInfo("Random", width, height);
 			for(int x = 0; x < width; x++) {
 				for(int y = 0; y < height; y++) {
 					FNode n = result[x, y];
-					short id = (short)(n.weight >= threashold && Random.Range(0, 100) < 85 ? Random.Range(-4, 0) : 0);
+					short id = (short)(n.weight >= threashold && Random.Range(0, 100) < 85
+						? Methods.GetRandomInArray(-1, -2, -3, -4)//this is all 1x1
+						: 0);
 					NodeType type = path.Contains(n) ? NodeType.Path : NodeType.Placable;
 					if(id < 0) {
 						type = NodeType.Unplacable;
@@ -195,10 +198,10 @@ namespace TowerDefence {
 		private static void CalculateWeight(FNode[,] nodes, List<FNode> path) {
 			bool IsInRange(Vector2Int coord) => coord.x >= 0 && coord.y >= 0 && coord.x < nodes.GetLength(0) && coord.y < nodes.GetLength(1);
 			List<FNode> GetNeighbours(FNode n, int range = 3) {
-				var result = new List<FNode>();
+				List<FNode> result = new List<FNode>();
 				for(int x = -range; x < range; x++) {
 					for(int y = -range; y < range; y++) {
-						var coord = n.coord + new Vector2Int(x, y);
+						Vector2Int coord = n.coord + new Vector2Int(x, y);
 						if(IsInRange(coord)) {
 							result.Add(nodes[coord.x, coord.y]);
 						}
