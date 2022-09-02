@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using TowerDefence.Scripts.Data;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace TowerDefence.UserInterface.StartScene {
 	public class StartScene_MiddlePanel: MonoBehaviour {

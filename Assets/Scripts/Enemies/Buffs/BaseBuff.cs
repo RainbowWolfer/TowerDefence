@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-
-namespace TowerDefence.Enemies.Buffs {
+﻿namespace TowerDefence.Enemies.Buffs {
 	public abstract class BaseBuff {
 		public float Time { get; private set; }
 		public float Duration { get; private set; }

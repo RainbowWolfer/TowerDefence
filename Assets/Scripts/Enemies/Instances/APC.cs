@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TowerDefence.Enemies.Interfaces;
-using TowerDefence.GameControl.Waves;
-using UnityEngine;
+﻿using TowerDefence.Enemies.Interfaces;
 
 namespace TowerDefence.Enemies.Instances {
 	public class APC: Enemy, ISpawnOnDeath {

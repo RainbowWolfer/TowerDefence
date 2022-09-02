@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TowerDefence;
-using TowerDefence.Enemies;
+﻿using TowerDefence.Enemies;
 using UnityEngine;
 
 namespace TowerDefence.GameControl {

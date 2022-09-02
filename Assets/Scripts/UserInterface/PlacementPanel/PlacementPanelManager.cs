@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TowerDefence.Functions;
 using TowerDefence.Placements;
 using TowerDefence.Placements.Environments;
 using UnityEngine;
-using UnityEngine.UI;
 namespace TowerDefence.UserInterface {
 	public class PlacementPanelManager: MonoBehaviour {
 		[SerializeField]

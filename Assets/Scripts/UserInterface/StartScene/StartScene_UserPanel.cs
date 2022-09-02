@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using TowerDefence.Data.Instance;
-using TowerDefence.Enemies.Instances;
 using TowerDefence.Local;
 using TowerDefence.Scripts.Data;
 using UnityEngine;

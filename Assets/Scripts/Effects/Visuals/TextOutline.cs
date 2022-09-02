@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-
-using System.Collections;
 using UnityEngine.Rendering;
 
 namespace TowerDefence.Effects.Visuals {

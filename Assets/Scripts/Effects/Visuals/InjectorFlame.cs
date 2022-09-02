@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using TowerDefence;
+﻿using TowerDefence;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.Effects.Visuals {

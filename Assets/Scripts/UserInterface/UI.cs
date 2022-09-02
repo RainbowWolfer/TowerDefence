@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using TMPro;
-using System.Collections;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using TowerDefence.UserInterface.LevelIncomingPanel;
+﻿using TowerDefence.UserInterface.LevelIncomingPanel;
 using TowerDefence.UserInterface.LevelPanels;
+using UnityEngine;
 
 namespace TowerDefence.UserInterface {
 	public class UI: MonoBehaviour {

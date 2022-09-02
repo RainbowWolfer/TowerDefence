@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TowerDefence.Data;
 using TowerDefence.GameControl.Waves;
-using TowerDefence.Placements.Emplacements;
-using TowerDefence.Placements.Towers;
 using UnityEngine;
 
 namespace TowerDefence.Data {

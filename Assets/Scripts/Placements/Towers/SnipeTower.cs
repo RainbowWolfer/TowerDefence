@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using TowerDefence.Enemies;
 using TowerDefence.Functions;
-using TowerDefence.Placements;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

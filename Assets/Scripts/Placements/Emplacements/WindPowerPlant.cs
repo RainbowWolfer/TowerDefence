@@ -1,6 +1,5 @@
 ﻿
 using TowerDefence.Functions;
-using TowerDefence.Scripts.Data;
 using UnityEngine;
 
 namespace TowerDefence.Placements {

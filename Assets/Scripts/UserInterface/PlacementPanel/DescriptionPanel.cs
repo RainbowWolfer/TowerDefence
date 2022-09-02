@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 using TMPro;
 using TowerDefence.Placements;
-using UnityEngine.UI;
 using TowerDefence.Placements.Environments;
+using UnityEngine;
 
 namespace TowerDefence.UserInterface {
 	public class DescriptionPanel: PlacementPanel {
