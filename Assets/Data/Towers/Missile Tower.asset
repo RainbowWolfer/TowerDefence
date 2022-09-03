@@ -26,14 +26,14 @@ MonoBehaviour:
   star1Exp: 1000
   star2Exp: 3000
   star3Exp: 6000
-  damageUpgradeMultuplier: 2
-  fireRateUpgradeMultuplier: 0.5
-  radiusUpgradeMultuplier: 1.3
+  damageUpgradeMultuplier: 1.6
+  fireRateUpgradeMultuplier: 0.8
+  radiusUpgradeMultuplier: 1.2
   damage:
-    none: 70
-    one: 140
-    two: 280
-    three: 350
+    none: 50
+    one: 100
+    two: 150
+    three: 200
   fireRate:
     none: 5
     one: 4.5
@@ -46,9 +46,9 @@ MonoBehaviour:
     three: 4.75
   turnnigTime:
     none: 0.3
-    one: 0.25
-    two: 0.2
-    three: 0.15
+    one: 0.275
+    two: 0.25
+    three: 0.225
   ability:
     abilityRadius: 0
     cooldown: 0
