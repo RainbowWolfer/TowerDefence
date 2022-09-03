@@ -30,6 +30,9 @@ namespace TowerDefence {
 
 		public readonly List<Enemy> enemies = new List<Enemy>();
 
+		public int sizeWidth = 15;
+		public int sizeHeight = 20;
+
 		private void Awake() {
 			Instance = this;
 		}
@@ -55,7 +58,8 @@ namespace TowerDefence {
 		}
 
 		public void GameInitialize() {
-			level.Initialize(MapInfo.GenerateRandomMap(15, 20));
+			level.Initialize(MapInfo.GenerateRandomMap(sizeWidth, sizeHeight));
+			CameraController.Instance.InitializeCamera();
 			ClearEnemies();
 
 			waves.levels = StageLevel.GetDefaultLevels();

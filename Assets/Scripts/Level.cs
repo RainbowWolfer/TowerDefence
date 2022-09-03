@@ -251,6 +251,10 @@ namespace TowerDefence {
 			ClearNode(coord.x, coord.y);
 		}
 
+		public Vector2Int GetMapSize() {
+			return new Vector2Int(map.Nodes.GetLength(0), map.Nodes.GetLength(1));
+		}
+
 		private GameObject CreateGameObject(int x, int y, short id, Transform parent) {
 			TowerInfo info = Game.Instance.Towers.RequestByID(id);
 			GameObject prefab = info.prefab;

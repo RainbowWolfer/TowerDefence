@@ -31,9 +31,9 @@ MonoBehaviour:
   radiusUpgradeMultuplier: 1.25
   damage:
     none: 10
-    one: 20
-    two: 30
-    three: 40
+    one: 15
+    two: 20
+    three: 25
   fireRate:
     none: 0.06
     one: 0.05
@@ -55,6 +55,7 @@ MonoBehaviour:
     upgradedCooldown: 0
   description: A powerful tower equiepped with 4 full-auto cannons that can tear
     apart every enemy
+  specials: {fileID: 0}
   attackType: 0
   damageData:
     from: 1
